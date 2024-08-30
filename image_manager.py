@@ -21,6 +21,9 @@ class ImageManager:
 
     def blit_image(self,screen,position,image):
         screen.blit(image,position)
+    def resize_image(self,width,height,image):
+        pygame.transform.scale(image,(width,height))
+
 
 
 

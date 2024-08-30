@@ -16,3 +16,8 @@ class GridManager:
         self.grid1.drawgrid(SCREEN_X/2-400,100)
         self.grid2.drawgrid(SCREEN_X/2+100,100)
 
+    def checkoverlap(self,ship,grid):
+
+        if pygame.Rect.collidelist(ship.rect,[grid.get_cell_rects()]):
+            print("COLLISION")
+

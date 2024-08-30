@@ -11,8 +11,8 @@ from text_manager import Textmanager
 # Initialize Pygame
 pygame.init()
 
-SCREEN_X = 1600
-SCREEN_Y = 800
+SCREEN_X = 1300
+SCREEN_Y = 700
 BLOCK_SIZE = 30
 CAPTION = "SHIP WRECK"
 WHITE = (255,255,255)
@@ -24,6 +24,7 @@ SCREEN = gui.returnscreen()
 
 imagemanager = ImageManager()
 imagemanager.load_image("BACKGROUND2.jpg")
+imagemanager.resize_image(SCREEN_X,SCREEN_Y,imagemanager.return_last_image())
 imagemanager.blit_image(SCREEN,(-700,-700),imagemanager.return_last_image())
 
 
@@ -86,9 +87,10 @@ while running:
                     ship1.checkmouseclick()
 
 
+
                 for ship2 in all_ships2:
                     ship2.checkmousehover()
-                    ship2.checkmouseclick()
+                    ship2.checkmouseclick
 
 
             if event.button == 3:
@@ -102,9 +104,11 @@ while running:
         elif event.type == pygame.MOUSEBUTTONUP:
             for ship1 in all_ships1:
                 ship1.checkmouseclick()
+                grid_manager.checkoverlap(ship1,grid)
 
             for ship2 in all_ships2:
                 ship2.checkmouseclick()
+                grid_manager.checkoverlap(ship2,grid2)
 
     #draw line and images
 
@@ -115,15 +119,15 @@ while running:
     #draw boats and label
     text_manager.createlabel('BATTLESHIPS', WHITE, 100,25)
     destroyer.drawship(50,100)
-    carrier.drawship(250,100)
+    carrier.drawship(150,100)
     patrol_boat.drawship(50,300)
-    battleship.drawship(250,300)
+    battleship.drawship(150,300)
 
     text_manager.createlabel('BATTLESHIPS', WHITE,SCREEN_X-240, 25)
-    destroyer2.drawship(SCREEN_X-100, 100)
-    carrier2.drawship(SCREEN_X-250, 100)
-    patrol_boat2.drawship(SCREEN_X-100, 300)
-    battleship2.drawship(SCREEN_X-250, 300)
+    destroyer2.drawship(SCREEN_X-70, 100)
+    carrier2.drawship(SCREEN_X-150, 100)
+    patrol_boat2.drawship(SCREEN_X-70, 300)
+    battleship2.drawship(SCREEN_X-150, 300)
 
 
 

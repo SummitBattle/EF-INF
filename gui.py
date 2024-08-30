@@ -9,7 +9,7 @@ class Gui:
 
         pygame.display.set_caption(Caption)
 
-        self.screen = pygame.display.set_mode((self.screenX,self.screenY))
+        self.screen = pygame.display.set_mode((self.screenX,self.screenY),pygame.FULLSCREEN | pygame.SCALED)
         self.screen.fill((244,222,222))
 
     def updatescreen(self):
