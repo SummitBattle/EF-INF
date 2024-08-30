@@ -56,6 +56,3 @@ class Grid:
     def getgrids(self):
         return self.grid_rects
 
-    def get_bottom_y(self, grid_y):
-        """Return the y-coordinate of the bottom edge of the grid."""
-        return grid_y + (self.num_rows * self.block_size)

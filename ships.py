@@ -62,7 +62,9 @@ class Ship:
 
 
         self.checkoverlap(grid)
+
         if self.overlapping:
+
             if self.rect.top <= self.screen.get_height()/2.3:
                 self.rect.top = self.collided_rect.top
 
@@ -90,20 +92,21 @@ class Ship:
         pygame.draw.rect(self.screen, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
     def checkoverlap(self, grid):
-        self.cell_rects = grid.getgrids()
-
-        # Check if the ship's rect collides with any rect in the grid
-        self.collision_index = self.rect.collidelist(self.cell_rects)
-        if self.collision_index != -1:
-            self.collided_rect = self.cell_rects[self.collision_index]
-            print(self.collided_rect)
-
-            # Set ship's overlapping status and store the collided rectangle
-            self.overlapping = True
-        else:
-            self.overlapping = False
+        self.cell_rects = grid.getgrids()  # Get all grid rectangles
+        self.overlapping_cells = []  # List to store overlapping cells
 
 
+
+        # Iterate through all grid cells and check if the ship's rect overlaps
+        for self.cell_rect in self.cell_rects:
+
+            if self.rect.colliderect(self.cell_rect):
+                self.overlapping_cells.append(self.cell_rect)  # Store the overlapping grid cell
+                print("Checking overlap with cell rect:", self.overlapping_cells)
+        # Print the list of overlapping cells for debugging
+        print("Overlapping cells found:", self.overlapping_cells)
+
+        return self.overlapping_cells  # Return the list of all overlapping grid cells
 
 
 class PatrolBoat(Ship):
