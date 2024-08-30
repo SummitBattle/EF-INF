@@ -60,14 +60,8 @@ patrol_boat2 = PatrolBoat(BLOCK_SIZE,SCREEN)
 battleship2 = Battleship(BLOCK_SIZE,SCREEN)
 
 all_ships1.append(destroyer)
-all_ships1.append(carrier)
-all_ships1.append(patrol_boat)
-all_ships1.append(battleship)
 
 all_ships2.append(destroyer2)
-all_ships2.append(carrier2)
-all_ships2.append(patrol_boat2)
-all_ships2.append(battleship2)
 
 
 
@@ -122,15 +116,10 @@ while running:
     #draw boats and label
     text_manager.createlabel('BATTLESHIPS', WHITE, 100,25)
     destroyer.drawship(50, 100, grid)
-    carrier.drawship(150, 100, grid)
-    patrol_boat.drawship(50, 300, grid)
-    battleship.drawship(150, 300, grid)
+
 
     text_manager.createlabel('BATTLESHIPS', WHITE,SCREEN_X-240, 25)
     destroyer2.drawship(SCREEN_X - 70, 100, grid2)
-    carrier2.drawship(SCREEN_X - 150, 100, grid2)
-    patrol_boat2.drawship(SCREEN_X - 70, 300, grid2)
-    battleship2.drawship(SCREEN_X - 150, 300, grid2)
 
 
 
