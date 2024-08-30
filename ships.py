@@ -63,10 +63,9 @@ class Ship:
 
         self.checkoverlap(grid)
 
-
         if self.overlapping:
             self.collided_rect = self.overlapping_cells[0]
-
+            print(self.collided_rect)
 
             if self.rect.top <= self.screen.get_height()/2.3:
                 self.rect.top = self.collided_rect.top
@@ -109,8 +108,6 @@ class Ship:
                 self.overlapping = True
 
 
-            else:
-                self.overlapping = False
 
 
 class PatrolBoat(Ship):
