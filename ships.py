@@ -60,11 +60,10 @@ class Ship:
             self.rect.topleft = (self.mousePos[0] - width // 2, self.mousePos[1] - height // 2)
 
 
+
         if self.overlapping:
 
-            self.rect.topleft = self.collided_rect.topleft
-            self.rect.midtop = self.collided_rect.midtop
-            self.rect.midright = self.collided_rect.midright
+            self.rect.center = self.collided_rect.center
 
         # Create a surface for the ship
         ship_surface = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -82,7 +81,7 @@ class Ship:
         pygame.draw.rect(self.SCREEN, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
     def checkoverlap(self, grid):
-        self.cell_rects = grid.get_cell_rects()
+        self.cell_rects = grid.getgrids()
 
         # Check if the ship's rect collides with any rect in the grid
         self.collision_index = self.rect.collidelist(self.cell_rects)
@@ -95,8 +94,7 @@ class Ship:
         else:
             self.overlapping = False
 
-        print("overlapping is:")
-        print(self.overlapping)
+
 
 
 class PatrolBoat(Ship):

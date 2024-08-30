@@ -2,6 +2,7 @@ import pygame
 
 class Grid:
     def __init__(self, block_size, screen):
+
         self.block_size = block_size
         self.SCREEN = screen
         self.num_rows = 10  # Number of rows
@@ -22,26 +23,15 @@ class Grid:
         if 0 <= row < self.num_rows and 0 <= col < self.num_cols:
             self.grid_state[row][col] = state
 
-    def get_cell_rects(self):
-        """Return the rectangles for each cell in the grid."""
-        rects = []
-        for row in range(self.num_rows):
-            for col in range(self.num_cols):
-                x = col * self.block_size
-                y = row * self.block_size
-                rect = pygame.Rect(x, y, self.block_size, self.block_size)
-                rects.append(rect)
-        return rects
 
     def drawgrid(self, grid_x, grid_y):
         """Draw the grid with cell states filled with semi-transparent colors."""
-        self.grid_rects = self.get_cell_rects()  # Reset grid rectangles
-
         for row in range(self.num_rows):
             for col in range(self.num_cols):
                 x = grid_x + col * self.block_size
                 y = grid_y + row * self.block_size
                 rect = pygame.Rect(x, y, self.block_size, self.block_size)
+                self.grid_rects.append(rect)
 
                 # Create a surface with an alpha channel
                 cell_surface = pygame.Surface((self.block_size, self.block_size), pygame.SRCALPHA)
@@ -64,3 +54,5 @@ class Grid:
             return self.grid_state[row][col]
         return None
 
+    def getgrids(self):
+        return self.grid_rects
