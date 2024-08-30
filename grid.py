@@ -64,9 +64,3 @@ class Grid:
             return self.grid_state[row][col]
         return None
 
-    def check_overlap(self, ship_rect):
-        """Check if the ship overlaps with any cell in the grid."""
-        for rect in self.grid_rects:
-            if ship_rect.colliderect(rect):
-                return True
-        return False

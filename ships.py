@@ -4,6 +4,7 @@ class Ship:
     dragging_ship = None
 
     def __init__(self, num_rows, num_cols, block_size, screen, name, orientation='horizontal'):
+        self.overlapping = False
         self.block_size = block_size
         self.SCREEN = screen
         self.num_rows = num_rows  # Number of rows the ship will occupy
@@ -35,25 +36,35 @@ class Ship:
                 Ship.dragging_ship = self  # Start dragging this ship
                 self.is_dragging = True
 
+
     def toggle_orientation(self):
         if (self.orientation == 'horizontal' and (self.is_hovering or self.is_dragging)) or \
            (self.orientation == 'vertical' and (self.is_hovering or self.is_dragging)):
             self.orientation = 'vertical' if self.orientation == 'horizontal' else 'horizontal'
             self.num_rows, self.num_cols = self.num_cols, self.num_rows
 
-    def drawship(self, grid_x, grid_y):
+    def drawship(self, grid_x, grid_y,grid):
         """Draw the ship with hover effect on the grid."""
         self.is_hovering = False
         width = self.num_cols * self.block_size
         height = self.num_rows * self.block_size
-
+        if self.overlapping:
+            grid_x = self.collided_rect.x
+            grid_y = self.collided_rect.y
         # Create the rect for the ship
         self.rect = pygame.Rect(grid_x, grid_y, width, height)
         self.checkmousehover()
-
         if self.is_dragging:
             # Center the ship around the mouse position
+            self.overlapping = False
             self.rect.topleft = (self.mousePos[0] - width // 2, self.mousePos[1] - height // 2)
+
+
+        if self.overlapping:
+
+            self.rect.topleft = self.collided_rect.topleft
+            self.rect.midtop = self.collided_rect.midtop
+            self.rect.midright = self.collided_rect.midright
 
         # Create a surface for the ship
         ship_surface = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -70,8 +81,22 @@ class Ship:
         # Draw the grid lines around the ship
         pygame.draw.rect(self.SCREEN, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
+    def checkoverlap(self, grid):
+        self.cell_rects = grid.get_cell_rects()
 
+        # Check if the ship's rect collides with any rect in the grid
+        self.collision_index = self.rect.collidelist(self.cell_rects)
+        if self.collision_index != -1:
+            self.collided_rect = self.cell_rects[self.collision_index]
+            print(self.collided_rect)
 
+            # Set ship's overlapping status and store the collided rectangle
+            self.overlapping = True
+        else:
+            self.overlapping = False
+
+        print("overlapping is:")
+        print(self.overlapping)
 
 
 class PatrolBoat(Ship):
