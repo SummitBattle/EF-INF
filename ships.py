@@ -6,7 +6,7 @@ class Ship:
     def __init__(self, num_rows, num_cols, block_size, screen, name, orientation='horizontal'):
         self.overlapping = False
         self.block_size = block_size
-        self.SCREEN = screen
+        self.screen = screen
         self.num_rows = num_rows  # Number of rows the ship will occupy
         self.num_cols = num_cols  # Number of columns the ship will occupy
         self.name = name
@@ -17,6 +17,7 @@ class Ship:
             'hover': (50, 0, 255, 255),  # Hover color
             'normal': (0, 0, 255, 128)  # Normal color
         }
+        self.SCREENY, self.SCREENX = screen.get_size()
 
     def checkmousehover(self):
         self.mousePos = pygame.mouse.get_pos()
@@ -60,10 +61,18 @@ class Ship:
             self.rect.topleft = (self.mousePos[0] - width // 2, self.mousePos[1] - height // 2)
 
 
-
+        self.checkoverlap(grid)
         if self.overlapping:
+            if self.rect.top <= self.screen.get_height()/2.3:
+                self.rect.top = self.collided_rect.top
 
-            self.rect.center = self.collided_rect.center
+            else:
+                self.rect.bottom = self.collided_rect.bottom
+
+            self.rect.left = self.collided_rect.left
+
+
+
 
         # Create a surface for the ship
         ship_surface = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -75,10 +84,10 @@ class Ship:
             ship_surface.fill(self.color['normal'])  # Normal color
 
         # Blit the ship surface onto the main screen
-        self.SCREEN.blit(ship_surface, self.rect.topleft)
+        self.screen.blit(ship_surface, self.rect.topleft)
 
         # Draw the grid lines around the ship
-        pygame.draw.rect(self.SCREEN, (255, 255, 255), self.rect, 1)  # White color for grid lines
+        pygame.draw.rect(self.screen, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
     def checkoverlap(self, grid):
         self.cell_rects = grid.getgrids()

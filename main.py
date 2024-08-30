@@ -105,12 +105,12 @@ while running:
         elif event.type == pygame.MOUSEBUTTONUP:
             for ship1 in all_ships1:
                 ship1.checkmouseclick()
-                ship1.checkoverlap(grid)
+
 
 
             for ship2 in all_ships2:
                 ship2.checkmouseclick()
-                ship2.checkoverlap(grid2)
+
 
 
     #draw line and images
@@ -121,16 +121,16 @@ while running:
 
     #draw boats and label
     text_manager.createlabel('BATTLESHIPS', WHITE, 100,25)
-    destroyer.drawship(50,100,grid)
-    carrier.drawship(150,100,grid)
-    patrol_boat.drawship(50,300,grid)
-    battleship.drawship(150,300,grid)
+    destroyer.drawship(50, 100, grid)
+    carrier.drawship(150, 100, grid)
+    patrol_boat.drawship(50, 300, grid)
+    battleship.drawship(150, 300, grid)
 
     text_manager.createlabel('BATTLESHIPS', WHITE,SCREEN_X-240, 25)
-    destroyer2.drawship(SCREEN_X-70, 100,grid2)
-    carrier2.drawship(SCREEN_X-150, 100,grid2)
-    patrol_boat2.drawship(SCREEN_X-70, 300,grid2)
-    battleship2.drawship(SCREEN_X-150, 300,grid2)
+    destroyer2.drawship(SCREEN_X - 70, 100, grid2)
+    carrier2.drawship(SCREEN_X - 150, 100, grid2)
+    patrol_boat2.drawship(SCREEN_X - 70, 300, grid2)
+    battleship2.drawship(SCREEN_X - 150, 300, grid2)
 
 
 

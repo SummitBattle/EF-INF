@@ -2,7 +2,6 @@ import pygame
 
 class Grid:
     def __init__(self, block_size, screen):
-
         self.block_size = block_size
         self.SCREEN = screen
         self.num_rows = 10  # Number of rows
@@ -23,9 +22,9 @@ class Grid:
         if 0 <= row < self.num_rows and 0 <= col < self.num_cols:
             self.grid_state[row][col] = state
 
-
     def drawgrid(self, grid_x, grid_y):
         """Draw the grid with cell states filled with semi-transparent colors."""
+        self.grid_rects = []  # Clear previous grid_rects
         for row in range(self.num_rows):
             for col in range(self.num_cols):
                 x = grid_x + col * self.block_size
@@ -56,3 +55,7 @@ class Grid:
 
     def getgrids(self):
         return self.grid_rects
+
+    def get_bottom_y(self, grid_y):
+        """Return the y-coordinate of the bottom edge of the grid."""
+        return grid_y + (self.num_rows * self.block_size)
