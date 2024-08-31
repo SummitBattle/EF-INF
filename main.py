@@ -148,9 +148,10 @@ while running:
         battleship.drawship(150, 300, grid)
 
 
-
-    text_manager.createlabel('BATTLESHIPS', WHITE,SCREEN_X-240, 25)
     if not customButton2.shipsplaced:
+
+        text_manager.createlabel('BATTLESHIPS', WHITE,SCREEN_X-240, 25)
+
         destroyer2.drawship(SCREEN_X - 70, 100, grid2)
         carrier2.drawship(SCREEN_X - 150, 100, grid2)
         patrol_boat2.drawship(SCREEN_X - 70, 300, grid2)
