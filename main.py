@@ -157,32 +157,34 @@ while running:
         patrol_boat2.drawship(SCREEN_X - 70, 300, grid2)
         battleship2.drawship(SCREEN_X - 150, 300, grid2)
 
-    if customButton.shipsplaced:
-        for ship1 in all_ships1:
-            grid_manager.shipintostate1(grid,ship1,smallergrid1)
-
-
-    if customButton2.shipsplaced:
-        for ship2 in all_ships2:
-            grid_manager.shipintostate2(grid2,ship2,smallergrid2)
-
-
-    grid_manager.drawgrids(SCREEN_X,SCREEN_Y)
-
-    if customButton.shipsplaced and customButton2.shipsplaced:
-        grid_manager.drawsmallergrids(SCREEN_X,SCREEN_Y)
 
 
     if customButton.shipsplaced and customButton2.shipsplaced and not copiedgrids:
+        all_ships = {}  # Dictionary to store ships and their grid positions
+        all_ships_array2 = {}
+        for ship1 in all_ships1:
+            ship_name = ship1.name
+            shipgrids = grid_manager.shipintostate1(grid, ship1, smallergrid1)
+            all_ships[ship_name] = shipgrids  # Store the grid positions in the dictionary
+
+        for ship2 in all_ships2:
+            ship_name2 = ship2.name
+            shipgrids2 = grid_manager.shipintostate2(grid2, ship2, smallergrid2)
+            all_ships_array2[ship_name2] = shipgrids2  # Store the grid positions in the dictio
+        print(all_ships)  # Debugging print statement to verify
+        print(all_ships_array2)  # Debugging print statement to verify
 
         grid_manager.drawsmallergrids(SCREEN_X,SCREEN_Y)
         copiedgrids = True
 
 
+
     #draw buttons and label
 
+    grid_manager.drawgrids(SCREEN_X, SCREEN_Y)
 
-
+    if customButton.shipsplaced and customButton2.shipsplaced:
+        grid_manager.drawsmallergrids(SCREEN_X, SCREEN_Y)
 
     if turn == 1:
         customButton.process()

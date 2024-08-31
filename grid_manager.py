@@ -30,29 +30,39 @@ class GridManager:
         self.grid1.drawgrid(self.gridleft1,self.gridtop1)
         self.grid2.drawgrid(self.gridleft2,self.gridtop2)
 
-    def shipintostate1(self,grid,ship,smallergrid):
-
+    def shipintostate1(self, grid, ship, smallergrid):
         overlapping_rects = ship.overlapping_cells
 
+        ship_positions = []  # Array to store the grid positions of the ship
 
         for rect in overlapping_rects:
             row = (rect.left - self.gridleft1) // self.block_size
             col = (rect.top - self.gridtop1) // self.block_size
 
-            grid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
-            smallergrid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
+            grid.set_cell_state(int(col), int(row), 1)
+            smallergrid.set_cell_state(int(col), int(row), 1)
 
+            # Store the grid position
+            ship_positions.append((int(col), int(row)))
 
-
+        # Return the list of grid positions
+        return ship_positions
 
     def shipintostate2(self,grid,ship,smallergrid):
         overlapping_rects = ship.overlapping_cells
+
+        ship_positions = []
 
         for rect in overlapping_rects:
             row = (rect.left - self.gridleft2) // self.block_size
             col = (rect.top - self.gridtop2) // self.block_size
             grid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
             smallergrid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
+
+            ship_positions.append((int(col), int(row)))
+
+            # Return the list of grid positions
+        return ship_positions
 
     def clickongrid(self, grid):
         grids = grid.getgrids()  # Assuming this returns a list of pygame.Rect objects

@@ -19,6 +19,7 @@ class Ship:
         }
         self.SCREENY, self.SCREENX = screen.get_size()
 
+
     def checkmousehover(self):
         self.mousePos = pygame.mouse.get_pos()
         if self.rect.collidepoint(self.mousePos) and Ship.dragging_ship is None:
