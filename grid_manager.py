@@ -8,6 +8,7 @@ class GridManager:
         self.block_size = blocksize
         self.smallergrid1 = smallergrid1
         self.smallergrid2 = smallergrid2
+        self.blackgrid = True
 
 
 
@@ -92,7 +93,14 @@ class GridManager:
                 # Calculate the row and column based on the rectangle's position
                 row = (rect.left - self.gridleft1) // self.block_size
                 col = (rect.top - self.gridtop1) // self.block_size
-                grid.set_cell_state(int(col), int(row), 5)  # Assuming the method expects (row, col, value)
+                grid.set_cell_state(int(col), int(row), 4)  # Assuming the method expects (row, col, value)
+                if not self.blackgrid:
+                    self.blackgrid = True
+                    grid.blackgrid = True
 
-                print(f"Calculated Row: {row}, Column: {col}")
+                else:
+                    self.blackgrid = False
+                    grid.blackgrid = False
+                print(grid.blackgrid)
+                print(grid.returnblackgrids())
                 break  # Exit the loop once the correct cell is found and processed

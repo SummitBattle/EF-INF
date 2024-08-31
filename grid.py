@@ -8,7 +8,7 @@ class Grid:
         self.num_cols = 10  # Number of columns
         self.grid_rects = []  # List to hold grid rectangles
         self.grid_state = [[0 for _ in range(self.num_cols)] for _ in range(self.num_rows)]
-        self.is_hovering = False
+        self.is_hovering = True
         # Define colors for different states
         self.colors = {
             0: (0, 255, 255, 128),  # Empty (light blue)
@@ -18,11 +18,11 @@ class Grid:
             4: (0,0,0,128),      #selected grid
             5: (0,255,255,255) #hovering
         }
+        self.blackgrid = False
 
-    def set_cell_state(self, row, col, state):
-        """Set the state of a cell. State can be 0 (empty), 1 (occupied), 2 (miss), or 3 (hit)."""
-        if 0 <= row < self.num_rows and 0 <= col < self.num_cols:
-            self.grid_state[row][col] = state
+    def set_cell_state(self, row, col, value):
+        if self.grid_state[row][col] != 4 or self.blackgrid:  # Check if the current state is not 5
+            self.grid_state[row][col] = value
 
     def drawgrid(self, grid_x, grid_y):
         """Draw the grid with cell states filled with semi-transparent colors."""
@@ -72,3 +72,13 @@ class Grid:
         if self.is_dragging and not mouse_pressed[0]:
             self.is_dragging = False
 
+    def returnblackgrids(self):
+        blackgrids = []
+        # Iterate through grid_state and collect the coordinates with state 4
+        for row in range(len(self.grid_state)):
+            for col in range(len(self.grid_state[row])):
+                if self.grid_state[row][col] == 4:
+                    # Append a tuple with the coordinates (row, col)
+                    blackgrids.append((row, col))
+
+        return blackgrids
