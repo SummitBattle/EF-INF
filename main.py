@@ -107,7 +107,11 @@ while running:
                         ship2.checkmousehover()
                         ship2.checkmouseclick()
 
+                if turn == 1 and copiedgrids == True:
+                    grid_manager.clickongrid(grid,SCREEN_X)
 
+                if turn == 2 and copiedgrids == True:
+                    grid_manager.clickongrid(grid2,SCREEN_X)
             if event.button == 3:
                 if not customButton.shipsplaced:
                     for ship1 in all_ships1:
@@ -118,11 +122,6 @@ while running:
                         ship2.checkmousehover()
                         ship2.toggle_orientation()
 
-            if turn == 1 and customButton.shipsplaced:
-                grid_manager.clickongrid(grid)
-
-            if turn == 2 and customButton2.shipsplaced:
-                grid_manager.clickongrid(grid2)
         elif event.type == pygame.MOUSEBUTTONUP:
             for ship1 in all_ships1:
                 ship1.checkmouseclick()
@@ -171,8 +170,6 @@ while running:
             ship_name2 = ship2.name
             shipgrids2 = grid_manager.shipintostate2(grid2, ship2, smallergrid2)
             all_ships_array2[ship_name2] = shipgrids2  # Store the grid positions in the dictio
-        print(all_ships)  # Debugging print statement to verify
-        print(all_ships_array2)  # Debugging print statement to verify
 
         grid_manager.drawsmallergrids(SCREEN_X,SCREEN_Y)
         copiedgrids = True
