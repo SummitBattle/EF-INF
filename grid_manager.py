@@ -2,17 +2,23 @@ import pygame.mouse
 
 
 class GridManager:
-    def __init__(self,grid1,grid2,blocksize):
+    def __init__(self,grid1,grid2,blocksize,smallergrid1,smallergrid2):
         self.grid1 = grid1
         self.grid2 = grid2
         self.block_size = blocksize
+        self.smallergrid1 = smallergrid1
+        self.smallergrid2 = smallergrid2
 
 
 
-    def changegrid(self,STATE1,ROW1,COL1, ROW2,COL2,STATE2):
-        self.grid1.set_cell_state(ROW1,COL1,STATE1)
-        self.grid2.set_cell_state(ROW2,COL2,STATE2)
+    def drawsmallergrids(self,SCREEN_X,SCREEN_Y):
+        self.gridleft1 = SCREEN_X / 20
+        self.gridtop1 = SCREEN_Y / 1.3
+        self.gridleft2 = SCREEN_X - SCREEN_X/8
+        self.gridtop2 = SCREEN_Y / 1.3
 
+        self.smallergrid1.drawgrid(self.gridleft1, self.gridtop1)
+        self.smallergrid2.drawgrid(self.gridleft2, self.gridtop2)
 
     def drawgrids(self,SCREEN_X,SCREEN_Y):
         self.gridleft1 = SCREEN_X/2-400
@@ -24,26 +30,46 @@ class GridManager:
         self.grid1.drawgrid(self.gridleft1,self.gridtop1)
         self.grid2.drawgrid(self.gridleft2,self.gridtop2)
 
-    def shipintostate1(self,grid,ship):
+    def shipintostate1(self,grid,ship,smallergrid):
 
         overlapping_rects = ship.overlapping_cells
-        print("overlapping rects are:")
-        print(overlapping_rects)
-        print(self.gridleft1, self.gridleft1)
+
 
         for rect in overlapping_rects:
             row = (rect.left - self.gridleft1) // self.block_size
             col = (rect.top - self.gridtop1) // self.block_size
-            print(row)
-            print(col)
-            grid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
 
-    def shipintostate2(self,grid,ship):
+            grid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
+            smallergrid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
+
+
+
+
+    def shipintostate2(self,grid,ship,smallergrid):
         overlapping_rects = ship.overlapping_cells
 
         for rect in overlapping_rects:
             row = (rect.left - self.gridleft2) // self.block_size
-            col = (rect.top - self.gridtop1) // self.block_size
-            print(row)
-            print(col)
+            col = (rect.top - self.gridtop2) // self.block_size
             grid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
+            smallergrid.set_cell_state(int(col), int(row), 1)  # Assuming the method expects (row, col, value)
+
+    def clickongrid(self, grid):
+        grids = grid.getgrids()  # Assuming this returns a list of pygame.Rect objects
+        self.mousePos = pygame.mouse.get_pos()
+
+        for cell_rect in grids:
+            if cell_rect.collidepoint(self.mousePos):
+                # Determine the row and column of the clicked grid cell
+                row = (cell_rect.top - self.gridtop1) // self.block_size
+                col = (cell_rect.left - self.gridleft1) // self.block_size
+
+                # Example action: Set the cell state
+                grid.set_cell_state(int(row), int(col), 4)
+
+
+                # Print or return the row and column (optional)
+                print(f"Clicked on grid cell at row {row}, column {col}")
+                break  # Exit the loop once the correct cell is found and processed
+
+
