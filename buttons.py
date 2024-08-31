@@ -16,6 +16,8 @@ class Button():
         self.height = height
         self.onclickFunction = onclickFunction
         self.onePress = onePress
+        self.shipsplaced = False
+        self.pressedbutton = False
 
 
         self.fillColors = {
@@ -45,7 +47,11 @@ class Button():
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
 
+
+
                 if self.onePress:
+                    self.shipsplaced = True
+
                     self.onclickFunction()
 
                 elif not self.alreadyPressed:
@@ -62,7 +68,13 @@ class Button():
 
 
     def setfalse(self):
-        self.alreadyPressed = False
+        self.pressedbutton = False
+
+    def shipsplaced(self):
+        self.shipsplaced = True
+
+    def setready(self):
+        self.pressedbutton = True
 
 
 

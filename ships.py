@@ -54,6 +54,7 @@ class Ship:
             grid_y = self.collided_rect.y
         # Create the rect for the ship
         self.rect = pygame.Rect(grid_x, grid_y, width, height)
+
         self.checkmousehover()
         if self.is_dragging:
             # Center the ship around the mouse position
@@ -65,7 +66,7 @@ class Ship:
 
         if self.overlapping:
             self.collided_rect = self.overlapping_cells[0]
-            print(self.collided_rect)
+
 
             if self.rect.top <= self.screen.get_height()/2.3:
                 self.rect.top = self.collided_rect.top
@@ -107,6 +108,7 @@ class Ship:
                 self.overlapping_cells.append(self.cell_rect)  # Store the overlapping grid cell
                 self.overlapping = True
 
+        return self.overlapping_cells
 
 
 

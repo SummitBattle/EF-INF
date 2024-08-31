@@ -8,13 +8,15 @@ class Grid:
         self.num_cols = 10  # Number of columns
         self.grid_rects = []  # List to hold grid rectangles
         self.grid_state = [[0 for _ in range(self.num_cols)] for _ in range(self.num_rows)]
-
+        self.is_hovering = False
         # Define colors for different states
         self.colors = {
             0: (0, 255, 255, 128),  # Empty (light blue)
             1: (0, 0, 255, 128),    # Occupied (blue, semi-transparent)
             2: (255, 0, 0, 128),    # Miss (red, semi-transparent)
-            3: (0, 255, 0, 128)     # Hit (green)
+            3: (0, 255, 0, 128), # Hit (green)
+            4: (0,0,0,128),      #selected grid
+            5: (0,255,255,255) #hovering
         }
 
     def set_cell_state(self, row, col, state):
@@ -29,13 +31,17 @@ class Grid:
             for col in range(self.num_cols):
                 x = grid_x + col * self.block_size
                 y = grid_y + row * self.block_size
-                rect = pygame.Rect(x, y, self.block_size, self.block_size)
-                self.grid_rects.append(rect)
+                self.rect = pygame.Rect(x, y, self.block_size, self.block_size)
+                self.grid_rects.append(self.rect)
+                self.checkmousehover()
 
                 # Create a surface with an alpha channel
                 cell_surface = pygame.Surface((self.block_size, self.block_size), pygame.SRCALPHA)
+                if self.is_hovering:
+                    self.set_cell_state(row,col,5)
 
-                # Get the color based on the cell state
+                else:
+                    self.set_cell_state(row,col,0)
                 color = self.colors[self.grid_state[row][col]]
 
                 # Fill the cell surface with the color
@@ -45,7 +51,7 @@ class Grid:
                 self.SCREEN.blit(cell_surface, (x, y))
 
                 # Draw the grid lines
-                pygame.draw.rect(self.SCREEN, (255, 255, 255), rect, 1)  # White color for grid lines
+                pygame.draw.rect(self.SCREEN, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
     def get_cell_state(self, row, col):
         """Return the state of a specific cell."""
@@ -55,4 +61,17 @@ class Grid:
 
     def getgrids(self):
         return self.grid_rects
+
+
+    def checkmousehover(self):
+        self.mousePos = pygame.mouse.get_pos()
+        if self.rect.collidepoint(self.mousePos):
+            self.is_hovering = True  # Mouse is over the ship
+        else:
+            self.is_hovering = False
+
+    def checkmouseclick(self):
+        mouse_pressed = pygame.mouse.get_pressed()
+        if self.is_dragging and not mouse_pressed[0]:
+            self.is_dragging = False
 
