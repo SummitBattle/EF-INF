@@ -19,7 +19,7 @@ SMALLER_BLOCK_SIZE = 10
 CAPTION = "SHIP WRECK"
 WHITE = (255,255,255)
 LINE_THICKNESS = 30
-
+GREEN = (0,255,0)
 
 gui = Gui(SCREEN_X,SCREEN_Y,CAPTION)
 SCREEN = gui.returnscreen()
@@ -35,15 +35,40 @@ grid2 = Grid(BLOCK_SIZE, SCREEN)
 smallergrid1 = Smallergrid(SMALLER_BLOCK_SIZE,SCREEN)
 smallergrid2 = Smallergrid(SMALLER_BLOCK_SIZE,SCREEN)
 grid_manager = GridManager(grid,grid2,BLOCK_SIZE,smallergrid1,smallergrid2)
+destroyedship = False
+destroyedship2 = False
+won1 = False
+won2 = False
+
 
 turn = 1
 
 copiedgrids = False
 def buttonclick1():
     global turn
+    global destroyedship2
+    global won1
+    global won2
     if turn == 1 and customButton.shipsplaced:
         grid_manager.checkblackgrid(grid, smallergrid2,all_ships_smallergrid2)
         smallergrid2.drawgrid(SCREEN_X,SCREEN_Y)
+        destroyedships2 = grid_manager.find_ships_with_no_grids_left(all_ships_smallergrid2)
+
+        if len(all_ships_smallergrid2) == 0:
+            won1 = True
+            won2 = False
+
+        if len(destroyedships2) >= 1:
+
+            destroyedship2 = True
+
+
+
+        else:
+            destroyedship2 = False
+
+
+
 
     customButton.shipsplaced = True
 
@@ -53,9 +78,26 @@ def buttonclick1():
 
 def buttonclick2():
     global turn
+    global destroyedship
+    global won1
+    global won2
     if turn == 2 and customButton2.shipsplaced:
         grid_manager.checkblackgrid(grid2, smallergrid1,all_ships_smallergrid)
         smallergrid1.drawgrid(SCREEN_X, SCREEN_Y)
+        destroyedships = grid_manager.find_ships_with_no_grids_left(all_ships_smallergrid)
+        if len(all_ships_smallergrid) == 0:
+            won1 = False
+            won2 = True
+
+        if len(destroyedships) >= 1:
+
+            destroyedship = True
+
+        else:
+            destroyedship = False
+
+
+
     customButton2.shipsplaced = True
 
     turn = 1
@@ -176,10 +218,14 @@ while running:
             shipgrids = grid_manager.shipintostate1(grid, ship1, smallergrid1)
             all_ships_smallergrid[ship_name] = shipgrids  # Store the grid positions in the dictionary
 
+
+
         for ship2 in all_ships2:
             ship_name2 = ship2.name
             shipgrids2 = grid_manager.shipintostate2(grid2, ship2, smallergrid2)
             all_ships_smallergrid2[ship_name2] = shipgrids2  # Store the grid positions in the dictio
+
+
 
         grid_manager.drawsmallergrids(SCREEN_X,SCREEN_Y)
         copiedgrids = True
@@ -193,10 +239,20 @@ while running:
     if customButton.shipsplaced and customButton2.shipsplaced:
         grid_manager.drawsmallergrids(SCREEN_X, SCREEN_Y)
 
+
     if turn == 1:
         customButton.process()
         text_manager.createlabel('CONFIRM', WHITE, CUSTOMBUTTON_X - 375 + CUSTOMBUTTON_WIDTH / 2 + 28,
                                  CUSTOMBUTTON_Y + CUSTOMBUTTON_WIDTH / 2 - 13)
+
+        if won1:
+            text_manager.createlabel("ALL ENEMY SHIPS DESTROYED!", GREEN, SCREEN_X / 30, 50)
+            text_manager.createlabel("ALL ALLY SHIPS DESTROYED!", GREEN, SCREEN_X - SCREEN_X / 4, 50)
+
+
+        elif destroyedship:
+            text_manager.createlabel("SHIP DESTROYED!", GREEN, SCREEN_X - SCREEN_X/5,50)
+
 
 
     if turn == 2:
@@ -207,6 +263,12 @@ while running:
 
 
 
+        if won2:
+            text_manager.createlabel("ALL ALLY SHIPS DESTROYED!", GREEN, SCREEN_X / 30, 50)
+            text_manager.createlabel("ALL ENEMY SHIPS DESTROYED!", GREEN, SCREEN_X - SCREEN_X / 4, 50)
+
+        elif destroyedship2:
+            text_manager.createlabel("SHIP DESTROYED!", GREEN, SCREEN_X/30, 50)
 
     # Update the display
     gui.updatescreen()

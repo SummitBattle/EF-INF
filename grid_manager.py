@@ -100,7 +100,7 @@ class GridManager:
                     self.blackgrid = False
                     grid.blackgrid = False
 
-                print(grid.returnblackgrids())
+
                 break  # Exit the loop once the correct cell is found and processed
 
     def clickongrid2(self, grid, SCREEN_X):
@@ -136,7 +136,7 @@ class GridManager:
 
                 break  # Exit the loop once the correct cell is found and processed
 
-    def checkblackgrid(self, grid, smallergrid,all_ships):
+    def checkblackgrid(self, grid, smallergrid, all_ships):
         # Get the black grids with their row and column positions
         blackgrids = grid.returnblackgrids()
 
@@ -146,29 +146,47 @@ class GridManager:
         while blackgrids:  # Loop until there are no more black grids to check
             row, col = blackgrids.pop(0)  # Process and remove the first element
 
-            # Debug: Check the current grid state before any changes
-
-            # Check the state of the corresponding cell in the smallergrid
-            enemy_check = smallergrid.get_cell_state(row, col)
-
-
-
             # If the enemy grid has a ship (state 1), mark it as a hit (state 3)
-            if enemy_check == 1:
-                grid.blackgrid = True
+            hit_detected = False
+            for ship_name, grids in all_ships.items():
+                if (row, col) in grids:
+                    hit_detected = True
+                    grids.remove((row, col))  # Remove the grid from the ship's list
 
+                    break
+
+            if hit_detected:
+                grid.blackgrid = True
                 grid.set_cell_state(row, col, 3)  # Update the grid to show a hit
-                smallergrid.set_cell_state(row,col,3)
-            elif enemy_check == 0:
+                smallergrid.set_cell_state(row, col, 3)
+            else:
                 grid.blackgrid = True
+                grid.set_cell_state(row, col, 2)  # Update the grid to show a miss
+                smallergrid.set_cell_state(row, col, 2)
 
-                # Optionally update the grid to show a miss or remove the black grid state
-                grid.set_cell_state(row, col, 2)  # Set to empty or another state, e.g., state 0 for empty
-                smallergrid.set_cell_state(row,col,2)
-
-
-
+            # Debug: Print the updated state of the black grids list
 
         # After the loop, reset self.blackgrid if necessary
         self.blackgrid = False
 
+    def find_ships_with_no_grids_left(self, all_ships):
+        """
+        Finds and returns a list of ships that have no grids left.
+
+        :param all_ships: Dictionary with ship names as keys and lists of grid positions as values.
+        :return: List of ship names that have no grids left.
+        """
+        ships_with_no_grids_left = []
+        ships_to_remove = []
+
+        # Collect ships with no grids left
+        for ship_name, grids in all_ships.items():
+            if len(grids) == 0:
+                ships_with_no_grids_left.append(ship_name)
+                ships_to_remove.append(ship_name)
+
+        # Remove collected ships from the dictionary
+        for ship_name in ships_to_remove:
+            all_ships.pop(ship_name)
+
+        return ships_with_no_grids_left
