@@ -21,8 +21,19 @@ class Grid:
         self.blackgrid = False
 
     def set_cell_state(self, row, col, value):
-        if self.grid_state[row][col] != 4 or self.blackgrid:  # Check if the current state is not 5
+        current_state = self.grid_state[row][col]
+
+        # Prevent changing the state if it's already a miss (2) or hit (3)
+        if current_state in [2, 3]:
+            return  # Do nothing, keep the current state
+
+        # Update the state only if it's not 4 or if blackgrid is True
+        if current_state != 4 or self.blackgrid:
             self.grid_state[row][col] = value
+
+    def get_cell_state(self, row, col):
+        # Directly return the state of the cell at the specified row and column
+        return self.grid_state[row][col]
 
     def drawgrid(self, grid_x, grid_y):
         """Draw the grid with cell states filled with semi-transparent colors."""

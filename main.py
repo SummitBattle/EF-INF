@@ -40,14 +40,24 @@ turn = 1
 
 copiedgrids = False
 def buttonclick1():
-    customButton.shipsplaced = True
     global turn
+    if turn == 1 and customButton.shipsplaced:
+        grid_manager.checkblackgrid(grid, smallergrid2,all_ships_smallergrid2)
+        smallergrid2.drawgrid(SCREEN_X,SCREEN_Y)
+
+    customButton.shipsplaced = True
+
+
     turn = 2
 
 
 def buttonclick2():
-    customButton2.shipsplaced = True
     global turn
+    if turn == 2 and customButton2.shipsplaced:
+        grid_manager.checkblackgrid(grid2, smallergrid1,all_ships_smallergrid)
+        smallergrid1.drawgrid(SCREEN_X, SCREEN_Y)
+    customButton2.shipsplaced = True
+
     turn = 1
 
 
@@ -111,7 +121,7 @@ while running:
                     grid_manager.clickongrid(grid,SCREEN_X)
 
                 if turn == 2 and copiedgrids == True:
-                    grid_manager.clickongrid(grid2,SCREEN_X)
+                    grid_manager.clickongrid2(grid2,SCREEN_X)
             if event.button == 3:
                 if not customButton.shipsplaced:
                     for ship1 in all_ships1:
@@ -159,17 +169,17 @@ while running:
 
 
     if customButton.shipsplaced and customButton2.shipsplaced and not copiedgrids:
-        all_ships = {}  # Dictionary to store ships and their grid positions
-        all_ships_array2 = {}
+        all_ships_smallergrid = {}  # Dictionary to store ships and their grid positions
+        all_ships_smallergrid2 = {}
         for ship1 in all_ships1:
             ship_name = ship1.name
             shipgrids = grid_manager.shipintostate1(grid, ship1, smallergrid1)
-            all_ships[ship_name] = shipgrids  # Store the grid positions in the dictionary
+            all_ships_smallergrid[ship_name] = shipgrids  # Store the grid positions in the dictionary
 
         for ship2 in all_ships2:
             ship_name2 = ship2.name
             shipgrids2 = grid_manager.shipintostate2(grid2, ship2, smallergrid2)
-            all_ships_array2[ship_name2] = shipgrids2  # Store the grid positions in the dictio
+            all_ships_smallergrid2[ship_name2] = shipgrids2  # Store the grid positions in the dictio
 
         grid_manager.drawsmallergrids(SCREEN_X,SCREEN_Y)
         copiedgrids = True
@@ -194,7 +204,6 @@ while running:
 
         text_manager.createlabel('CONFIRM', WHITE, CUSTOMBUTTON_X + 125 + CUSTOMBUTTON_WIDTH / 2 + 28,
                                  CUSTOMBUTTON_Y + CUSTOMBUTTON_WIDTH / 2 - 13)
-
 
 
 
