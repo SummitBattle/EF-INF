@@ -12,26 +12,26 @@ class GridManager:
 
 
 
-    def drawsmallergrids(self,SCREEN_X,SCREEN_Y):
+    def draw_smallergrids(self, SCREEN_X, SCREEN_Y):
         self.gridleft1 = SCREEN_X / 20
         self.gridtop1 = SCREEN_Y / 1.3
         self.gridleft2 = SCREEN_X - SCREEN_X/8
         self.gridtop2 = SCREEN_Y / 1.3
 
-        self.smallergrid1.drawgrid(self.gridleft1, self.gridtop1)
-        self.smallergrid2.drawgrid(self.gridleft2, self.gridtop2)
+        self.smallergrid1.draw_grid(self.gridleft1, self.gridtop1)
+        self.smallergrid2.draw_grid(self.gridleft2, self.gridtop2)
 
-    def drawgrids(self,SCREEN_X,SCREEN_Y):
+    def draw_grids(self, SCREEN_X, SCREEN_Y):
         self.gridleft1 = SCREEN_X/2-400
         self.gridtop1 = 100
         self.gridleft2 = SCREEN_X/2+100
         self.gridtop2 = 100
 
 
-        self.grid1.drawgrid(self.gridleft1,self.gridtop1)
-        self.grid2.drawgrid(self.gridleft2,self.gridtop2)
+        self.grid1.draw_grid(self.gridleft1, self.gridtop1)
+        self.grid2.draw_grid(self.gridleft2, self.gridtop2)
 
-    def shipintostate1(self, grid, ship, smallergrid):
+    def ship_into_state1(self, grid, ship, smallergrid):
         overlapping_rects = ship.overlapping_cells
 
         ship_positions = []  # Array to store the grid positions of the ship
@@ -51,7 +51,7 @@ class GridManager:
         # Return the list of grid positions
         return ship_positions
 
-    def shipintostate2(self,grid,ship,smallergrid):
+    def ship_into_state2(self, grid, ship, smallergrid):
         overlapping_rects = ship.overlapping_cells
 
 
@@ -69,7 +69,7 @@ class GridManager:
             # Return the list of grid positions
         return ship_positions
 
-    def clickongrid(self, grid,SCREEN_X):
+    def click_on_grid(self, grid, SCREEN_X):
         self.gridleft1 = SCREEN_X / 2 - 400
         self.gridtop1 = 100
         self.gridleft2 = SCREEN_X / 2 + 100
@@ -79,7 +79,7 @@ class GridManager:
         self.mousePos = pygame.mouse.get_pos()
 
         # Get all rectangles for grid cells
-        overlapping_rects2 = grid.getgrids()  # Assuming this method returns a list of pygame.Rect objects
+        overlapping_rects2 = grid.get_grids()  # Assuming this method returns a list of pygame.Rect objects
 
         # Iterate through each rectangle to find which one was clicked
 
@@ -103,7 +103,7 @@ class GridManager:
 
                 break  # Exit the loop once the correct cell is found and processed
 
-    def clickongrid2(self, grid, SCREEN_X):
+    def click_on_grid2(self, grid, SCREEN_X):
         self.gridleft1 = SCREEN_X / 2 - 400
         self.gridtop1 = 100
         self.gridleft2 = SCREEN_X / 2 + 100
@@ -113,7 +113,7 @@ class GridManager:
         self.mousePos = pygame.mouse.get_pos()
 
         # Get all rectangles for grid cells
-        overlapping_rects2 = grid.getgrids()  # Assuming this method returns a list of pygame.Rect objects
+        overlapping_rects2 = grid.get_grids()  # Assuming this method returns a list of pygame.Rect objects
 
         # Iterate through each rectangle to find which one was clicked
 
@@ -136,9 +136,9 @@ class GridManager:
 
                 break  # Exit the loop once the correct cell is found and processed
 
-    def checkblackgrid(self, grid, smallergrid, all_ships):
+    def check_blackgrid(self, grid, smallergrid, all_ships):
         # Get the black grids with their row and column positions
-        blackgrids = grid.returnblackgrids()
+        blackgrids = grid.return_blackgrids()
 
         # Debug: Print initial state of the black grids list
 

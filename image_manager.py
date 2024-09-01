@@ -3,7 +3,7 @@ import os.path
 import pygame.image
 
 
-class ImageManager:
+class Image_Manager:
     def __init__(self):
         self.image_array = []
 

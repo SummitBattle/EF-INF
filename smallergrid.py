@@ -23,7 +23,7 @@ class Smallergrid:
         if 0 <= row < self.num_rows and 0 <= col < self.num_cols:
             self.grid_state[row][col] = state
 
-    def drawgrid(self, grid_x, grid_y):
+    def draw_grid(self, grid_x, grid_y):
         """Draw the grid with cell states filled with semi-transparent colors."""
         self.grid_rects = []  # Clear previous grid_rects
         for row in range(self.num_rows):
@@ -54,7 +54,7 @@ class Smallergrid:
             return self.grid_state[row][col]
         return None
 
-    def getgrids(self):
+    def get_grids(self):
         return self.grid_rects
 
 

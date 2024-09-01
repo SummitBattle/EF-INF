@@ -97,7 +97,7 @@ class Ship:
 
     def checkoverlap(self, grid):
         self.cell_rects = []
-        self.cell_rects = grid.getgrids()  # Get all grid rectangles
+        self.cell_rects = grid.get_grids()  # Get all grid rectangles
         self.overlapping_cells = []  # List to store overlapping cells
 
 

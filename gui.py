@@ -3,22 +3,21 @@ import pygame
 import os
 
 class Gui:
-    def __init__(self,SCREEN_X,SCREEN_Y,Caption):
-        self.screenX = SCREEN_X
-        self.screenY = SCREEN_Y
-
-        pygame.display.set_caption(Caption)
+    def __init__(self, screen_x, screen_y, caption):
+        self.screenX = screen_x
+        self.screenY = screen_y
+        pygame.display.set_caption(caption)
 
         self.screen = pygame.display.set_mode((self.screenX,self.screenY),pygame.FULLSCREEN | pygame.SCALED)
         self.screen.fill((244,222,222))
 
-    def updatescreen(self):
+    def update_screen(self):
         pygame.display.flip()
 
-    def returnscreen(self):
+    def return_screen(self):
         return self.screen
 
-    def drawline(self,screen,COLOR,POS,ENDPOS,THICKNESS):
+    def draw_line(self, screen, COLOR, POS, ENDPOS, THICKNESS):
 
         pygame.draw.line(screen,COLOR,POS,ENDPOS,THICKNESS)
 

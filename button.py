@@ -67,14 +67,8 @@ class Button():
         self.screen.blit(self.buttonSurface, self.buttonRect)
 
 
-    def setfalse(self):
-        self.pressedbutton = False
-
-    def shipsplaced(self):
+    def ships_placed(self):
         self.shipsplaced = True
-
-    def setready(self):
-        self.pressedbutton = True
 
 
 

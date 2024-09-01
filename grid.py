@@ -35,7 +35,7 @@ class Grid:
         # Directly return the state of the cell at the specified row and column
         return self.grid_state[row][col]
 
-    def drawgrid(self, grid_x, grid_y):
+    def draw_grid(self, grid_x, grid_y):
         """Draw the grid with cell states filled with semi-transparent colors."""
         self.grid_rects = []  # Clear previous grid_rects
         for row in range(self.num_rows):
@@ -44,7 +44,7 @@ class Grid:
                 y = grid_y + row * self.block_size
                 self.rect = pygame.Rect(x, y, self.block_size, self.block_size)
                 self.grid_rects.append(self.rect)
-                self.checkmousehover()
+                self.check_mouse_hover()
 
                 # Create a surface with an alpha channel
                 cell_surface = pygame.Surface((self.block_size, self.block_size), pygame.SRCALPHA)
@@ -67,23 +67,23 @@ class Grid:
     def get_cell_states(self):
         return self.grid_state
 
-    def getgrids(self):
+    def get_grids(self):
         return self.grid_rects
 
 
-    def checkmousehover(self):
+    def check_mouse_hover(self):
         self.mousePos = pygame.mouse.get_pos()
         if self.rect.collidepoint(self.mousePos):
             self.is_hovering = True  # Mouse is over the ship
         else:
             self.is_hovering = False
 
-    def checkmouseclick(self):
+    def check_mouseclick(self):
         mouse_pressed = pygame.mouse.get_pressed()
         if self.is_dragging and not mouse_pressed[0]:
             self.is_dragging = False
 
-    def returnblackgrids(self):
+    def return_blackgrids(self):
         blackgrids = []
         # Iterate through grid_state and collect the coordinates with state 4
         for row in range(len(self.grid_state)):
