@@ -9,6 +9,23 @@ class Button():
 
 
     def __init__(self,screen, x, y, width, height, onclickFunction=None, onePress=False):
+        """
+        Initializes a new Button instance
+        :param screen: The window of the game
+        :type screen: screen
+        :param x: The X position of the button
+        :type x: int
+        :param y: The Y position of the button
+        :type y: int
+        :param width: The Width of the button
+        :type width: int
+        :param height: The height of the button
+        :type height: int
+        :param onclickFunction: Function to be called when button is pressed
+        :type onclickFunction: function
+        :param onePress: Allow multiple presses or not
+        :type onePress: bool
+        """
         self.screen = screen
         self.x = x
         self.y = y
@@ -37,6 +54,11 @@ class Button():
 
 
     def process(self):
+        """
+        Collects the button state (normal,hover,pressed) and calls function when pressed
+        :return: None
+        :rtype: None
+        """
 
         mousePos = pygame.mouse.get_pos()
 
@@ -66,9 +88,6 @@ class Button():
 
         self.screen.blit(self.buttonSurface, self.buttonRect)
 
-
-    def ships_placed(self):
-        self.shipsplaced = True
 
 
 

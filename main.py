@@ -73,19 +73,26 @@ class Main:
                 self.won1 = True
                 self.won2 = False
 
-            self.destroyed_ship2 = len(destroyedships2) >= 1
 
         self.customButton.shipsplaced = True
         self.turn = 2
 
     def button_click2(self):
+        if not hasattr(self, 'all_ships_smallergrid'):
+            self.all_ships_smallergrid = {}  # Initialize if it doesn't exist
+        if not hasattr(self, 'all_ships_smallergrid2'):
+            self.all_ships_smallergrid2 = {}  # Initialize if it doesn't exist
+
         if self.turn == 2 and self.customButton2.shipsplaced:
             self.grid_manager.check_blackgrid(self.grid2, self.smallergrid1, self.all_ships_smallergrid)
             self.smallergrid1.draw_grid(self.SCREEN_X, self.SCREEN_Y)
             destroyedships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid)
 
-            self.destroyed_ship = len(destroyedships) >= 1
+            if len(self.all_ships_smallergrid) == 0:
+                self.won1 = False
+                self.won2 = True
 
+        print(self.all_ships_smallergrid)
         self.customButton2.shipsplaced = True
         self.turn = 1
 
@@ -210,7 +217,7 @@ class Main:
             self.text_manager.create_label("ALL ALLY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 4, 50)
 
         elif self.destroyed_ship and self.turn == 1:
-            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 5, 50)
+            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 2.5, 50)
 
         if self.turn == 2:
             self.customButton2.process()
@@ -222,10 +229,11 @@ class Main:
             self.text_manager.create_label("ALL ENEMY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 4, 50)
 
         elif self.destroyed_ship2 and self.turn == 2:
-            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X / 30, 50)
+            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X / 3.2, 50)
 
         if self.won2 or self.won1:
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1, 300)
+
+
             self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 10, 300)
             self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 20, 800)
             self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1, 600)
@@ -236,8 +244,6 @@ class Main:
             self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.5, 700)
             self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.7, 400)
             self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.9, 90)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.2, 950)
-
 
 
 
