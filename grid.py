@@ -3,7 +3,7 @@ import pygame
 class Grid:
     def __init__(self, block_size, screen):
         """
-        Creates a Grid instance
+        Creates a Grid instance.
         :param block_size: Size of each cell in the grid
         :type block_size: int
         :param screen: The window of the game
@@ -29,7 +29,7 @@ class Grid:
 
     def set_cell_state(self, row, col, value):
         """
-        Sets the cell in a different state, needed for colors
+        Sets the cell in a different state, needed for colors.
         :param row: Row of the cell to be changed
         :type row: int
         :param col: Column of the cell to be changed
@@ -57,7 +57,7 @@ class Grid:
 
     def draw_grid(self, grid_x, grid_y):
         """
-        draws the grids on the screen
+        draws the grids on the screen.
         :param grid_x: X position of the grid
         :type grid_x: int
         :param grid_y: Y position of the grid
@@ -97,7 +97,7 @@ class Grid:
 
     def get_cell_states(self):
         """
-        Returns the state from each grid
+        Returns the state from each grid.
         :return: List of the states
         :rtype: list
         """
@@ -105,7 +105,7 @@ class Grid:
 
     def get_grids(self):
         """
-        Returns the rect from each grid
+        Returns the rect from each grid.
         :return: List of the rects
         :rtype: list
         """
@@ -114,7 +114,7 @@ class Grid:
 
     def check_mouse_hover(self):
         """
-        Check if mouse is hovering button
+        Check if mouse is hovering button.
         :return: None
         :rtype: None
         """
@@ -126,7 +126,7 @@ class Grid:
 
     def check_mouseclick(self):
         """
-        Check for mouse click on button
+        Check for mouse click on button.
         :return: None
         :rtype: None
         """
@@ -136,7 +136,7 @@ class Grid:
 
     def return_blackgrids(self):
         """
-        Returns all black grids
+        Returns all black grids.
         :return: List of black grids (state 4)
         :rtype: list
         """

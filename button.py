@@ -10,7 +10,7 @@ class Button():
 
     def __init__(self,screen, x, y, width, height, onclickFunction=None, onePress=False):
         """
-        Initializes a new Button instance
+        Initializes a new Button instance.
         :param screen: The window of the game
         :type screen: screen
         :param x: The X position of the button
@@ -55,7 +55,7 @@ class Button():
 
     def process(self):
         """
-        Collects the button state (normal,hover,pressed) and calls function when pressed
+        Collects the button state (normal,hover,pressed) and calls function when pressed.
         :return: None
         :rtype: None
         """

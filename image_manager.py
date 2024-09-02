@@ -7,13 +7,13 @@ class Image_Manager:
 
     def __init__(self):
         """
-        Creates a list with all images to be used
+        Creates a list with all images to be used.
         """
         self.image_array = []
 
     def load_image(self,name):
         """
-        Loads the image for further usage
+        Loads the image for further usage.
         :param name: Name of image
         :type name: string
         :return: None
@@ -26,7 +26,7 @@ class Image_Manager:
 
     def return_list(self):
         """
-        Returns list with all images
+        Returns list with all images.
         :return: List of images
         :rtype: list
         """
@@ -34,7 +34,7 @@ class Image_Manager:
 
     def return_last_image(self):
         """
-        Returns the last image in the list
+        Returns the last image in the list.
         :return: Last image
         :rtype: image
         """
@@ -42,7 +42,7 @@ class Image_Manager:
 
     def blit_image(self,screen,position,image):
         """
-        Draws the image on the screen
+        Draws the image on the screen.
         :param screen: Window of game
         :type screen: screen
         :param position: Position of image
@@ -55,7 +55,7 @@ class Image_Manager:
         screen.blit(image,position)
     def resize_image(self,width,height,image):
         """
-        Resizes the image
+        Resizes the image.
         :param width: New width of image
         :type width: int
         :param height: New height of image

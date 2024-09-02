@@ -5,7 +5,7 @@ import os
 class Gui:
     def __init__(self, screen_x, screen_y, caption):
         """
-        Creates a screen instance
+        Creates a screen instance.
         :param screen_x: Width of screen
         :type screen_x: int
         :param screen_y: Height of screen
@@ -22,7 +22,7 @@ class Gui:
 
     def update_screen(self):
         """
-        updates frame of screen
+        updates frame of screen.
         :return:
         :rtype:
         """
@@ -30,7 +30,7 @@ class Gui:
 
     def return_screen(self):
         """
-        returns the screen
+        returns the screen.
         :return: screen
         :rtype: screen
         """
@@ -38,7 +38,7 @@ class Gui:
 
     def draw_line(self, screen, COLOR, POS, ENDPOS, THICKNESS):
         """
-        Draws the line in the middle of screen
+        Draws the line in the middle of screen.
         :param screen: The screen of the game
         :type screen: screen
         :param COLOR: Color of line

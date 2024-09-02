@@ -4,7 +4,7 @@ import pygame.mouse
 class GridManager:
     def __init__(self,grid1,grid2,block_size,smallergrid1,smallergrid2):
         """
-        Creates a new GridManager instance
+        Creates a new GridManager instance.
         :param grid1: First Grid instance
         :type grid1: Grid
         :param grid2: Second Grid instance
@@ -27,7 +27,7 @@ class GridManager:
 
     def draw_smallergrids(self, SCREEN_X, SCREEN_Y):
         """
-        Draws the smallergrids on screen
+        Draws the smallergrids on screen.
         :param SCREEN_X: Width of screen
         :type SCREEN_X: int
         :param SCREEN_Y: Height of screen
@@ -45,7 +45,7 @@ class GridManager:
 
     def draw_grids(self, SCREEN_X, SCREEN_Y):
         """
-        Draws the normal grids on the screen
+        Draws the normal grids on the screen.
         :param SCREEN_X: Width of screen
         :type SCREEN_X: int
         :param SCREEN_Y: Height of screen
@@ -65,7 +65,7 @@ class GridManager:
     def ship_into_state1(self, grid, ship, smallergrid):
         """
         Turns left ship into cell state 1 (occupied)
-        :param grid: Grid instance
+        :param grid: Grid instance.
         :type grid: Grid
         :param ship: Ship instance
         :type ship: Ship
@@ -95,7 +95,7 @@ class GridManager:
 
     def ship_into_state2(self, grid, ship, smallergrid):
         """
-        Turns right ship into state 1 (occupied)
+        Turns right ship into state 1 (occupied).
         :param grid: Grid instance
         :type grid: Grid
         :param ship: Ship instance
@@ -127,7 +127,7 @@ class GridManager:
 
     def click_on_grid(self, grid, SCREEN_X):
         """
-        Convert left state 0 (empty) into state 4 (selected)
+        Convert left state 0 (empty) into state 4 (selected).
         :param grid: Grid instance
         :type grid: Grid
         :param SCREEN_X: Width of screen
@@ -170,7 +170,7 @@ class GridManager:
 
     def click_on_grid2(self, grid, SCREEN_X):
         """
-        Convert right state 0 (empty) to state 4 (selected)
+        Convert right state 0 (empty) to state 4 (selected).
         :param grid: Grid instance
         :type grid: Grid
         :param SCREEN_X: Width of screen
@@ -212,10 +212,9 @@ class GridManager:
 
     def check_blackgrid(self, grid, smallergrid, all_ships):
         """
-        Convert state 4 (selected) into 2 (miss) or 3 (hit)
-
-        Dictionary contains keys as string
-        Dictionary contains values with lists of grid positions
+        Convert state 4 (selected) into 2 (miss) or 3 (hit).
+        Dictionary contains keys as string.
+        Dictionary contains values with lists of grid positions.
         :param grid: Grid instance
         :type grid: Grid
         :param smallergrid: Smallergrid instance
