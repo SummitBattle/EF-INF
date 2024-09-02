@@ -97,11 +97,16 @@ class Main:
         if self.turn == 1 and self.customButton.shipsplaced:
             self.grid_manager.check_blackgrid(self.grid, self.smallergrid2, self.all_ships_smallergrid2)
             self.smallergrid2.draw_grid(self.SCREEN_X, self.SCREEN_Y)
-
+            destroyed_ships2 = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid2)
             # Checks if any ships are left
             if len(self.all_ships_smallergrid2) == 0:
                 self.won1 = True
                 self.won2 = False
+
+            if len(destroyed_ships2) >= 1:
+                self.destroyed_ship2 = True
+            else:
+                self.destroyed_ship2 = False
 
         # Change turn and check if ships were placed
         self.customButton.shipsplaced = True
@@ -123,11 +128,15 @@ class Main:
         if self.turn == 2 and self.customButton2.shipsplaced:
             self.grid_manager.check_blackgrid(self.grid2, self.smallergrid1, self.all_ships_smallergrid)
             self.smallergrid1.draw_grid(self.SCREEN_X, self.SCREEN_Y)
-
+            destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid)
             # Check if somebody won
             if len(self.all_ships_smallergrid) == 0:
                 self.won1 = False
                 self.won2 = True
+            if len(destroyed_ships) >= 1:
+                self.destroyed_ship = True
+            else:
+                self.destroyed_ship = False
         # Check if ships were placed and change turn
         self.customButton2.shipsplaced = True
         self.turn = 1
@@ -320,6 +329,7 @@ class Main:
             self.text_manager.create_label('CONFIRM', self.WHITE, self.CUSTOMBUTTON_X + 125 + self.CUSTOMBUTTON_WIDTH / 2 + 28,
                                            self.CUSTOMBUTTON_Y + self.CUSTOMBUTTON_WIDTH / 2 - 13)
         # When somebody won
+
         if self.won2:
             self.text_manager.create_label("ALL ALLY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X / 30, 50)
             self.text_manager.create_label("ALL ENEMY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 4, 50)
