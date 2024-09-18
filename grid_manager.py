@@ -273,3 +273,16 @@ class GridManager:
             all_ships.pop(ship_name)
 
         return ships_with_no_grids_left
+
+    def check_ship_ship_overlap(self, ship, ships,screen):
+        # Inflate the ship's rectangle to expand the detection area
+        expanded_rect = ship.rect.inflate(self.block_size * 2, self.block_size * 2)
+
+        # Visualize the expanded rectangle for debugging
+        pygame.draw.rect(screen, (255, 0, 0), expanded_rect, 2)  # Red outline
+
+        # Check for collisions, ignoring self
+        for checkship in ships:
+            if checkship != ship and expanded_rect.colliderect(checkship.rect):
+                return True  # Overlap detected
+        return False  # No overlap detected

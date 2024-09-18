@@ -92,6 +92,7 @@ class Main:
         :return: None
         :rtype: None
         """
+
         # Boolean if ship was hit
         ship_hit = False
 
@@ -121,23 +122,31 @@ class Main:
             # Change turn and check if all ships were placed
 
             for ship1 in self.all_ships1:
+                # Check if all ships were placed properly
                 shiplist = ship1.checkoverlap(self.grid)
+                # Check for overlaps between ships with 1 grid distance
+                ship_overlaps = self.grid_manager.check_ship_ship_overlap(ship1, self.all_ships1,self.SCREEN)
+
                 if not shiplist:  # If any ship is not placed correctly
                     all_ships_placed = False  # Set flag to False
+
+
                     break  # Exit the loop early if a ship isn't placed correctly
 
 
-        if all_ships_placed and not self.copiedgrids:  # After all ships were placed
+        if all_ships_placed and not self.copiedgrids and not ship_overlaps:  # After all ships were placed and no ships are overlapping
             self.customButton.shipsplaced = True
             self.turn = 2
 
         # Repeat turn if a ship was hit
         if ship_hit:
             self.turn = 1
-        # Change turn if a blackgrid exists
+        # Change turn only if a blackgrid exists
         elif blackgrid_exists:
 
             self.turn = 2
+
+
 
     def button_click2(self):
         """
@@ -162,7 +171,9 @@ class Main:
             ship_hit = self.grid_manager.check_blackgrid(self.grid2, self.smallergrid1, self.all_ships_smallergrid)
             self.smallergrid1.draw_grid(self.SCREEN_X, self.SCREEN_Y)
             destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid)
-            print(destroyed_ships)
+            print("Destroyed ships:", destroyed_ships)
+
+
             # Check if somebody won
             if len(self.all_ships_smallergrid) == 0:
                 self.won1 = False
@@ -171,15 +182,18 @@ class Main:
                 self.destroyed_ship = True
             else:
                 self.destroyed_ship = False
+
+            print("Destroyed ship flag:", self.destroyed_ship)
         # Check if all ships were placed and change turn
         if not self.customButton2.shipsplaced:
             for ship2 in self.all_ships2:
                 shiplist = ship2.checkoverlap(self.grid2)
+                ships_overlapping = self.grid_manager.check_ship_ship_overlap(ship2,self.all_ships2,self.SCREEN)
                 if not shiplist:  # If any ship is not placed correctly
                     all_ships_placed = False  # Set flag to False
                     break  # Exit the loop early if a ship isn't placed correctly
 
-        if all_ships_placed and not self.copiedgrids:  # Only change turn if all ships are placed correctly
+        if all_ships_placed and not self.copiedgrids and not ships_overlapping:  # Only change turn if all ships are placed correctly
             self.customButton2.shipsplaced = True
             self.turn = 1
         if ship_hit:
@@ -324,7 +338,7 @@ class Main:
         # If ships were placed, turn ships into state 1 and draws smallergrids ONCE
 
         if self.customButton.shipsplaced and self.customButton2.shipsplaced and not self.copiedgrids:
-            print("STARTING COPYING GRIDS")
+
             self.all_ships_smallergrid = {}  # Dictionary to store ships and their grid positions
             self.all_ships_smallergrid2 = {}
             for ship1 in self.all_ships1:
@@ -368,31 +382,24 @@ class Main:
             self.customButton2.process()
             self.text_manager.create_label('CONFIRM', self.WHITE, self.CUSTOMBUTTON_X + 125 + self.CUSTOMBUTTON_WIDTH / 2 + 28,
                                            self.CUSTOMBUTTON_Y + self.CUSTOMBUTTON_WIDTH / 2 - 13)
-
+            self.gui.cover_left_side(self.SCREEN)
 
         # When ship got destroyed
-        elif self.destroyed_ship2 and self.turn == 1:
+        if self.destroyed_ship2 and self.turn == 1:
             self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X/4, 50)
 
 
 
 
-        elif self.destroyed_ship and self.turn == 2:
+        if self.destroyed_ship and self.turn == 2:
             self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X / 1.5, 50)
 
         if self.won2 or self.won1:
 
 
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 10, 300)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 20, 800)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1, 600)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 6, 950)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 20, 250)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 30, 500)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.2,350 )
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.5, 700)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.7, 400)
-            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.9, 90)
+            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 1.2, 800)
+            self.text_manager.create_label("PRESS R TO RESTART", self.GREEN, self.SCREEN_X / 4, 800)
+
 
     def update_screen(self):
         """
