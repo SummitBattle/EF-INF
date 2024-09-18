@@ -18,6 +18,9 @@ class Main:
         """
         Creates main instance.
         """
+
+        self.ships_overlaps1 = None
+        self.ships_overlaps2 = None
         self.SCREEN_X  = 1300
         self.SCREEN_Y = 700
         self.BLOCK_SIZE = 30
@@ -124,8 +127,9 @@ class Main:
             for ship1 in self.all_ships1:
                 # Check if all ships were placed properly
                 shiplist = ship1.checkoverlap(self.grid)
+
                 # Check for overlaps between ships with 1 grid distance
-                ship_overlaps = self.grid_manager.check_ship_ship_overlap(ship1, self.all_ships1,self.SCREEN)
+                self.ships_overlaps1 = self.grid_manager.check_ship_ship_overlap(ship1, self.all_ships1)
 
                 if not shiplist:  # If any ship is not placed correctly
                     all_ships_placed = False  # Set flag to False
@@ -134,7 +138,7 @@ class Main:
                     break  # Exit the loop early if a ship isn't placed correctly
 
 
-        if all_ships_placed and not self.copiedgrids and not ship_overlaps:  # After all ships were placed and no ships are overlapping
+        if all_ships_placed and not self.copiedgrids and not self.ships_overlaps1:  # After all ships were placed and no ships are overlapping
             self.customButton.shipsplaced = True
             self.turn = 2
 
@@ -171,7 +175,7 @@ class Main:
             ship_hit = self.grid_manager.check_blackgrid(self.grid2, self.smallergrid1, self.all_ships_smallergrid)
             self.smallergrid1.draw_grid(self.SCREEN_X, self.SCREEN_Y)
             destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid)
-            print("Destroyed ships:", destroyed_ships)
+
 
 
             # Check if somebody won
@@ -183,17 +187,17 @@ class Main:
             else:
                 self.destroyed_ship = False
 
-            print("Destroyed ship flag:", self.destroyed_ship)
+
         # Check if all ships were placed and change turn
         if not self.customButton2.shipsplaced:
             for ship2 in self.all_ships2:
                 shiplist = ship2.checkoverlap(self.grid2)
-                ships_overlapping = self.grid_manager.check_ship_ship_overlap(ship2,self.all_ships2,self.SCREEN)
+                self.ships_overlaps2 = self.grid_manager.check_ship_ship_overlap(ship2, self.all_ships2)
                 if not shiplist:  # If any ship is not placed correctly
                     all_ships_placed = False  # Set flag to False
                     break  # Exit the loop early if a ship isn't placed correctly
 
-        if all_ships_placed and not self.copiedgrids and not ships_overlapping:  # Only change turn if all ships are placed correctly
+        if all_ships_placed and not self.copiedgrids and not self.ships_overlaps2:  # Only change turn if all ships are placed correctly
             self.customButton2.shipsplaced = True
             self.turn = 1
         if ship_hit:
@@ -388,11 +392,14 @@ class Main:
         if self.destroyed_ship2 and self.turn == 1:
             self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X/4, 50)
 
-
-
-
         if self.destroyed_ship and self.turn == 2:
             self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X / 1.5, 50)
+
+        if self.ships_overlaps1:
+            self.text_manager.create_label("NO TOUCHING SHIPS!", self.GREEN, self.SCREEN_X / 4, 50)
+
+        if self.ships_overlaps2:
+            self.text_manager.create_label("NO TOUCHING SHIPS!", self.GREEN, self.SCREEN_X / 1.5, 50)
 
         if self.won2 or self.won1:
 
