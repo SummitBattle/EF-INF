@@ -137,6 +137,7 @@ class GridManager:
         :return: None
         :rtype: None
         """
+
         self.gridleft1 = SCREEN_X / 2 - 400
         self.gridtop1 = 100
         self.gridleft2 = SCREEN_X / 2 + 100
@@ -152,20 +153,20 @@ class GridManager:
         for rect in overlapping_rects2:
 
             if rect.collidepoint(self.mousePos):
-
+                # Turn all blackgrids back to normal
+                blackgrids = grid.return_blackgrids()
+                for grids in blackgrids:
+                    grid.blackgrid = True
+                    grid.set_cell_state(grids[0], grids[1], 0)
+                    grid.blackgrid = False
 
                 # Calculate the row and column based on the rectangle's position
                 row = (rect.left - self.gridleft1) // self.block_size
                 col = (rect.top - self.gridtop1) // self.block_size
+                grid.blackgrid = True
                 grid.set_cell_state(int(col), int(row), 4)  # Assuming the method expects (row, col, value)
-                if not self.blackgrid:
+                grid.blackgrid = False
 
-                    self.blackgrid = True
-                    grid.blackgrid = True
-
-                else:
-                    self.blackgrid = False
-                    grid.blackgrid = False
 
 
                 break  # Exit the loop once the correct cell is found and processed
@@ -184,19 +185,21 @@ class GridManager:
 
         for rect in overlapping_rects2:
             if rect.collidepoint(self.mousePos):
+                blackgrids = grid.return_blackgrids()
+                for grids in blackgrids:
+                    grid.blackgrid = True
+                    grid.set_cell_state(grids[0], grids[1], 0)
+                    grid.blackgrid = False
 
                 # Calculate the row and column based on the rectangle's position
                 row = (rect.left - self.gridleft2) // self.block_size
                 col = (rect.top - self.gridtop2) // self.block_size
+                grid.blackgrid = True
                 grid.set_cell_state(int(col), int(row), 4)
+                grid.blackgrid = False
 
                 # Toggle blackgrid2 correctly, similar to Player 1's behavior
-                if not self.blackgrid2:
-                    self.blackgrid2 = True
-                    grid.blackgrid = True
-                else:
-                    self.blackgrid2 = False
-                    grid.blackgrid = False
+
 
                 break
 

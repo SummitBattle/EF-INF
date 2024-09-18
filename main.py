@@ -247,6 +247,7 @@ class Main:
                     ship2.checkmouseclick()
         # Allows to select grids for left and right side
             if self.turn == 1 and self.copiedgrids:
+                print(self.grid.return_blackgrids())
                 self.grid_manager.click_on_grid(self.grid, self.SCREEN_X)
 
             if self.turn == 2 and self.copiedgrids:
