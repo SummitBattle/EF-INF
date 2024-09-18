@@ -92,6 +92,10 @@ class Main:
         :return: None
         :rtype: None
         """
+        # Boolean if ship was hit
+        ship_hit = False
+
+        # Boolean if there is a blackgrid
         blackgrids = self.grid.return_blackgrids()
         blackgrid_exists = False
         if blackgrids:
@@ -100,7 +104,8 @@ class Main:
         all_ships_placed = True  # Assume all ships are placed at first
         # Draws smallergrid and checks for selected grids
         if self.turn == 1 and self.customButton.shipsplaced:
-            self.grid_manager.check_blackgrid(self.grid, self.smallergrid2, self.all_ships_smallergrid2)
+            ship_hit = (self.grid_manager.check_blackgrid(self.grid, self.smallergrid2, self.all_ships_smallergrid2))
+
             self.smallergrid2.draw_grid(self.SCREEN_X, self.SCREEN_Y)
             destroyed_ships2 = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid2)
             # Checks if any ships are left
@@ -122,12 +127,15 @@ class Main:
                     break  # Exit the loop early if a ship isn't placed correctly
 
 
-        if all_ships_placed and not self.copiedgrids:  # Only change turn if all ships are placed correctly
+        if all_ships_placed and not self.copiedgrids:  # After all ships were placed
             self.customButton.shipsplaced = True
             self.turn = 2
 
-
-        if blackgrid_exists:
+        # Repeat turn if a ship was hit
+        if ship_hit:
+            self.turn = 1
+        # Change turn if a blackgrid exists
+        elif blackgrid_exists:
 
             self.turn = 2
 
@@ -137,6 +145,7 @@ class Main:
         :return: None
         :rtype:  None
         """
+        ship_hit = False
         blackgrids = self.grid2.return_blackgrids()
         blackgrid_exists = False
         if blackgrids:
@@ -150,9 +159,10 @@ class Main:
 
         # Draw smallergrid and check for blackgrids
         if self.turn == 2 and self.customButton2.shipsplaced:
-            self.grid_manager.check_blackgrid(self.grid2, self.smallergrid1, self.all_ships_smallergrid)
+            ship_hit = self.grid_manager.check_blackgrid(self.grid2, self.smallergrid1, self.all_ships_smallergrid)
             self.smallergrid1.draw_grid(self.SCREEN_X, self.SCREEN_Y)
             destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smallergrid)
+            print(destroyed_ships)
             # Check if somebody won
             if len(self.all_ships_smallergrid) == 0:
                 self.won1 = False
@@ -161,7 +171,7 @@ class Main:
                 self.destroyed_ship = True
             else:
                 self.destroyed_ship = False
-        # Check if all eships were placed and change turn
+        # Check if all ships were placed and change turn
         if not self.customButton2.shipsplaced:
             for ship2 in self.all_ships2:
                 shiplist = ship2.checkoverlap(self.grid2)
@@ -172,8 +182,9 @@ class Main:
         if all_ships_placed and not self.copiedgrids:  # Only change turn if all ships are placed correctly
             self.customButton2.shipsplaced = True
             self.turn = 1
-
-        if blackgrid_exists:
+        if ship_hit:
+            self.turn = 2
+        elif blackgrid_exists:
             self.turn = 1
     def create_buttons(self):
         """
@@ -247,7 +258,7 @@ class Main:
                     ship2.checkmouseclick()
         # Allows to select grids for left and right side
             if self.turn == 1 and self.copiedgrids:
-                print(self.grid.return_blackgrids())
+
                 self.grid_manager.click_on_grid(self.grid, self.SCREEN_X)
 
             if self.turn == 2 and self.copiedgrids:
@@ -353,27 +364,21 @@ class Main:
                                            self.CUSTOMBUTTON_Y + self.CUSTOMBUTTON_WIDTH / 2 - 13)
             self.gui.cover_right_side(self.SCREEN)
 
-        if self.won1:
-            self.text_manager.create_label("ALL ENEMY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X / 30, 50)
-            self.text_manager.create_label("ALL ALLY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 4, 50)
-
-        # When ship got destroyed
-        elif self.destroyed_ship and self.turn == 1:
-            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 2.5, 50)
-
         if self.turn == 2:
             self.customButton2.process()
             self.text_manager.create_label('CONFIRM', self.WHITE, self.CUSTOMBUTTON_X + 125 + self.CUSTOMBUTTON_WIDTH / 2 + 28,
                                            self.CUSTOMBUTTON_Y + self.CUSTOMBUTTON_WIDTH / 2 - 13)
-            self.gui.cover_left_side(self.SCREEN)
-        # When somebody won
 
-        if self.won2:
-            self.text_manager.create_label("ALL ALLY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X / 30, 50)
-            self.text_manager.create_label("ALL ENEMY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X - self.SCREEN_X / 4, 50)
 
-        elif self.destroyed_ship2 and self.turn == 2:
-            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X / 3.2, 50)
+        # When ship got destroyed
+        elif self.destroyed_ship2 and self.turn == 1:
+            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X/4, 50)
+
+
+
+
+        elif self.destroyed_ship and self.turn == 2:
+            self.text_manager.create_label("SHIP DESTROYED!", self.GREEN, self.SCREEN_X / 1.5, 50)
 
         if self.won2 or self.won1:
 

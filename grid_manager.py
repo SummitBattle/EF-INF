@@ -214,8 +214,8 @@ class GridManager:
         :type smallergrid: Smallergrid
         :param all_ships: Dictionary with all ships and their grid positions
         :type all_ships: dict[str,list]
-        :return: None
-        :rtype: None
+        :return: If a ship got hit
+        :rtype: Boolean
         """
         # Get the black grids with their row and column positions
         blackgrids = grid.return_blackgrids()
@@ -231,7 +231,9 @@ class GridManager:
                 # Check if row and col of black grid match with row and col from a ship grid
                 if (row, col) in grids:
                     hit_detected = True
+
                     grids.remove((row, col))  # Remove the grid from the ship's list
+
 
                     break
 
@@ -239,10 +241,13 @@ class GridManager:
                 grid.blackgrid = True
                 grid.set_cell_state(row, col, 3)  # Update the grid to show a hit
                 smallergrid.set_cell_state(row, col, 3)
+                return hit_detected
             else:
                 grid.blackgrid = True
                 grid.set_cell_state(row, col, 2)  # Update the grid to show a miss
                 smallergrid.set_cell_state(row, col, 2)
+                return hit_detected
+
 
         # Reset self.blackgrid
 
