@@ -22,6 +22,7 @@ class GridManager:
         self.smallergrid1 = smallergrid1
         self.smallergrid2 = smallergrid2
         self.blackgrid = True
+        self.blackgrid2 = True
 
 
 
@@ -74,6 +75,7 @@ class GridManager:
         :return: List of grid positions of the ship
         :rtype: List
         """
+        ship.checkoverlap(grid)
         overlapping_rects = ship.overlapping_cells # Get all overlapping cells between ship and grid
 
         ship_positions = []  # Array to store the grid positions of the ship
@@ -105,7 +107,7 @@ class GridManager:
         :return: List of grid positions of the ship
         :rtype: List
         """
-
+        ship.checkoverlap(grid)
         overlapping_rects = ship.overlapping_cells # Receive overlapping cells between ship and grid
 
 
@@ -169,15 +171,6 @@ class GridManager:
                 break  # Exit the loop once the correct cell is found and processed
 
     def click_on_grid2(self, grid, SCREEN_X):
-        """
-        Convert right state 0 (empty) to state 4 (selected).
-        :param grid: Grid instance
-        :type grid: Grid
-        :param SCREEN_X: Width of screen
-        :type SCREEN_X: int
-        :return: None
-        :rtype: None
-        """
         self.gridleft1 = SCREEN_X / 2 - 400
         self.gridtop1 = 100
         self.gridleft2 = SCREEN_X / 2 + 100
@@ -189,26 +182,23 @@ class GridManager:
         # Get all rectangles for grid cells
         overlapping_rects2 = grid.get_grids()
 
-        # Iterate through each rectangle to find which one was clicked
-
         for rect in overlapping_rects2:
-
             if rect.collidepoint(self.mousePos):
 
                 # Calculate the row and column based on the rectangle's position
                 row = (rect.left - self.gridleft2) // self.block_size
                 col = (rect.top - self.gridtop2) // self.block_size
                 grid.set_cell_state(int(col), int(row), 4)
-                if not self.blackgrid:
-                    self.blackgrid = True
-                    grid.blackgrid = True
 
+                # Toggle blackgrid2 correctly, similar to Player 1's behavior
+                if not self.blackgrid2:
+                    self.blackgrid2 = True
+                    grid.blackgrid = True
                 else:
-                    self.blackgrid = False
+                    self.blackgrid2 = False
                     grid.blackgrid = False
 
-
-                break  # Exit the loop once the correct cell is found and processed
+                break
 
     def check_blackgrid(self, grid, smallergrid, all_ships):
         """
@@ -252,7 +242,7 @@ class GridManager:
                 smallergrid.set_cell_state(row, col, 2)
 
         # Reset self.blackgrid
-        self.blackgrid = False
+
 
     def find_ships_with_no_grids_left(self, all_ships):
         """

@@ -315,6 +315,7 @@ class Main:
             self.customButton.process()
             self.text_manager.create_label('CONFIRM', self.WHITE, self.CUSTOMBUTTON_X - 375 + self.CUSTOMBUTTON_WIDTH / 2 + 28,
                                            self.CUSTOMBUTTON_Y + self.CUSTOMBUTTON_WIDTH / 2 - 13)
+            self.gui.cover_right_side(self.SCREEN)
 
         if self.won1:
             self.text_manager.create_label("ALL ENEMY SHIPS DESTROYED!", self.GREEN, self.SCREEN_X / 30, 50)
@@ -328,6 +329,7 @@ class Main:
             self.customButton2.process()
             self.text_manager.create_label('CONFIRM', self.WHITE, self.CUSTOMBUTTON_X + 125 + self.CUSTOMBUTTON_WIDTH / 2 + 28,
                                            self.CUSTOMBUTTON_Y + self.CUSTOMBUTTON_WIDTH / 2 - 13)
+            self.gui.cover_left_side(self.SCREEN)
         # When somebody won
 
         if self.won2:
