@@ -92,7 +92,7 @@ class Main:
         :return: None
         :rtype: None
         """
-
+        all_ships_placed = True  # Assume all ships are placed at first
         # Draws smallergrid and checks for selected grids
         if self.turn == 1 and self.customButton.shipsplaced:
             self.grid_manager.check_blackgrid(self.grid, self.smallergrid2, self.all_ships_smallergrid2)
@@ -107,10 +107,18 @@ class Main:
                 self.destroyed_ship2 = True
             else:
                 self.destroyed_ship2 = False
+        if not self.customButton.shipsplaced:
+            # Change turn and check if ships were placed
 
-        # Change turn and check if ships were placed
-        self.customButton.shipsplaced = True
-        self.turn = 2
+            for ship1 in self.all_ships1:
+                shiplist = ship1.checkoverlap(self.grid)
+                if not shiplist:  # If any ship is not placed correctly
+                    all_ships_placed = False  # Set flag to False
+                    break  # Exit the loop early if a ship isn't placed correctly
+
+        if all_ships_placed:  # Only change turn if all ships are placed correctly
+            self.customButton.shipsplaced = True
+            self.turn = 2
 
     def button_click2(self):
         """
@@ -118,6 +126,7 @@ class Main:
         :return: None
         :rtype:  None
         """
+        all_ships_placed = True  # Assume all ships are placed at first
         if not hasattr(self, 'all_ships_smallergrid'):
             self.all_ships_smallergrid = {}  # Initialize if it doesn't exist
         if not hasattr(self, 'all_ships_smallergrid2'):
@@ -138,9 +147,16 @@ class Main:
             else:
                 self.destroyed_ship = False
         # Check if ships were placed and change turn
-        self.customButton2.shipsplaced = True
-        self.turn = 1
+        if not self.customButton2.shipsplaced:
+            for ship2 in self.all_ships2:
+                shiplist = ship2.checkoverlap(self.grid2)
+                if not shiplist:  # If any ship is not placed correctly
+                    all_ships_placed = False  # Set flag to False
+                    break  # Exit the loop early if a ship isn't placed correctly
 
+        if all_ships_placed:  # Only change turn if all ships are placed correctly
+            self.customButton2.shipsplaced = True
+            self.turn = 1
     def create_buttons(self):
         """
         Create buttons and textmanager.
@@ -278,6 +294,7 @@ class Main:
         # If ships were placed, turn ships into state 1 and draws smallergrids ONCE
 
         if self.customButton.shipsplaced and self.customButton2.shipsplaced and not self.copiedgrids:
+            print("STARTING COPYING GRIDS")
             self.all_ships_smallergrid = {}  # Dictionary to store ships and their grid positions
             self.all_ships_smallergrid2 = {}
             for ship1 in self.all_ships1:
