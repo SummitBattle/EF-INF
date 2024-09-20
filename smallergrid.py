@@ -1,14 +1,16 @@
 import pygame
 
-class Smallergrid:
+
+class SmallerGrid:
     def __init__(self, block_size, screen):
         """
-        Initializes an instance of Smallergrid.
+        Initializes an instance of Smaller grid.
         :param block_size: Size of each cell
         :type block_size: int
         :param screen: The window of the game
         :type screen: screen
         """
+        self.rect = None
         self.block_size = block_size
         self.SCREEN = screen
         self.num_rows = 10  # Number of rows
@@ -18,11 +20,11 @@ class Smallergrid:
         # Define colors for different states
         self.colors = {
             0: (0, 255, 255, 128),  # Empty (light blue, semi-transparent)
-            1: (0, 0, 255, 128),    # Occupied (blue, semi-transparent)
-            2: (255, 0, 0, 128),    # Miss (red, semi-transparent)
-            3: (0, 255, 0, 128), # Hit (green)
-            4: (0,0,0,128),      # Selected (black, semi-transparent)
-            5: (0,255,255,255) # Hovering (light blue, fully visible)
+            1: (0, 0, 255, 128),  # Occupied (blue, semi-transparent)
+            2: (255, 0, 0, 128),  # Miss (red, semi-transparent)
+            3: (0, 255, 0, 128),  # Hit (green)
+            4: (0, 0, 0, 128),  # Selected (black, semi-transparent)
+            5: (0, 255, 255, 255)  # Hovering (light blue, fully visible)
         }
 
     def set_cell_state(self, row, col, state):
@@ -43,7 +45,7 @@ class Smallergrid:
 
     def draw_grid(self, grid_x, grid_y):
         """
-        Draw the smallergrid. Color is based on the state.
+        Draw the smaller grid. Color is based on the state.
         :param grid_x: X position of the grid
         :type grid_x: int
         :param grid_y: Y position of the grid
@@ -91,7 +93,3 @@ class Smallergrid:
 
     def get_grids(self):
         return self.grid_rects
-
-
-
-

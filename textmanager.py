@@ -3,16 +3,18 @@ import pygame.font
 
 class TextManager:
 
-    def __init__(self,screen):
+    def __init__(self, screen):
         """
-        Creates an instance of TextManager
-        :param screen: Window of the game
-        :type screen: screen
+        Creates text on screen
+        :param screen:
+        :type screen:
         """
+
         pygame.font.init()
         # Loads the font
-        self.my_font = pygame.font.SysFont('Arial',25)
+        self.my_font = pygame.font.SysFont('Arial', 25)
         self.screen = screen
+        self.text_surface = None
 
     def create_label(self, label, COLOR, x, y):
         """
@@ -28,5 +30,5 @@ class TextManager:
         :return: None
         :rtype: None
         """
-        self.text_surface = self.my_font.render(label,False,COLOR)
-        self.screen.blit(self.text_surface, (x,y))
+        self.text_surface = self.my_font.render(label, False, COLOR)
+        self.screen.blit(self.text_surface, (x, y))

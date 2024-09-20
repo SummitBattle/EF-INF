@@ -5,10 +5,9 @@ import pygame
 pygame.init()
 
 
-class Button():
+class Button:
 
-
-    def __init__(self,screen, x, y, width, height, onclickFunction=None, onePress=False):
+    def __init__(self, screen, x, y, width, height, onclickFunction=None, onePress=False):
         """
         Initializes a new Button instance.
         :param screen: The window of the game
@@ -33,25 +32,16 @@ class Button():
         self.height = height
         self.onclickFunction = onclickFunction
         self.onePress = onePress
-        self.shipsplaced = False
+        self.ships_placed = False
         self.pressedbutton = False
-
-
         self.fillColors = {
             'normal': '#00aaaa',
             'hover': '#00ffff',
             'pressed': '#333333',
         }
-
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
-
-
-
         self.alreadyPressed = False
-
-
-
 
     def process(self):
         """
@@ -69,10 +59,8 @@ class Button():
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
 
-
-
                 if self.onePress:
-                    self.shipsplaced = True
+                    self.ships_placed = True
 
                     self.onclickFunction()
 
@@ -83,11 +71,4 @@ class Button():
             else:
                 self.alreadyPressed = False
 
-
-
-
         self.screen.blit(self.buttonSurface, self.buttonRect)
-
-
-
-

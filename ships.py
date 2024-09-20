@@ -1,5 +1,6 @@
 import pygame
 
+
 class Ship:
     dragging_ship = None
 
@@ -20,6 +21,8 @@ class Ship:
         :type orientation: str
         """
 
+        self.rect = None
+        self.collided_rect = None
         self.overlapping = False
         self.block_size = block_size
         self.screen = screen
@@ -35,20 +38,19 @@ class Ship:
         }
         self.SCREENY, self.SCREENX = screen.get_size()
 
-
-    def checkmousehover(self):
+    def check_mouse_hover(self):
         """
         Checks if mouse is over ship rect.
         :return: None
         :rtype: None
         """
-        self.mousePos = pygame.mouse.get_pos()
-        if self.rect.collidepoint(self.mousePos) and Ship.dragging_ship is None:
+        mousePos = pygame.mouse.get_pos()
+        if self.rect.collidepoint(mousePos) and Ship.dragging_ship is None:
             self.is_hovering = True  # Mouse is over the ship
         else:
-            self.is_hovering = False # Mouse is not over the ship
+            self.is_hovering = False  # Mouse is not over the ship
 
-    def checkmouseclick(self):
+    def check_mouseclick(self):
         """
         Checks if mouse got clicked while on a ship rect.
         :return: None
@@ -65,7 +67,6 @@ class Ship:
                 Ship.dragging_ship = self  # Start dragging this ship
                 self.is_dragging = True
 
-
     def toggle_orientation(self):
         """
         Function to flip the ship to vertical or back to horizontal.
@@ -73,17 +74,17 @@ class Ship:
         :rtype:
         """
         if (self.orientation == 'horizontal' and (self.is_hovering or self.is_dragging)) or \
-           (self.orientation == 'vertical' and (self.is_hovering or self.is_dragging)):
+                (self.orientation == 'vertical' and (self.is_hovering or self.is_dragging)):
             self.orientation = 'vertical' if self.orientation == 'horizontal' else 'horizontal'
             self.num_rows, self.num_cols = self.num_cols, self.num_rows
 
-    def drawship(self, grid_x, grid_y,grid):
+    def draw_ship(self, ship_x, ship_y, grid):
         """
         Draws the ship.
-        :param grid_x: X position of the ship
-        :type grid_x: int
-        :param grid_y: Y position of the ship
-        :type grid_y: int
+        :param ship_x: X position of the ship
+        :type ship_x: int
+        :param ship_y: Y position of the ship
+        :type ship_y: int
         :param grid: Grid it belongs to (Ships1 belong to Grid1 and Ships2 to Grid2)
         :type grid: Grid
         :return: None
@@ -94,37 +95,34 @@ class Ship:
         height = self.num_rows * self.block_size
         # Clip the position of the ship to the overlapping grid
         if self.overlapping:
-            grid_x = self.collided_rect.x
-            grid_y = self.collided_rect.y
+            ship_x = self.collided_rect.x
+            ship_y = self.collided_rect.y
 
         # Create the rect for the ship
-        self.rect = pygame.Rect(grid_x, grid_y, width, height)
+        self.rect = pygame.Rect(ship_x, ship_y, width, height)
 
-        self.checkmousehover()
+        self.check_mouse_hover()
         if self.is_dragging:
+            mousePos = pygame.mouse.get_pos()
             # If current ship is being dragged, center the ship around the mouse position
             self.overlapping = False
-            self.rect.topleft = (self.mousePos[0] - width // 2, self.mousePos[1] - height // 2)
-
+            self.rect.topleft = (mousePos[0] - width // 2, mousePos[1] - height // 2)
 
         # Check if ship is overlapping with any grids
-        self.checkoverlap(grid)
+        overlapping_cells = self.check_overlap(grid)
 
         # If overlapping with any grids, clip ship to the position of the grid
         if self.overlapping:
-            self.collided_rect = self.overlapping_cells[0]
 
+            self.collided_rect = overlapping_cells[0]
 
-            if self.rect.top <= self.screen.get_height()/2.3:
+            if self.rect.top <= self.screen.get_height() / 2.3:
                 self.rect.top = self.collided_rect.top
 
             else:
                 self.rect.bottom = self.collided_rect.bottom
 
             self.rect.left = self.collided_rect.left
-
-
-
 
         # Create a surface for the ship
         ship_surface = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -141,7 +139,7 @@ class Ship:
         # Draw the grid lines around the ship
         pygame.draw.rect(self.screen, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
-    def checkoverlap(self, grid):
+    def check_overlap(self, grid):
         """
         Function to check for overlapping.
         :param grid: The corresponding Grid for the ship
@@ -149,24 +147,18 @@ class Ship:
         :return: All cells which are overlapping with the ship
         :rtype: List
         """
-        self.cell_rects = []
-        self.cell_rects = grid.get_grids()  # Get all grid rectangles
-        self.overlapping_cells = []  # List to store overlapping cells
 
-
+        cell_rects = grid.get_grids()  # Get all grid rectangles
+        overlapping_cells = []  # List to store overlapping cells
 
         # Iterate through all grid cells and check if the ship's rect overlaps
-        for self.cell_rect in self.cell_rects:
+        for cell_rect in cell_rects:
 
-            if self.rect.colliderect(self.cell_rect):
-                self.overlapping_cells.append(self.cell_rect)  # Store the overlapping grid cell
+            if self.rect.colliderect(cell_rect):
+                overlapping_cells.append(cell_rect)  # Store the overlapping grid cell
                 self.overlapping = True
 
-        return self.overlapping_cells
-
-
-
-
+        return overlapping_cells
 
 
 class PatrolBoat(Ship):
@@ -177,6 +169,7 @@ class PatrolBoat(Ship):
     def __init__(self, BLOCK_SIZE, SCREEN):
         super().__init__(2, 2, BLOCK_SIZE, SCREEN, "PatrolBoat")
 
+
 class Destroyer(Ship):
     """
     Child class of Ship, with specified size and name.
@@ -185,13 +178,6 @@ class Destroyer(Ship):
     def __init__(self, BLOCK_SIZE, SCREEN):
         super().__init__(3, 1, BLOCK_SIZE, SCREEN, "Destroyer")
 
-class Carrier(Ship):
-    """
-    Child class of Ship, with specified size and name.
-    """
-
-    def __init__(self, BLOCK_SIZE, SCREEN):
-        super().__init__(5, 1, BLOCK_SIZE, SCREEN, "Carrier")
 
 class Battleship(Ship):
     """
@@ -200,3 +186,12 @@ class Battleship(Ship):
 
     def __init__(self, BLOCK_SIZE, SCREEN):
         super().__init__(4, 1, BLOCK_SIZE, SCREEN, "Battleship")
+
+
+class Carrier(Ship):
+    """
+    Child class of Ship, with specified size and name.
+    """
+
+    def __init__(self, BLOCK_SIZE, SCREEN):
+        super().__init__(5, 1, BLOCK_SIZE, SCREEN, "Carrier")

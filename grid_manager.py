@@ -2,7 +2,7 @@ import pygame.mouse
 
 
 class GridManager:
-    def __init__(self,grid1,grid2,block_size,smallergrid1,smallergrid2):
+    def __init__(self, grid1, grid2, block_size, smallergrid1, smallergrid2):
         """
         Creates a new GridManager instance.
         :param grid1: First Grid instance
@@ -16,6 +16,10 @@ class GridManager:
         :param smallergrid2: Second Smallergrid instance
         :type smallergrid2: Smallergrid
         """
+        self.gridtop2 = None
+        self.gridleft2 = None
+        self.gridtop1 = None
+        self.gridleft1 = None
         self.grid1 = grid1
         self.grid2 = grid2
         self.block_size = block_size
@@ -24,9 +28,7 @@ class GridManager:
         self.blackgrid = True
         self.blackgrid2 = True
 
-
-
-    def draw_smallergrids(self, SCREEN_X, SCREEN_Y):
+    def draw_smaller_grids(self, SCREEN_X, SCREEN_Y):
         """
         Draws the smallergrids on screen.
         :param SCREEN_X: Width of screen
@@ -36,29 +38,26 @@ class GridManager:
         :return: None
         :rtype: None
         """
-        self.gridleft1 = SCREEN_X / 20
-        self.gridtop1 = SCREEN_Y / 1.3
-        self.gridleft2 = SCREEN_X - SCREEN_X/8
-        self.gridtop2 = SCREEN_Y / 1.3
+        gridleft1 = SCREEN_X / 20
+        gridtop1 = SCREEN_Y / 1.3
+        gridleft2 = SCREEN_X - SCREEN_X / 8
+        gridtop2 = SCREEN_Y / 1.3
 
-        self.smallergrid1.draw_grid(self.gridleft1, self.gridtop1)
-        self.smallergrid2.draw_grid(self.gridleft2, self.gridtop2)
+        self.smallergrid1.draw_grid(gridleft1, gridtop1)
+        self.smallergrid2.draw_grid(gridleft2, gridtop2)
 
-    def draw_grids(self, SCREEN_X, SCREEN_Y):
+    def draw_grids(self, SCREEN_X):
         """
         Draws the normal grids on the screen.
         :param SCREEN_X: Width of screen
         :type SCREEN_X: int
-        :param SCREEN_Y: Height of screen
-        :type SCREEN_Y: int
         :return: None
         :rtype: None
         """
-        self.gridleft1 = SCREEN_X/2-400
+        self.gridleft1 = SCREEN_X / 2 - 400
         self.gridtop1 = 100
-        self.gridleft2 = SCREEN_X/2+100
+        self.gridleft2 = SCREEN_X / 2 + 100
         self.gridtop2 = 100
-
 
         self.grid1.draw_grid(self.gridleft1, self.gridtop1)
         self.grid2.draw_grid(self.gridleft2, self.gridtop2)
@@ -75,14 +74,12 @@ class GridManager:
         :return: List of grid positions of the ship
         :rtype: List
         """
-        ship.checkoverlap(grid)
-        overlapping_rects = ship.overlapping_cells # Get all overlapping cells between ship and grid
+        overlapping_rects = ship.check_overlap(grid)
 
         ship_positions = []  # Array to store the grid positions of the ship
 
         # Calculate colum and row and update cell state
         for rect in overlapping_rects:
-
             row = (rect.left - self.gridleft1) // self.block_size
             col = (rect.top - self.gridtop1) // self.block_size
 
@@ -91,7 +88,6 @@ class GridManager:
 
             # Store the grid position
             ship_positions.append((int(col), int(row)))
-
 
         return ship_positions
 
@@ -107,9 +103,8 @@ class GridManager:
         :return: List of grid positions of the ship
         :rtype: List
         """
-        ship.checkoverlap(grid)
-        overlapping_rects = ship.overlapping_cells # Receive overlapping cells between ship and grid
 
+        overlapping_rects = ship.check_overlap(grid)
 
         ship_positions = []
 
@@ -122,7 +117,6 @@ class GridManager:
             smallergrid.set_cell_state(int(col), int(row), 1)
 
             ship_positions.append((int(col), int(row)))
-
 
         # Return the list of grid positions
         return ship_positions
@@ -138,13 +132,11 @@ class GridManager:
         :rtype: None
         """
 
-        self.gridleft1 = SCREEN_X / 2 - 400
-        self.gridtop1 = 100
-        self.gridleft2 = SCREEN_X / 2 + 100
-        self.gridtop2 = 100
+        gridleft1 = SCREEN_X / 2 - 400
+        gridtop1 = 100
 
         # Get the mouse position
-        self.mousePos = pygame.mouse.get_pos()
+        mouse_pos = pygame.mouse.get_pos()
 
         # Get all rectangles for grid cells
         overlapping_rects2 = grid.get_grids()  # Assuming this method returns a list of pygame.Rect objects
@@ -152,54 +144,50 @@ class GridManager:
         # Iterate through each rectangle to find which one was clicked
         for rect in overlapping_rects2:
 
-            if rect.collidepoint(self.mousePos):
+            if rect.collidepoint(mouse_pos):
                 # Turn all blackgrids back to normal
-                blackgrids = grid.return_blackgrids()
+                blackgrids = grid.return_black_grids()
                 for grids in blackgrids:
-                    grid.blackgrid = True
+                    grid.black_grid = True
                     grid.set_cell_state(grids[0], grids[1], 0)
-                    grid.blackgrid = False
+                    grid.black_grid = False
 
                 # Calculate the row and column based on the rectangle's position
-                row = (rect.left - self.gridleft1) // self.block_size
-                col = (rect.top - self.gridtop1) // self.block_size
-                grid.blackgrid = True
+                row = (rect.left - gridleft1) // self.block_size
+                col = (rect.top - gridtop1) // self.block_size
+                grid.black_grid = True
                 grid.set_cell_state(int(col), int(row), 4)  # Assuming the method expects (row, col, value)
-                grid.blackgrid = False
-
-
+                grid.black_grid = False
 
                 break  # Exit the loop once the correct cell is found and processed
 
     def click_on_grid2(self, grid, SCREEN_X):
-        self.gridleft1 = SCREEN_X / 2 - 400
-        self.gridtop1 = 100
-        self.gridleft2 = SCREEN_X / 2 + 100
-        self.gridtop2 = 100
+
+        gridleft2 = SCREEN_X / 2 + 100
+        gridtop2 = 100
 
         # Get the mouse position
-        self.mousePos = pygame.mouse.get_pos()
+        mouse_pos = pygame.mouse.get_pos()
 
         # Get all rectangles for grid cells
         overlapping_rects2 = grid.get_grids()
 
         for rect in overlapping_rects2:
-            if rect.collidepoint(self.mousePos):
-                blackgrids = grid.return_blackgrids()
+            if rect.collidepoint(mouse_pos):
+                blackgrids = grid.return_black_grids()
                 for grids in blackgrids:
-                    grid.blackgrid = True
+                    grid.black_grid = True
                     grid.set_cell_state(grids[0], grids[1], 0)
-                    grid.blackgrid = False
+                    grid.black_grid = False
 
                 # Calculate the row and column based on the rectangle's position
-                row = (rect.left - self.gridleft2) // self.block_size
-                col = (rect.top - self.gridtop2) // self.block_size
-                grid.blackgrid = True
+                row = (rect.left - gridleft2) // self.block_size
+                col = (rect.top - gridtop2) // self.block_size
+                grid.black_grid = True
                 grid.set_cell_state(int(col), int(row), 4)
-                grid.blackgrid = False
+                grid.black_grid = False
 
                 # Toggle blackgrid2 correctly, similar to Player 1's behavior
-
 
                 break
 
@@ -215,11 +203,10 @@ class GridManager:
         :param all_ships: Dictionary with all ships and their grid positions
         :type all_ships: dict[str,list]
         :return: If a ship got hit
-        :rtype: Boolean
+        :rtype: Bool
         """
         # Get the black grids with their row and column positions
-        blackgrids = grid.return_blackgrids()
-
+        blackgrids = grid.return_black_grids()
 
         # Iterate through all the grid positions returned
         while blackgrids:  # Loop until there are no more black grids to check
@@ -234,23 +221,20 @@ class GridManager:
 
                     grids.remove((row, col))  # Remove the grid from the ship's list
 
-
                     break
 
             if hit_detected:
-                grid.blackgrid = True
+                grid.black_grid = True
                 grid.set_cell_state(row, col, 3)  # Update the grid to show a hit
                 smallergrid.set_cell_state(row, col, 3)
                 return hit_detected
             else:
-                grid.blackgrid = True
+                grid.black_grid = True
                 grid.set_cell_state(row, col, 2)  # Update the grid to show a miss
                 smallergrid.set_cell_state(row, col, 2)
                 return hit_detected
 
-
         # Reset self.blackgrid
-
 
     def find_ships_with_no_grids_left(self, all_ships):
         """
@@ -282,14 +266,13 @@ class GridManager:
         :param ships: All own ships
         :type ships: Array
         :return: Returns if ships are overlapping with ship
-        :rtype: Boolean
+        :rtype: Bool
         """
         # Inflate the ship's rectangle to expand the detection area
         expanded_rect = ship.rect.inflate(self.block_size * 2, self.block_size * 2)
 
-
         # Check for collisions, ignoring self
-        for checkship in ships:
-            if checkship != ship and expanded_rect.colliderect(checkship.rect):
+        for check_ship in ships:
+            if check_ship != ship and expanded_rect.colliderect(check_ship.rect):
                 return True  # Overlap detected
         return False  # No overlap detected

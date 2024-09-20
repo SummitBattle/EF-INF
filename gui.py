@@ -1,6 +1,6 @@
 # import the pygame module
 import pygame
-import os
+
 
 class Gui:
     def __init__(self, screen_x, screen_y, caption):
@@ -17,9 +17,9 @@ class Gui:
         self.screenY = screen_y
         pygame.display.set_caption(caption)
 
-        self.screen = pygame.display.set_mode((self.screenX,self.screenY),pygame.FULLSCREEN | pygame.SCALED)
-        self.screen.fill((244,222,222))
-        self.black = (0,0,0)
+        self.screen = pygame.display.set_mode((self.screenX, self.screenY), pygame.FULLSCREEN | pygame.SCALED)
+        self.screen.fill((244, 222, 222))
+        self.black = (0, 0, 0)
 
     def update_screen(self):
         """
@@ -54,9 +54,9 @@ class Gui:
         :rtype: None
         """
 
-        pygame.draw.line(screen,COLOR,POS,ENDPOS,THICKNESS)
+        pygame.draw.line(screen, COLOR, POS, ENDPOS, THICKNESS)
 
-    def cover_left_side(self,screen):
+    def cover_left_side(self, screen):
         """
         Covers the left side with a rect
         :param screen: Screen of the game
@@ -65,7 +65,8 @@ class Gui:
         :rtype: None
         """
         pygame.draw.rect(screen, self.black, (0, 0, self.screenX//2, self.screenY))
-    def cover_right_side(self,screen):
+
+    def cover_right_side(self, screen):
         """
         Covers the right side with a rect
         :param screen: Screen of the game

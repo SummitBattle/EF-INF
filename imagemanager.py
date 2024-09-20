@@ -3,15 +3,16 @@ import os.path
 import pygame.image
 
 
-class Image_Manager:
+class ImageManager:
 
     def __init__(self):
         """
         Creates a list with all images to be used.
         """
         self.image_array = []
+        self.image = None
 
-    def load_image(self,name):
+    def load_image(self, name):
         """
         Loads the image for further usage.
         :param name: Name of image
@@ -40,7 +41,7 @@ class Image_Manager:
         """
         return self.image_array[-1]
 
-    def blit_image(self,screen,position,image):
+    def blit_image(self, screen, position, image):
         """
         Draws the image on the screen.
         :param screen: Window of game
@@ -52,8 +53,9 @@ class Image_Manager:
         :return: None
         :rtype: None
         """
-        screen.blit(image,position)
-    def resize_image(self,width,height,image):
+        screen.blit(image, position)
+
+    def resize_image(self, width, height, image):
         """
         Resizes the image.
         :param width: New width of image
@@ -65,18 +67,4 @@ class Image_Manager:
         :return: None
         :rtype: None
         """
-        pygame.transform.scale(image,(width,height))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        pygame.transform.scale(image, (width, height))

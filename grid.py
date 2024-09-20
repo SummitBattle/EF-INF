@@ -1,5 +1,6 @@
 import pygame
 
+
 class Grid:
     def __init__(self, block_size, screen):
         """
@@ -9,6 +10,8 @@ class Grid:
         :param screen: The window of the game
         :type screen: screen
         """
+        self.is_dragging = None
+        self.rect = None
         self.block_size = block_size
         self.SCREEN = screen
         self.num_rows = 10  # Number of rows
@@ -19,13 +22,13 @@ class Grid:
         # Define colors for different states
         self.colors = {
             0: (0, 255, 255, 128),  # Empty (light blue)
-            1: (0, 0, 255, 128),    # Occupied (blue, semi-transparent)
-            2: (255, 0, 0, 128),    # Miss (red, semi-transparent)
-            3: (0, 255, 0, 128), # Hit (green)
-            4: (0,0,0,128),      # Selected (black, semi-transparent)
-            5: (0,255,255,255) # Hovering (green-blue, transparent
+            1: (0, 0, 255, 128),  # Occupied (blue, semi-transparent)
+            2: (255, 0, 0, 128),  # Miss (red, semi-transparent)
+            3: (0, 255, 0, 128),  # Hit (green)
+            4: (0, 0, 0, 128),  # Selected (black, semi-transparent)
+            5: (0, 255, 255, 255)  # Hovering (green-blue, transparent
         }
-        self.blackgrid = False  # Check if current blackgrid state can be changed
+        self.black_grid = False  # Check if current black grid state can be changed
 
     def set_cell_state(self, row, col, value):
         """
@@ -46,14 +49,13 @@ class Grid:
         if current_state in [2, 3]:
             return  # Do nothing, keep the current state
 
-        # Update the state only if it's not 4 or if blackgrid is True
-        if current_state != 4 or self.blackgrid:
+        # Update the state only if it's not 4 or if black grid is True
+        if current_state != 4 or self.black_grid:
             self.grid_state[row][col] = value
 
     def get_cell_state(self, row, col):
         # Directly return the state of the cell at the specified row and column
         return self.grid_state[row][col]
-
 
     def draw_grid(self, grid_x, grid_y):
         """
@@ -74,15 +76,15 @@ class Grid:
                 y = grid_y + row * self.block_size
                 self.rect = pygame.Rect(x, y, self.block_size, self.block_size)
                 self.grid_rects.append(self.rect)
-                self.check_mouse_hover() # Check if mouse is hovering grid
+                self.check_mouse_hover()  # Check if mouse is hovering grid
 
                 # Create a surface with an alpha channel
                 cell_surface = pygame.Surface((self.block_size, self.block_size), pygame.SRCALPHA)
                 if self.is_hovering:
-                    self.set_cell_state(row,col,5)
+                    self.set_cell_state(row, col, 5)
 
                 else:
-                    self.set_cell_state(row,col,0)
+                    self.set_cell_state(row, col, 0)
                 # Receive grid state for color
                 color = self.colors[self.grid_state[row][col]]
 
@@ -111,18 +113,17 @@ class Grid:
         """
         return self.grid_rects
 
-
     def check_mouse_hover(self):
         """
         Check if mouse is hovering button.
         :return: None
         :rtype: None
         """
-        self.mousePos = pygame.mouse.get_pos()
-        if self.rect.collidepoint(self.mousePos):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos):
             self.is_hovering = True  # Mouse is over the ship
         else:
-            self.is_hovering = False # Moise is not over the ship
+            self.is_hovering = False  # Moise is not over the ship
 
     def check_mouseclick(self):
         """
@@ -134,18 +135,18 @@ class Grid:
         if self.is_dragging and not mouse_pressed[0]:
             self.is_dragging = False
 
-    def return_blackgrids(self):
+    def return_black_grids(self):
         """
         Returns all black grids.
         :return: List of black grids (state 4)
         :rtype: list
         """
-        blackgrids = []
+        black_grids = []
         # Iterate through grid_state and collect the coordinates with state 4
         for row in range(len(self.grid_state)):
             for col in range(len(self.grid_state[row])):
                 if self.grid_state[row][col] == 4:
                     # Append a tuple with the coordinates (row, col)
-                    blackgrids.append((row, col))
+                    black_grids.append((row, col))
 
-        return blackgrids
+        return black_grids
