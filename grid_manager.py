@@ -4,7 +4,7 @@ import pygame.mouse
 class GridManager:
     def __init__(self, grid1, grid2, block_size, smallergrid1, smallergrid2):
         """
-        Creates a new GridManager instance.
+        Create a new GridManager instance.
         :param grid1: First Grid instance
         :type grid1: Grid
         :param grid2: Second Grid instance

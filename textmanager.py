@@ -5,9 +5,9 @@ class TextManager:
 
     def __init__(self, screen):
         """
-        Creates text on screen
-        :param screen:
-        :type screen:
+        Initialize TextManager instance
+        :param screen: Screen of game
+        :type screen: Screen
         """
 
         pygame.font.init()

@@ -4,7 +4,7 @@ import pygame
 class Grid:
     def __init__(self, block_size, screen):
         """
-        Creates a Grid instance.
+        Initialize a Grid instance.
         :param block_size: Size of each cell in the grid
         :type block_size: int
         :param screen: The window of the game

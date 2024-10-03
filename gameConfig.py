@@ -1,5 +1,8 @@
 class GameConfig:
     def __init__(self):
+        """
+        Initialize the GameConfig instance.
+        """
         # CONST Variables
         self.SCREEN_X = 1300
         self.SCREEN_Y = 700

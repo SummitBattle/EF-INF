@@ -6,7 +6,7 @@ class Ship:
 
     def __init__(self, num_rows, num_cols, block_size, screen, name, orientation='horizontal'):
         """
-        Initializes a Ship instance.
+        Initialize a Ship instance.
         :param num_rows: Amount of grid rows
         :type num_rows: int
         :param num_cols: Amount of grid columns

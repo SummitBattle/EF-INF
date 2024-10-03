@@ -6,7 +6,7 @@ from button import Button
 from ships import *
 from textmanager import TextManager
 from smallergrid import SmallerGrid
-from gameConfig import  GameConfig
+from gameConfig import GameConfig
 
 # Initialize Pygame
 pygame.init()
@@ -14,13 +14,15 @@ pygame.init()
 
 class Main:
     def __init__(self):
+        """
+        Initialize the Main instance.
+        """
         # Arrays to collect ships
         self.all_ships1 = None
         self.all_ships2 = None
         # Dicts to store ships and grid positions from smaller grid
         self.all_ships_smaller_grid1 = {}
         self.all_ships_smaller_grid2 = {}
-
 
         # Needed for game process
         self.copied_grids = None
@@ -100,7 +102,8 @@ class Main:
         """
         self.image_manager = ImageManager()
         self.image_manager.load_image("BACKGROUND2.jpg")
-        self.image_manager.resize_image(self.config.SCREEN_X, self.config.SCREEN_Y, self.image_manager.return_last_image())
+        self.image_manager.resize_image(self.config.SCREEN_X, self.config.SCREEN_Y,
+                                        self.image_manager.return_last_image())
         self.image_manager.blit_image(self.SCREEN, (-700, -700), self.image_manager.return_last_image())
 
     def create_grids(self):
@@ -113,7 +116,8 @@ class Main:
         self.grid2 = Grid(self.config.BLOCK_SIZE, self.SCREEN)
         self.smaller_grid1 = SmallerGrid(self.config.SMALLER_BLOCK_SIZE, self.SCREEN)
         self.smaller_grid2 = SmallerGrid(self.config.SMALLER_BLOCK_SIZE, self.SCREEN)
-        self.grid_manager = GridManager(self.grid1, self.grid2, self.config.BLOCK_SIZE, self.smaller_grid1, self.smaller_grid2)
+        self.grid_manager = GridManager(self.grid1, self.grid2, self.config.BLOCK_SIZE, self.smaller_grid1,
+                                        self.smaller_grid2)
 
     def button_click1(self):
         """
@@ -272,8 +276,8 @@ class Main:
         :rtype: None
         """
         # Main loop
-        CLOCK = pygame.time.Clock()
-        CLOCK.tick(90)
+        clock = pygame.time.Clock()
+        clock.tick(90)
 
     def mouse_click_events(self, event):
         """
@@ -335,7 +339,8 @@ class Main:
         # Draw line and images
         self.SCREEN.fill((255, 255, 255))
         self.image_manager.blit_image(self.SCREEN, (-700, -700), self.image_manager.return_last_image())
-        self.gui.draw_line(self.SCREEN, self.config.WHITE, (self.config.SCREEN_X / 2, 0), (self.config.SCREEN_X / 2, self.config.SCREEN_Y),
+        self.gui.draw_line(self.SCREEN, self.config.WHITE, (self.config.SCREEN_X / 2, 0),
+                           (self.config.SCREEN_X / 2, self.config.SCREEN_Y),
                            self.config.LINE_THICKNESS)
 
     def draw_ships_and_label(self):
@@ -434,6 +439,11 @@ class Main:
         self.gui.update_screen()
 
     def draw_elements(self):
+        """
+        Draws line,background,ships,labels and smaller_grids on the screen.
+        :return: None
+        :rtype: None
+        """
         self.draw_background_and_line()
         self.draw_ships_and_label()
         self.draw_smaller_grids()

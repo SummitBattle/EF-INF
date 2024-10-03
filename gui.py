@@ -5,7 +5,7 @@ import pygame
 class Gui:
     def __init__(self, screen_x, screen_y, caption):
         """
-        Creates a screen instance.
+        Create a screen instance.
         :param screen_x: Width of screen
         :type screen_x: int
         :param screen_y: Height of screen

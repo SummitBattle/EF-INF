@@ -4,7 +4,7 @@ import pygame
 class SmallerGrid:
     def __init__(self, block_size, screen):
         """
-        Initializes an instance of Smaller grid.
+        Initialize an instance of Smaller grid.
         :param block_size: Size of each cell
         :type block_size: int
         :param screen: The window of the game
