@@ -17,10 +17,10 @@ class Main:
         self.all_ships1 = None
         self.all_ships2 = None
         # Dicts to store ships and grid positions from smaller grid
-        self.all_ships_smaller_grid = {}
+        self.all_ships_smaller_grid1 = {}
         self.all_ships_smaller_grid2 = {}
-        # to set fps clock
-        self.clock = None
+        # Clock to decide fps
+        self.CLOCK = 60
 
         # Needed for game process
         self.copied_grids = None
@@ -48,23 +48,23 @@ class Main:
 
         # Class instances for later
 
-        self.grid = None
+        self.grid1 = None
         self.grid2 = None
         self.gui = None
         self.grid_manager = None
-        self.customButton = None
+        self.customButton1 = None
         self.customButton2 = None
         self.image_manager = None
         self.smaller_grid1 = None
         self.smaller_grid2 = None
         self.text_manager = None
-        self.patrol_boat = None
+        self.patrol_boat1 = None
         self.patrol_boat2 = None
-        self.destroyer = None
+        self.destroyer1 = None
         self.destroyer2 = None
-        self.carrier = None
+        self.carrier1 = None
         self.carrier2 = None
-        self.battleship = None
+        self.battleship1 = None
         self.battleship2 = None
 
         # Screen instance
@@ -120,11 +120,11 @@ class Main:
         :return: None
         :rtype: None
         """
-        self.grid = Grid(self.BLOCK_SIZE, self.SCREEN)
+        self.grid1 = Grid(self.BLOCK_SIZE, self.SCREEN)
         self.grid2 = Grid(self.BLOCK_SIZE, self.SCREEN)
         self.smaller_grid1 = SmallerGrid(self.SMALLER_BLOCK_SIZE, self.SCREEN)
         self.smaller_grid2 = SmallerGrid(self.SMALLER_BLOCK_SIZE, self.SCREEN)
-        self.grid_manager = GridManager(self.grid, self.grid2, self.BLOCK_SIZE, self.smaller_grid1, self.smaller_grid2)
+        self.grid_manager = GridManager(self.grid1, self.grid2, self.BLOCK_SIZE, self.smaller_grid1, self.smaller_grid2)
 
     def button_click1(self):
         """
@@ -137,15 +137,15 @@ class Main:
         ship_hit = False
 
         # Boolean if there is a black grid
-        black_grids = self.grid.return_black_grids()
+        black_grids = self.grid1.return_black_grids()
         black_grid_exists = False
         if black_grids:
             black_grid_exists = True
 
         all_ships_placed = True  # Assume all ships are placed at first
         # Draws smaller grid and checks for selected grids
-        if self.turn == 1 and self.customButton.ships_placed:
-            ship_hit = (self.grid_manager.check_blackgrid(self.grid, self.smaller_grid2, self.all_ships_smaller_grid2))
+        if self.turn == 1 and self.customButton1.ships_placed:
+            ship_hit = (self.grid_manager.check_blackgrid(self.grid1, self.smaller_grid2, self.all_ships_smaller_grid2))
 
             self.smaller_grid2.draw_grid(self.SCREEN_X, self.SCREEN_Y)
             destroyed_ships2 = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid2)
@@ -158,12 +158,12 @@ class Main:
                 self.destroyed_ship2 = True
             else:
                 self.destroyed_ship2 = False
-        if not self.customButton.ships_placed:
+        if not self.customButton1.ships_placed:
             # Change turn and check if all ships were placed
 
             for ship1 in self.all_ships1:
                 # Check if all ships were placed properly
-                ship_list = ship1.check_overlap(self.grid)
+                ship_list = ship1.check_overlap(self.grid1)
 
                 # Check for overlaps between ships with 1 grid distance
                 self.ships_overlaps1 = self.grid_manager.check_ship_ship_overlap(ship1, self.all_ships1)
@@ -174,7 +174,7 @@ class Main:
 
         # After all ships were placed and no ships are overlapping
         if all_ships_placed and not self.copied_grids and not self.ships_overlaps1:
-            self.customButton.ships_placed = True
+            self.customButton1.ships_placed = True
             self.turn = 2
 
         # Repeat turn if a ship was hit
@@ -200,12 +200,12 @@ class Main:
 
         # Draw smaller grid and check for black grids
         if self.turn == 2 and self.customButton2.ships_placed:
-            ship_hit = self.grid_manager.check_blackgrid(self.grid2, self.smaller_grid1, self.all_ships_smaller_grid)
+            ship_hit = self.grid_manager.check_blackgrid(self.grid2, self.smaller_grid1, self.all_ships_smaller_grid1)
             self.smaller_grid1.draw_grid(self.SCREEN_X, self.SCREEN_Y)
-            destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid)
+            destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid1)
 
             # Check if somebody won
-            if len(self.all_ships_smaller_grid) == 0:
+            if len(self.all_ships_smaller_grid1) == 0:
                 self.won1 = False
                 self.won2 = True
             if len(destroyed_ships) >= 1:
@@ -238,9 +238,9 @@ class Main:
         :rtype: None
         """
 
-        self.customButton = Button(self.SCREEN, self.CUSTOM_BUTTON_X - 375, self.CUSTOM_BUTTON_Y,
-                                   self.CUSTOM_BUTTON_HEIGHT,
-                                   self.CUSTOM_BUTTON_WIDTH, self.button_click1)
+        self.customButton1 = Button(self.SCREEN, self.CUSTOM_BUTTON_X - 375, self.CUSTOM_BUTTON_Y,
+                                    self.CUSTOM_BUTTON_HEIGHT,
+                                    self.CUSTOM_BUTTON_WIDTH, self.button_click1)
 
         self.customButton2 = Button(self.SCREEN, self.CUSTOM_BUTTON_X + 125, self.CUSTOM_BUTTON_Y,
                                     self.CUSTOM_BUTTON_HEIGHT,
@@ -256,20 +256,20 @@ class Main:
         # Create ships
         self.all_ships1 = []
         self.all_ships2 = []
-        self.destroyer = Destroyer(self.BLOCK_SIZE, self.SCREEN)
-        self.carrier = Carrier(self.BLOCK_SIZE, self.SCREEN)
-        self.patrol_boat = PatrolBoat(self.BLOCK_SIZE, self.SCREEN)
-        self.battleship = Battleship(self.BLOCK_SIZE, self.SCREEN)
+        self.destroyer1 = Destroyer(self.BLOCK_SIZE, self.SCREEN)
+        self.carrier1 = Carrier(self.BLOCK_SIZE, self.SCREEN)
+        self.patrol_boat1 = PatrolBoat(self.BLOCK_SIZE, self.SCREEN)
+        self.battleship1 = Battleship(self.BLOCK_SIZE, self.SCREEN)
 
         self.destroyer2 = Destroyer(self.BLOCK_SIZE, self.SCREEN)
         self.carrier2 = Carrier(self.BLOCK_SIZE, self.SCREEN)
         self.patrol_boat2 = PatrolBoat(self.BLOCK_SIZE, self.SCREEN)
         self.battleship2 = Battleship(self.BLOCK_SIZE, self.SCREEN)
         # Append ships
-        self.all_ships1.append(self.destroyer)
-        self.all_ships1.append(self.carrier)
-        self.all_ships1.append(self.patrol_boat)
-        self.all_ships1.append(self.battleship)
+        self.all_ships1.append(self.destroyer1)
+        self.all_ships1.append(self.carrier1)
+        self.all_ships1.append(self.patrol_boat1)
+        self.all_ships1.append(self.battleship1)
 
         self.all_ships2.append(self.destroyer2)
         self.all_ships2.append(self.carrier2)
@@ -283,8 +283,8 @@ class Main:
         :rtype: None
         """
         # Main loop
-        self.clock = pygame.time.Clock()
-        self.clock.tick(90)
+        self.CLOCK = pygame.time.Clock()
+        self.CLOCK.tick(90)
 
     def mouse_click_events(self, event):
         """
@@ -299,7 +299,7 @@ class Main:
         if event.button == 1:
             for ship1 in self.all_ships1:
                 ship1.check_mouse_hover()
-                if not self.customButton.ships_placed:
+                if not self.customButton1.ships_placed:
                     ship1.check_mouseclick()
 
             if not self.customButton2.ships_placed:
@@ -308,14 +308,14 @@ class Main:
                     ship2.check_mouseclick()
             # Allows to select grids for left and right side
             if self.turn == 1 and self.copied_grids:
-                self.grid_manager.click_on_grid(self.grid, self.SCREEN_X)
+                self.grid_manager.click_on_grid(self.grid1, self.SCREEN_X)
 
             if self.turn == 2 and self.copied_grids:
                 self.grid_manager.click_on_grid2(self.grid2, self.SCREEN_X)
         # 3 equals right click
 
         if event.button == 3:
-            if not self.customButton.ships_placed:
+            if not self.customButton1.ships_placed:
                 for ship1 in self.all_ships1:
                     ship1.check_mouse_hover()
                     ship1.toggle_orientation()
@@ -357,12 +357,12 @@ class Main:
         """
 
         # If ships were not placed yet, draw ships
-        if not self.customButton.ships_placed:
+        if not self.customButton1.ships_placed:
             self.text_manager.create_label('BATTLESHIPS', self.WHITE, 100, 25)
-            self.destroyer.draw_ship(50, 100, self.grid)
-            self.carrier.draw_ship(150, 100, self.grid)
-            self.patrol_boat.draw_ship(50, 300, self.grid)
-            self.battleship.draw_ship(150, 300, self.grid)
+            self.destroyer1.draw_ship(50, 100, self.grid1)
+            self.carrier1.draw_ship(150, 100, self.grid1)
+            self.patrol_boat1.draw_ship(50, 300, self.grid1)
+            self.battleship1.draw_ship(150, 300, self.grid1)
 
         if not self.customButton2.ships_placed:
             self.text_manager.create_label('BATTLESHIPS', self.WHITE, self.SCREEN_X - 240, 25)
@@ -373,12 +373,12 @@ class Main:
 
         # If ships were placed, turn ships into state 1 and draws smaller grids ONCE
 
-        if self.customButton.ships_placed and self.customButton2.ships_placed and not self.copied_grids:
+        if self.customButton1.ships_placed and self.customButton2.ships_placed and not self.copied_grids:
 
             for ship1 in self.all_ships1:
                 ship_name = ship1.name
-                ship_grids = self.grid_manager.ship_into_state1(self.grid, ship1, self.smaller_grid1)
-                self.all_ships_smaller_grid[ship_name] = ship_grids  # Store the grid positions in the dictionary
+                ship_grids = self.grid_manager.ship_into_state1(self.grid1, ship1, self.smaller_grid1)
+                self.all_ships_smaller_grid1[ship_name] = ship_grids  # Store the grid positions in the dictionary
 
             for ship2 in self.all_ships2:
                 ship_name2 = ship2.name
@@ -395,7 +395,7 @@ class Main:
         :rtype: None
         """
         self.grid_manager.draw_grids(self.SCREEN_X)
-        if self.customButton.ships_placed and self.customButton2.ships_placed:
+        if self.customButton1.ships_placed and self.customButton2.ships_placed:
             self.grid_manager.draw_smaller_grids(self.SCREEN_X, self.SCREEN_Y)
 
     def draw_labels(self):
@@ -407,7 +407,7 @@ class Main:
 
         # Text for Buttons
         if self.turn == 1:
-            self.customButton.process()
+            self.customButton1.process()
             self.text_manager.create_label('CONFIRM', self.WHITE,
                                            self.CUSTOM_BUTTON_X - 375 + self.CUSTOM_BUTTON_WIDTH / 2 + 28,
                                            self.CUSTOM_BUTTON_Y + self.CUSTOM_BUTTON_WIDTH / 2 - 13)
@@ -444,6 +444,14 @@ class Main:
         """
         self.gui.update_screen()
 
+    def draw_elements(self):
+        self.draw_background_and_line()
+        self.draw_ships_and_label()
+        self.draw_smaller_grids()
+        self.draw_labels()
+
+        self.update_screen()
+
     def run_game(self):
         """
         Main loop of Game.
@@ -468,12 +476,7 @@ class Main:
 
                 # Events that happen every frame
 
-                self.draw_background_and_line()
-                self.draw_ships_and_label()
-                self.draw_smaller_grids()
-                self.draw_labels()
-
-                self.update_screen()
+                self.draw_elements()
 
                 # Check for restart condition
                 keys = pygame.key.get_pressed()
