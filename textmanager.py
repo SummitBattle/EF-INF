@@ -2,6 +2,14 @@ import pygame.font
 
 
 class TextManager:
+    """
+    Manages text rendering in the game.
+
+    Attributes:
+        screen (Surface): The Pygame surface representing the game window where text is displayed.
+        my_font (Font): The font object used to render text.
+        text_surface (Surface or None): The Pygame surface that holds the rendered text.
+    """
 
     def __init__(self, screen):
         """

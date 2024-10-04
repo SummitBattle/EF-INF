@@ -2,6 +2,26 @@ import pygame
 
 
 class Ship:
+    """
+    Represents a ship in the Battleship game.
+
+    Attributes:
+        dragging_ship (Ship or None): Reference to the ship currently being dragged.
+        rect (Rect or None): Pygame rectangle representing the ship's position and size.
+        collided_rect (Rect or None): Pygame rectangle for the area the ship is colliding with.
+        overlapping (bool): Indicates whether the ship is overlapping with any grid cells.
+        block_size (int): Size of each cell in the grid.
+        screen (Surface): The window of the game where the ship is drawn.
+        num_rows (int): Number of rows the ship occupies in the grid.
+        num_cols (int): Number of columns the ship occupies in the grid.
+        name (str): The name of the ship.
+        is_hovering (bool): Indicates if the mouse is currently hovering over the ship.
+        is_dragging (bool): Indicates if the ship is currently being dragged.
+        orientation (str): Orientation of the ship ('horizontal' or 'vertical').
+        color (dict): A dictionary holding the colors used for hover and normal states.
+        SCREENY (int): Height of the screen.
+        SCREENX (int): Width of the screen.
+    """
     dragging_ship = None
 
     def __init__(self, num_rows, num_cols, block_size, screen, name, orientation='horizontal'):

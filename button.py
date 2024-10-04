@@ -4,26 +4,38 @@ import pygame
 # Configuration
 pygame.init()
 
-
 class Button:
+    """
+    A class representing a clickable button in the Pygame window
+
+    Attributes:
+        screen (pygame.Surface): The screen surface where the button will be rendered.
+        x (int): The x-coordinate of the button.
+        y (int): The y-coordinate of the button.
+        width (int): The width of the button.
+        height (int): The height of the button.
+        onclickFunction (function): The function to be executed when the button is clicked.
+        onePress (bool): If True, allows only a single press of the button. Otherwise, allows multiple presses.
+        ships_placed (bool): Indicates if ships have been placed, used for specific game logic.
+        pressedbutton (bool): Tracks the button's pressed state.
+        fillColors (dict): Dictionary holding colors for normal, hover, and pressed states.
+        buttonSurface (pygame.Surface): The surface representing the button's visual display.
+        buttonRect (pygame.Rect): The rectangle representing the button's position and size.
+        alreadyPressed (bool): Tracks whether the button has been pressed to prevent repeated triggers.
+    """
 
     def __init__(self, screen, x, y, width, height, onclickFunction=None, onePress=False):
         """
         Initialize a new Button instance.
-        :param screen: The window of the game
-        :type screen: screen
-        :param x: The X position of the button
-        :type x: int
-        :param y: The Y position of the button
-        :type y: int
-        :param width: The Width of the button
-        :type width: int
-        :param height: The height of the button
-        :type height: int
-        :param onclickFunction: Function to be called when button is pressed
-        :type onclickFunction: function
-        :param onePress: Allow multiple presses or not
-        :type onePress: bool
+
+        Args:
+            screen (pygame.Surface): The surface where the button will be displayed.
+            x (int): The x-coordinate for the button's position.
+            y (int): The y-coordinate for the button's position.
+            width (int): The width of the button.
+            height (int): The height of the button.
+            onclickFunction (function): The function to be called when the button is clicked.
+            onePress (bool): If True, the button can only be pressed once.
         """
         self.screen = screen
         self.x = x
@@ -45,11 +57,14 @@ class Button:
 
     def process(self):
         """
-        Collects the button state (normal,hover,pressed) and calls function when pressed.
-        :return: None
-        :rtype: None
-        """
+        Update the button state based on user input and call the associated function if the button is pressed.
 
+        This method changes the button's visual state (normal, hover, pressed) based on mouse interactions,
+        and triggers the onclickFunction if the button is clicked.
+
+        Returns:
+            None
+        """
         mousePos = pygame.mouse.get_pos()
 
         self.buttonSurface.fill(self.fillColors['normal'])
@@ -61,14 +76,12 @@ class Button:
 
                 if self.onePress:
                     self.ships_placed = True
-
                     self.onclickFunction()
-
                 elif not self.alreadyPressed:
                     self.onclickFunction()
                     self.alreadyPressed = True
-
             else:
                 self.alreadyPressed = False
 
+        # Render the button on the screen
         self.screen.blit(self.buttonSurface, self.buttonRect)

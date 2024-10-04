@@ -13,6 +13,27 @@ pygame.init()
 
 
 class Main:
+    """
+    The Main class is responsible for managing the game state and flow
+    in a Battleship-style game.
+
+    Attributes:
+        all_ships1 (list): List of all ships for Player 1.
+        all_ships2 (list): List of all ships for Player 2.
+        all_ships_smaller_grid1 (dict): Dictionary of ships for Player 1 with their grid positions.
+        all_ships_smaller_grid2 (dict): Dictionary of ships for Player 2 with their grid positions.
+        copied_grids (bool): Indicates if the grid state has been copied.
+        ships_overlaps1 (bool): Indicates if ships for Player 1 overlap.
+        ships_overlaps2 (bool): Indicates if ships for Player 2 overlap.
+        destroyed_ship (bool): Indicates if a ship has been destroyed for Player 1.
+        destroyed_ship2 (bool): Indicates if a ship has been destroyed for Player 2.
+        won1 (bool): Indicates if Player 1 has won.
+        won2 (bool): Indicates if Player 2 has won.
+        turn (int): Indicates the current player's turn (1 or 2).
+        SCREEN (Surface): Pygame surface for the game screen.
+
+        Rest are all instances of their respective classes.
+    """
     def __init__(self):
         """
         Initialize the Main instance.
@@ -117,7 +138,7 @@ class Main:
         self.smaller_grid1 = SmallerGrid(self.config.SMALLER_BLOCK_SIZE, self.SCREEN)
         self.smaller_grid2 = SmallerGrid(self.config.SMALLER_BLOCK_SIZE, self.SCREEN)
         self.grid_manager = GridManager(self.grid1, self.grid2, self.config.BLOCK_SIZE, self.smaller_grid1,
-                                        self.smaller_grid2)
+                                        self.smaller_grid2, self.config.SCREEN_X)
 
     def button_click1(self):
         """
@@ -301,10 +322,10 @@ class Main:
                     ship2.check_mouseclick()
             # Allows to select grids for left and right side
             if self.turn == 1 and self.copied_grids:
-                self.grid_manager.click_on_grid(self.grid1, self.config.SCREEN_X)
+                self.grid_manager.click_on_grid(self.grid1, self.config.SCREEN_X,1)
 
             if self.turn == 2 and self.copied_grids:
-                self.grid_manager.click_on_grid2(self.grid2, self.config.SCREEN_X)
+                self.grid_manager.click_on_grid(self.grid2, self.config.SCREEN_X,2)
         # 3 equals right click
 
         if event.button == 3:
@@ -371,12 +392,12 @@ class Main:
 
             for ship1 in self.all_ships1:
                 ship_name = ship1.name
-                ship_grids = self.grid_manager.ship_into_state1(self.grid1, ship1, self.smaller_grid1)
+                ship_grids = self.grid_manager.ship_into_state(self.grid1, ship1, self.smaller_grid1,1)
                 self.all_ships_smaller_grid1[ship_name] = ship_grids  # Store the grid positions in the dictionary
 
             for ship2 in self.all_ships2:
                 ship_name2 = ship2.name
-                ship_grids2 = self.grid_manager.ship_into_state2(self.grid2, ship2, self.smaller_grid2)
+                ship_grids2 = self.grid_manager.ship_into_state(self.grid2, ship2, self.smaller_grid2,2)
                 self.all_ships_smaller_grid2[ship_name2] = ship_grids2  # Store the grid positions in the dictionary
 
             self.grid_manager.draw_smaller_grids(self.config.SCREEN_X, self.config.SCREEN_Y)
@@ -388,7 +409,7 @@ class Main:
         :return: None
         :rtype: None
         """
-        self.grid_manager.draw_grids(self.config.SCREEN_X)
+        self.grid_manager.draw_grids()
         if self.customButton1.ships_placed and self.customButton2.ships_placed:
             self.grid_manager.draw_smaller_grids(self.config.SCREEN_X, self.config.SCREEN_Y)
 

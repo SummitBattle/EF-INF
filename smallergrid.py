@@ -2,6 +2,19 @@ import pygame
 
 
 class SmallerGrid:
+    """
+    Represents a smaller grid in the Battleship game.
+
+    Attributes:
+       rect (Rect or None): Pygame rectangle representing the current cell being processed.
+       block_size (int): Size of each cell in the grid.
+       SCREEN (Surface): The window of the game where the grid is drawn.
+       num_rows (int): Number of rows in the grid.
+       num_cols (int): Number of columns in the grid.
+       grid_rects (list): List to hold rectangles representing each cell in the grid.
+       grid_state (list of lists): 2D list representing the state of each cell in the grid.
+       colors (dict): A dictionary holding the colors used for different cell states.
+    """
     def __init__(self, block_size, screen):
         """
         Initialize an instance of Smaller grid.
