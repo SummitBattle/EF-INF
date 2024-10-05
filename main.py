@@ -1,12 +1,12 @@
-from gui import Gui
-from imagemanager import ImageManager
-from grid import Grid
-from gridmanager import GridManager
-from button import Button
-from ships import *
-from textmanager import TextManager
-from smallergrid import SmallerGrid
+import pygame
+from GraphicInterFace.gui import Gui
+from Grids.grid import Grid
+from Grids.gridmanager import GridManager
+from Grids.smallergrid import SmallerGrid
+from GraphicInterFace.button import Button
+from Ships.ships import Destroyer, Carrier, PatrolBoat, Battleship
 from gameconfig import GameConfig
+
 
 # Initialize Pygame
 pygame.init()
@@ -419,12 +419,14 @@ class Main:
                                            self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
             self.gui.cover_right_side()
 
+
         if self.turn == 2:
             self.customButton2.process()
             self.gui.create_label('CONFIRM', self.config.WHITE,
                                            self.config.CUSTOM_BUTTON_X + 125 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
                                            self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
             self.gui.cover_left_side()
+
 
         # When ship got destroyed
         if self.destroyed_ship2 and self.turn == 1:

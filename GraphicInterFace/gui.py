@@ -1,6 +1,7 @@
 import pygame
-from textmanager import TextManager
-from imagemanager import ImageManager
+
+from GraphicInterFace.imagemanager import ImageManager
+from GraphicInterFace.textmanager import TextManager
 
 
 class Gui:
@@ -59,7 +60,7 @@ class Gui:
         Returns the Pygame screen surface.
 
         This method allows access to the screen surface for additional drawing
-        operations outside the Gui class.
+        operations outside the GraphicInterFace class.
 
         :return: Pygame screen surface.
         :rtype: Surface
@@ -91,9 +92,10 @@ class Gui:
         Covers the left side of the screen with a rectangle.
 
         This method draws a black rectangle over the left half of the screen.
+        """
 
         pygame.draw.rect(self.screen, self.black, (0, 0, self.screenX // 2, self.screenY))
-        """
+
 
     def cover_right_side(self):
         """

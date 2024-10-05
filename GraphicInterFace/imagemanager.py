@@ -1,5 +1,5 @@
-import os.path
-import pygame.image
+import os
+import pygame
 
 
 class ImageManager:
@@ -17,37 +17,31 @@ class ImageManager:
     def __init__(self):
         """
         Initializes the ImageManager with an empty image list.
-
-        This method sets up the image array to store images that will be loaded.
-
-        :return: None
-        :rtype: None
         """
         self.image_array = []
         self.image = None
+        # Set the assets path based on the current file's directory
+        self.assets_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets')
 
     def load_image(self, name):
         """
         Loads an image and adds it to the list of images.
 
-        This method retrieves the image from the specified path and stores
-        it for future use.
-
         :param name: Name of the image file to load.
         :type name: str
-        :return: None
-        :rtype: None
         """
-        image_path = os.path.join("assets", name)
-        image = pygame.image.load(image_path)
-        self.image = image
-        self.image_array.append(image)
+        image_path = os.path.join(self.assets_path, name)
+        try:
+            # Load the image
+            image = pygame.image.load(image_path)
+            self.image = image
+            self.image_array.append(image)
+        except pygame.error as e:
+            print(f"Unable to load image at {image_path}: {e}")
 
     def return_list(self):
         """
         Returns the list of all loaded images.
-
-        This method provides access to the array of images stored in the manager.
 
         :return: List of images.
         :rtype: list
@@ -58,18 +52,16 @@ class ImageManager:
         """
         Returns the last loaded image.
 
-        This method retrieves the most recently loaded image from the image array.
-
-        :return: Last image in the list.
-        :rtype: Surface
+        :return: Last image in the list or None if no images have been loaded.
+        :rtype: Surface or None
         """
-        return self.image_array[-1]
+        if self.image_array:
+            return self.image_array[-1]
+        return None
 
     def blit_image(self, screen, position, image):
         """
         Draws the specified image on the screen at the given position.
-
-        This method blits the image onto the game window at the provided (x, y) coordinates.
 
         :param screen: The game window surface where the image will be drawn.
         :type screen: Surface
@@ -77,16 +69,12 @@ class ImageManager:
         :type position: tuple
         :param image: The image to be drawn.
         :type image: Surface
-        :return: None
-        :rtype: None
         """
         screen.blit(image, position)
 
     def resize_image(self, width, height, image):
         """
         Resizes the specified image to new dimensions.
-
-        This method scales the given image to the provided width and height.
 
         :param width: New width for the image.
         :type width: int
