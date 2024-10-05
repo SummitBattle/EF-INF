@@ -8,7 +8,7 @@ class SmallerGrid:
     Attributes:
        rect (Rect or None): Pygame rectangle representing the current cell being processed.
        block_size (int): Size of each cell in the grid.
-       SCREEN (Surface): The window of the game where the grid is drawn.
+       screen (Surface): The window of the game where the grid is drawn.
        num_rows (int): Number of rows in the grid.
        num_cols (int): Number of columns in the grid.
        grid_rects (list): List to hold rectangles representing each cell in the grid.
@@ -25,7 +25,7 @@ class SmallerGrid:
         """
         self.rect = None
         self.block_size = block_size
-        self.SCREEN = screen
+        self.screen = screen
         self.num_rows = 10  # Number of rows
         self.num_cols = 10  # Number of columns
         self.grid_rects = []  # List to hold grid rectangles
@@ -85,10 +85,10 @@ class SmallerGrid:
                 cell_surface.fill(color)
 
                 # Blit the cell surface onto the main screen
-                self.SCREEN.blit(cell_surface, (x, y))
+                self.screen.blit(cell_surface, (x, y))
 
                 # Draw the grid lines
-                pygame.draw.rect(self.SCREEN, (255, 255, 255), self.rect, 1)  # White color for grid lines
+                pygame.draw.rect(self.screen, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
     def get_cell_state(self, row, col):
         """

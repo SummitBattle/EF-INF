@@ -1,4 +1,6 @@
 import pygame
+from textmanager import TextManager
+from imagemanager import ImageManager
 
 
 class Gui:
@@ -38,6 +40,8 @@ class Gui:
         self.screen = pygame.display.set_mode((self.screenX, self.screenY), pygame.FULLSCREEN | pygame.SCALED)
         self.screen.fill((244, 222, 222))
         self.black = (0, 0, 0)
+        self.text_manager = TextManager(self.screen)
+        self.image_manager = ImageManager()
 
     def update_screen(self):
         """
@@ -62,7 +66,7 @@ class Gui:
         """
         return self.screen
 
-    def draw_line(self, screen, color, pos, endpos, thickness):
+    def draw_line(self,color, pos, endpos, thickness):
         """
         Draws a line on the specified screen.
 
@@ -82,7 +86,7 @@ class Gui:
         :return: None
         :rtype: None
         """
-        pygame.draw.line(screen, color, pos, endpos, thickness)
+        pygame.draw.line(self.screen, color, pos, endpos, thickness)
 
     def cover_left_side(self, screen):
         """
@@ -109,3 +113,21 @@ class Gui:
         :rtype: None
         """
         pygame.draw.rect(screen, self.black, (self.screenX // 2, 0, self.screenX // 2, self.screenY))
+
+    def draw_label(self, text, color, x, y):
+        self.gui.create_label(text, color, x, y)
+
+    def draw_image(self, image, x, y):
+        self.image_manager.blit_image(self.screen, (x, y), image)
+
+    def load_image(self, name):
+        self.image_manager.load_image(name)
+
+    def return_images(self):
+        return self.image_manager.return_list()
+
+    def return_last_image(self):
+        return self.image_manager.return_last_image()
+
+    def resize_image(self, image, width, height):
+        return self.image_manager.resize_image(width, height, image)
