@@ -15,16 +15,14 @@ class Button:
         width (int): The width of the button.
         height (int): The height of the button.
         onclickFunction (function): The function to be executed when the button is clicked.
-        onePress (bool): If True, allows only a single press of the button. Otherwise, allows multiple presses.
         ships_placed (bool): Indicates if ships have been placed, used for specific game logic.
-        pressedbutton (bool): Tracks the button's pressed state.
         fillColors (dict): Dictionary holding colors for normal, hover, and pressed states.
         buttonSurface (pygame.Surface): The surface representing the button's visual display.
         buttonRect (pygame.Rect): The rectangle representing the button's position and size.
-        alreadyPressed (bool): Tracks whether the button has been pressed to prevent repeated triggers.
+
     """
 
-    def __init__(self, screen, x, y, width, height, onclickFunction=None, onePress=False):
+    def __init__(self, screen, x, y, width, height, onclickFunction=None):
         """
         Initialize a new Button instance.
 
@@ -43,9 +41,7 @@ class Button:
         self.width = width
         self.height = height
         self.onclickFunction = onclickFunction
-        self.onePress = onePress
         self.ships_placed = False
-        self.pressedbutton = False
         self.fillColors = {
             'normal': '#00aaaa',
             'hover': '#00ffff',
@@ -53,7 +49,7 @@ class Button:
         }
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
-        self.alreadyPressed = False
+
 
     def process(self):
         """
@@ -73,15 +69,8 @@ class Button:
 
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
+                self.onclickFunction()
 
-                if self.onePress:
-                    self.ships_placed = True
-                    self.onclickFunction()
-                elif not self.alreadyPressed:
-                    self.onclickFunction()
-                    self.alreadyPressed = True
-            else:
-                self.alreadyPressed = False
 
         # Render the button on the screen
         self.screen.blit(self.buttonSurface, self.buttonRect)
