@@ -251,7 +251,6 @@ class Main:
         self.customButton2 = Button(self.screen, self.config.CUSTOM_BUTTON_X + 125, self.config.CUSTOM_BUTTON_Y,
                                     self.config.CUSTOM_BUTTON_HEIGHT,
                                     self.config.CUSTOM_BUTTON_WIDTH, self.button_click2)
-        self.text_manager = TextManager(self.screen)
 
     def create_ships(self):
         """
@@ -365,14 +364,14 @@ class Main:
 
         # If ships were not placed yet, draw ships
         if not self.customButton1.ships_placed:
-            self.text_manager.create_label('BATTLESHIPS', self.config.WHITE, 100, 25)
+            self.gui.create_label('BATTLESHIPS', self.config.WHITE, 100, 25)
             self.destroyer1.draw_ship(50, 100, self.grid1)
             self.carrier1.draw_ship(150, 100, self.grid1)
             self.patrol_boat1.draw_ship(50, 300, self.grid1)
             self.battleship1.draw_ship(150, 300, self.grid1)
 
         if not self.customButton2.ships_placed:
-            self.text_manager.create_label('BATTLESHIPS', self.config.WHITE, self.config.SCREEN_X - 240, 25)
+            self.gui.create_label('BATTLESHIPS', self.config.WHITE, self.config.SCREEN_X - 240, 25)
             self.destroyer2.draw_ship(self.config.SCREEN_X - 70, 100, self.grid2)
             self.carrier2.draw_ship(self.config.SCREEN_X - 150, 100, self.grid2)
             self.patrol_boat2.draw_ship(self.config.SCREEN_X - 70, 300, self.grid2)
@@ -415,33 +414,33 @@ class Main:
         # Text for Buttons
         if self.turn == 1:
             self.customButton1.process()
-            self.text_manager.create_label('CONFIRM', self.config.WHITE,
+            self.gui.create_label('CONFIRM', self.config.WHITE,
                                            self.config.CUSTOM_BUTTON_X - 375 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
                                            self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
-            self.gui.cover_right_side(self.screen)
+            self.gui.cover_right_side()
 
         if self.turn == 2:
             self.customButton2.process()
-            self.text_manager.create_label('CONFIRM', self.config.WHITE,
+            self.gui.create_label('CONFIRM', self.config.WHITE,
                                            self.config.CUSTOM_BUTTON_X + 125 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
                                            self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
-            self.gui.cover_left_side(self.screen)
+            self.gui.cover_left_side()
 
         # When ship got destroyed
         if self.destroyed_ship2 and self.turn == 1:
-            self.text_manager.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
+            self.gui.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
 
         if self.destroyed_ship and self.turn == 2:
-            self.text_manager.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
+            self.gui.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
 
         if self.ships_overlaps1:
-            self.text_manager.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
+            self.gui.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
 
         if self.ships_overlaps2:
-            self.text_manager.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
+            self.gui.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
 
         if self.won2 or self.won1:
-            self.text_manager.create_label("PRESS R TO RESTART", self.config.GREEN, self.config.SCREEN_X / 2 - 120, 300)
+            self.gui.create_label("PRESS R TO RESTART", self.config.GREEN, self.config.SCREEN_X / 2 - 120, 300)
 
     def update_screen(self):
         """

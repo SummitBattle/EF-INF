@@ -73,8 +73,6 @@ class Gui:
         This method renders a line between two points with the specified color
         and thickness.
 
-        :param screen: The screen on which to draw the line.
-        :type screen: Surface
         :param color: Color of the line in RGB format.
         :type color: tuple
         :param pos: Start position of the line (x, y).
@@ -88,20 +86,16 @@ class Gui:
         """
         pygame.draw.line(self.screen, color, pos, endpos, thickness)
 
-    def cover_left_side(self, screen):
+    def cover_left_side(self):
         """
         Covers the left side of the screen with a rectangle.
 
         This method draws a black rectangle over the left half of the screen.
 
-        :param screen: The screen to cover.
-        :type screen: Surface
-        :return: None
-        :rtype: None
+        pygame.draw.rect(self.screen, self.black, (0, 0, self.screenX // 2, self.screenY))
         """
-        pygame.draw.rect(screen, self.black, (0, 0, self.screenX // 2, self.screenY))
 
-    def cover_right_side(self, screen):
+    def cover_right_side(self):
         """
         Covers the right side of the screen with a rectangle.
 
@@ -112,22 +106,74 @@ class Gui:
         :return: None
         :rtype: None
         """
-        pygame.draw.rect(screen, self.black, (self.screenX // 2, 0, self.screenX // 2, self.screenY))
+        pygame.draw.rect(self.screen, self.black, (self.screenX // 2, 0, self.screenX // 2, self.screenY))
 
-    def draw_label(self, text, color, x, y):
-        self.gui.create_label(text, color, x, y)
+    def create_label(self, text, color, x, y):
+        """
+       Creates a label
+       :param text: Text of the label
+       :type textl: str
+       :param color: Color of the label
+       :type color: List
+       :param x: X position of the label
+       :type x: int
+       :param y: Y position of the label
+       :type y: int
+       :return: None
+       :rtype: None
+       """
+        self.text_manager.create_label(text, color, x, y)
 
     def draw_image(self, image, x, y):
+        """
+        Draws the specified image on the screen.
+        :param image: Image to be drawn
+        :type image: pygame.Surface
+        :param x: the x coordinate
+        :type x: int
+        :param y: the y coordinate
+        :type y: int
+        :return: None
+        :rtype: None
+        """
         self.image_manager.blit_image(self.screen, (x, y), image)
 
     def load_image(self, name):
+        """
+        Loads the image up
+        :param name: Path to image
+        :type name: str
+        :return: None
+        :rtype: None
+        """
         self.image_manager.load_image(name)
 
     def return_images(self):
+        """
+        Returns an array with all images
+        :return: All images
+        :rtype: list
+        """
         return self.image_manager.return_list()
 
     def return_last_image(self):
+        """
+        Returns the last image
+        :return: Last image
+        :rtype: pygame.Surface
+        """
         return self.image_manager.return_last_image()
 
     def resize_image(self, image, width, height):
+        """
+        Resizes the given image
+        :param image: Image to resize
+        :type image: pygame.Surface
+        :param width: New width of image
+        :type width: int
+        :param height: New height of image
+        :type height: int
+        :return: New resized image
+        :rtype: pygame.Surface
+        """
         return self.image_manager.resize_image(width, height, image)
