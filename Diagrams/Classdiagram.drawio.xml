@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1713" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" math="0" shadow="0">
+    <mxGraphModel dx="2193" dy="954" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -292,6 +291,15 @@
             <mxPoint x="1020" y="490" as="sourcePoint" />
             <mxPoint x="1180" y="490" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="hjPEkMtOQEibTSJvsnAd-5" value="&lt;p style=&quot;margin:0px;margin-top:10px;margin-left:10px;text-align:left;&quot;&gt;&lt;b&gt;All classes use the module Pygame to draw, interact and display elements on the screen. To avoid cluttering it won&#39;t be mentioned anywhere else.&lt;/b&gt;&lt;/p&gt;" style="shape=note;html=1;size=15;spacingLeft=5;align=left;html=1;overflow=fill;whiteSpace=wrap;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="100" y="1560" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="hjPEkMtOQEibTSJvsnAd-6" value="Pygame" style="shape=rect;fontStyle=1;whiteSpace=wrap;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="60" y="1660" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hjPEkMtOQEibTSJvsnAd-7" value="" style="rounded=0;html=1;labelBackgroundColor=none;endArrow=none;dashed=1;" edge="1" source="hjPEkMtOQEibTSJvsnAd-5" target="hjPEkMtOQEibTSJvsnAd-6" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
