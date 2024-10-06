@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram name="Seite-1" id="p63VLaspHqnrgBOGA-di">
-    <mxGraphModel dx="4472" dy="2591" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3643" dy="2173" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -17,7 +17,7 @@
           <mxGeometry x="180" y="-13" width="640" height="863" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-2" value="Turn 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-130" y="267.5" width="280" height="160" as="geometry" />
+          <mxGeometry x="-90" y="267.5" width="240" height="160" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-3" value="Turn 2" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-90" y="538" width="240" height="182" as="geometry" />
@@ -133,7 +133,7 @@
           <mxGeometry x="1065" y="645" width="130" height="58.75" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-101" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1990" y="8" width="770" height="1030" as="geometry" />
+          <mxGeometry x="2000" y="-13" width="770" height="1023" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-103" value="Check if smallergrid ship list has ships left" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1510" y="525" width="120" height="60" as="geometry" />
@@ -301,6 +301,15 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1080" y="350" as="sourcePoint" />
             <mxPoint x="1130" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="47wFf__YNuEGRafaKNUe-59" value="Object diagram 2" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="840" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="47wFf__YNuEGRafaKNUe-60" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="47wFf__YNuEGRafaKNUe-59" target="w7tAdLLK2ZvJtZfWx73t-34">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="990" y="370" as="sourcePoint" />
+            <mxPoint x="1040" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
