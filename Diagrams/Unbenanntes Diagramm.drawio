@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram name="Seite-1" id="Txuyjtg0kyF4jXf7s4eo">
-    <mxGraphModel dx="3091" dy="1909" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3251" dy="2020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -153,8 +153,8 @@
         <mxCell id="gaxLcLSFY38JtSqAiTus-101" value="has" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="797.95" y="230" width="40" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gaxLcLSFY38JtSqAiTus-102" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Smallergrids&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_state: List of 10 lists&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_rects: []&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="200" y="140" width="175" height="86" as="geometry" />
+        <mxCell id="gaxLcLSFY38JtSqAiTus-102" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Smallergrids&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_state: [[0, 0, ...],[0, 0, 0...], ...]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_rects: []&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="200" y="140" width="210" height="86" as="geometry" />
         </mxCell>
         <mxCell id="gaxLcLSFY38JtSqAiTus-103" value="To avoid cluttering: Smallergrids represents the 2 objects. Both smallergrid1 and smallergrid2 have the same values&amp;nbsp;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="-30" y="-21.5" width="220" height="110" as="geometry" />
@@ -177,8 +177,8 @@
         <mxCell id="gaxLcLSFY38JtSqAiTus-111" value="has" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="420" y="230" width="40" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gaxLcLSFY38JtSqAiTus-112" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Grid1&amp;nbsp;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_state: List of 10 lists&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_rects: List of 10 lists&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="708.87" y="30" width="175" height="86" as="geometry" />
+        <mxCell id="gaxLcLSFY38JtSqAiTus-112" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Grid1&amp;nbsp;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_state:&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;[[0, 0, 0, 1, ....],[1, 0, 0..], ...]&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_rects: [10x10 rectangles for positioning]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="661.9399999999999" y="40" width="259.19" height="86" as="geometry" />
         </mxCell>
         <mxCell id="gaxLcLSFY38JtSqAiTus-114" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="gaxLcLSFY38JtSqAiTus-102" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -186,8 +186,8 @@
             <mxPoint x="508.8699999999999" y="217" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gaxLcLSFY38JtSqAiTus-116" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Grid2&amp;nbsp;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_state: List of 10 lists&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_rects: List of 10 lists&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="952.95" y="40" width="175" height="86" as="geometry" />
+        <mxCell id="gaxLcLSFY38JtSqAiTus-116" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Grid2&amp;nbsp;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_state: [[1, 1, 5, 0, ....],[0, 0, 0, ..], ...]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grid_rects:&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;[10x10 rectangles for positioning]&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="944.42" y="40" width="265.58" height="86" as="geometry" />
         </mxCell>
         <mxCell id="gaxLcLSFY38JtSqAiTus-117" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" parent="1" source="gaxLcLSFY38JtSqAiTus-41" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -222,25 +222,25 @@
         <mxCell id="gaxLcLSFY38JtSqAiTus-122" value="In grid_state all lists are filled with 10 integers (mostly 0). Some integers are 1, these represent the placed ships.&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;grid_rects contains 100 (10x10) pygame.Rects, which represent the grids.&lt;br&gt;&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="669.37" y="-155" width="254" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="gaxLcLSFY38JtSqAiTus-123" value="In grid_state all lists are filled with 10 integers (mostly 0). Some integers are 1, these represent the placed ships.&lt;div&gt;One integer is 5, which is the current grid that is being hovered by the mouse.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;grid_rects contains 100 (10x10) pygame.Rects, which represent the grids.&lt;br&gt;&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
+        <mxCell id="gaxLcLSFY38JtSqAiTus-123" value="In grid_state 10 lists are filled with 10 integers (mostly 0). Some integers are 1, these represent the placed ships.&lt;div&gt;One integer is 5, which is the current grid that is being hovered by the mouse.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;grid_rects contains 100 (10x10) pygame.Rects, which represent the grids.&lt;br&gt;&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="1000" y="-155" width="310" height="165" as="geometry" />
         </mxCell>
-        <mxCell id="uaMQnum_KjGH0rsNnVOw-1" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="1">
+        <mxCell id="uaMQnum_KjGH0rsNnVOw-1" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" parent="1" vertex="1">
           <mxGeometry x="810" y="240" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="uaMQnum_KjGH0rsNnVOw-2" value="has" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="uaMQnum_KjGH0rsNnVOw-2" value="has" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="840" y="428" width="40" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="uaMQnum_KjGH0rsNnVOw-3" value="When all ships are placed by both players, the grid positions will be copied and saved to all_ships_smallergrid.&amp;nbsp;&lt;div&gt;Then copied_grids will turn True.&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+        <mxCell id="uaMQnum_KjGH0rsNnVOw-3" value="When all ships are placed by both players, the grid positions will be copied and saved to all_ships_smallergrid.&amp;nbsp;&lt;div&gt;Then copied_grids will turn True.&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="460" y="450" width="250" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="uaMQnum_KjGH0rsNnVOw-4" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" edge="1" parent="1">
+        <mxCell id="uaMQnum_KjGH0rsNnVOw-4" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="740" y="460" as="sourcePoint" />
             <mxPoint x="790" y="410" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uaMQnum_KjGH0rsNnVOw-5" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="uaMQnum_KjGH0rsNnVOw-3" target="gaxLcLSFY38JtSqAiTus-41">
+        <mxCell id="uaMQnum_KjGH0rsNnVOw-5" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="uaMQnum_KjGH0rsNnVOw-3" target="gaxLcLSFY38JtSqAiTus-41" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="620" y="470" as="sourcePoint" />
             <mxPoint x="670" y="420" as="targetPoint" />
