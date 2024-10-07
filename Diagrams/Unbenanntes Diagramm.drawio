@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram name="Seite-1" id="Txuyjtg0kyF4jXf7s4eo">
-    <mxGraphModel dx="3251" dy="2020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3175" dy="1979" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -17,7 +17,7 @@
           <mxGeometry x="170" y="620" width="190" height="50" as="geometry" />
         </mxCell>
         <mxCell id="gaxLcLSFY38JtSqAiTus-52" value="&lt;p style=&quot;margin:0px;margin-top:10px;margin-left:10px;text-align:left;&quot;&gt;&lt;b&gt;Player 1 has placed all ships, so ships_placed is true on the left side.&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:10px;margin-left:10px;text-align:left;&quot;&gt;&lt;b&gt;Player 2 hasn&#39;t yet so it&#39;s false.&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:10px;margin-left:10px;text-align:left;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/p&gt;" style="shape=note;html=1;size=15;spacingLeft=5;align=left;html=1;overflow=fill;whiteSpace=wrap;align=center;" parent="1" vertex="1">
-          <mxGeometry x="-110" y="410" width="230" height="80" as="geometry" />
+          <mxGeometry x="-130" y="378" width="230" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gaxLcLSFY38JtSqAiTus-54" value="" style="rounded=0;html=1;labelBackgroundColor=none;endArrow=none;dashed=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="gaxLcLSFY38JtSqAiTus-52" target="gaxLcLSFY38JtSqAiTus-36" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -234,16 +234,32 @@
         <mxCell id="uaMQnum_KjGH0rsNnVOw-3" value="When all ships are placed by both players, the grid positions will be copied and saved to all_ships_smallergrid.&amp;nbsp;&lt;div&gt;Then copied_grids will turn True.&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="460" y="450" width="250" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="uaMQnum_KjGH0rsNnVOw-4" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="740" y="460" as="sourcePoint" />
-            <mxPoint x="790" y="410" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="uaMQnum_KjGH0rsNnVOw-5" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="uaMQnum_KjGH0rsNnVOw-3" target="gaxLcLSFY38JtSqAiTus-41" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="620" y="470" as="sourcePoint" />
             <mxPoint x="670" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kwNNu7d775iZCvvpEm9I-1" value="key variable to transition to game phase" style="shape=note;size=15;align=left;spacingLeft=10;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="810" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="kwNNu7d775iZCvvpEm9I-2" value="" style="edgeStyle=none;endArrow=none;exitX=0.4;exitY=0;dashed=1;html=1;rounded=0;entryX=0.46;entryY=0.97;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" source="kwNNu7d775iZCvvpEm9I-1" parent="1" target="gaxLcLSFY38JtSqAiTus-36">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="10" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kwNNu7d775iZCvvpEm9I-3" value="" style="edgeStyle=none;endArrow=none;exitX=0.8;exitY=0;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="kwNNu7d775iZCvvpEm9I-1" parent="1" target="gaxLcLSFY38JtSqAiTus-43">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="170" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kwNNu7d775iZCvvpEm9I-4" value="key variable to transition to game phase:&lt;div&gt;copied_grids&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="860" y="304" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kwNNu7d775iZCvvpEm9I-5" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gaxLcLSFY38JtSqAiTus-41" target="kwNNu7d775iZCvvpEm9I-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="380" as="sourcePoint" />
+            <mxPoint x="890" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
