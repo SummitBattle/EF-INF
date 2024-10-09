@@ -98,7 +98,7 @@ class Ship:
             self.orientation = 'vertical' if self.orientation == 'horizontal' else 'horizontal'
             self.num_rows, self.num_cols = self.num_cols, self.num_rows
 
-    def draw_ship(self, ship_x, ship_y, grid):
+    def draw_ship(self, ship_x, ship_y, grid, side):
         """
         Draws the ship.
         :param ship_x: X position of the ship
@@ -134,15 +134,30 @@ class Ship:
         # If overlapping with any grids, clip ship to the position of the grid
         if self.overlapping:
 
+            # Get the first collided rectangle (cell) from overlapping_cells
             self.collided_rect = overlapping_cells[0]
 
-            if self.rect.top <= self.screen.get_height() / 2.3:
+            # Vertical position (clipping top or bottom)
+            if self.rect.top <= self.screen.get_height() / 2.55:
                 self.rect.top = self.collided_rect.top
-
             else:
                 self.rect.bottom = self.collided_rect.bottom
 
-            self.rect.left = self.collided_rect.left
+            # Horizontal position (clipping left or right)
+            # Fix for the right boundary
+            screen_width = self.screen.get_width()  # Use screen width for left-right boundary check
+
+            if side == 1:
+                if self.rect.right >= screen_width * 0.4:  # Check right boundary with the correct screen width
+                    self.rect.right = self.collided_rect.right
+                else:
+                    self.rect.left = self.collided_rect.left
+
+            if side == 2:
+                if self.rect.right >= screen_width * 0.9:  # Check right boundary with the correct screen width
+                    self.rect.right = self.collided_rect.right
+                else:
+                    self.rect.left = self.collided_rect.left
 
         # Create a surface for the ship
         ship_surface = pygame.Surface((width, height), pygame.SRCALPHA)

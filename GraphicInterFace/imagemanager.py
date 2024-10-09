@@ -36,7 +36,7 @@ class ImageManager:
             image = pygame.image.load(image_path)
             self.image = image
             self.image_array.append(image)
-            print(self.image_array)
+
         except pygame.error as e:
             print(f"Unable to load image at {image_path}: {e}")
 

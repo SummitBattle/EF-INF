@@ -38,7 +38,7 @@ class Grid:
         self.num_cols = 10  # Number of columns
         self.grid_rects = []  # List to hold grid rectangles
         self.grid_state = [[0 for _ in range(self.num_cols)] for _ in range(self.num_rows)]  # Grid state (2D list)
-        self.is_hovering = True  # Indicates if the mouse is hovering over the grid
+        self.is_hovering = False  # Indicates if the mouse is hovering over the grid
         self.colors = {
             0: (0, 255, 255, 128),  # Empty (light blue)
             1: (0, 0, 255, 128),    # Occupied (blue, semi-transparent)

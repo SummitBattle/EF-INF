@@ -366,17 +366,17 @@ class Main:
         # If ships were not placed yet, draw ships
         if not self.customButton1.ships_placed:
             self.gui.create_label('BATTLESHIPS', self.config.WHITE, 100, 25)
-            self.destroyer1.draw_ship(50, 100, self.grid1)
-            self.carrier1.draw_ship(150, 100, self.grid1)
-            self.patrol_boat1.draw_ship(50, 300, self.grid1)
-            self.battleship1.draw_ship(150, 300, self.grid1)
+            self.destroyer1.draw_ship(50, 100, self.grid1,1)
+            self.carrier1.draw_ship(150, 100, self.grid1,1)
+            self.patrol_boat1.draw_ship(50, 300, self.grid1,1)
+            self.battleship1.draw_ship(150, 300, self.grid1,1)
 
         if not self.customButton2.ships_placed:
             self.gui.create_label('BATTLESHIPS', self.config.WHITE, self.config.SCREEN_X - 240, 25)
-            self.destroyer2.draw_ship(self.config.SCREEN_X - 70, 100, self.grid2)
-            self.carrier2.draw_ship(self.config.SCREEN_X - 150, 100, self.grid2)
-            self.patrol_boat2.draw_ship(self.config.SCREEN_X - 70, 300, self.grid2)
-            self.battleship2.draw_ship(self.config.SCREEN_X - 150, 300, self.grid2)
+            self.destroyer2.draw_ship(self.config.SCREEN_X - 70, 100, self.grid2, 2)
+            self.carrier2.draw_ship(self.config.SCREEN_X - 150, 100, self.grid2, 2)
+            self.patrol_boat2.draw_ship(self.config.SCREEN_X - 70, 300, self.grid2, 2)
+            self.battleship2.draw_ship(self.config.SCREEN_X - 150, 300, self.grid2, 2)
 
         # If ships were placed, turn ships into state 1 and draws smaller grids ONCE
 

@@ -13,15 +13,14 @@ class GridManager:
         grid1 (Grid): The first grid instance for the game.
         grid2 (Grid): The second grid instance for the game.
         block_size (int): Size of each grid cell.
-        smallergrid1 (Smallergrid): The first smaller grid instance.
-        smallergrid2 (Smallergrid): The second smaller grid instance.
-        blackgrid (bool): State indicating if the black grid is active for grid1.
-        blackgrid2 (bool): State indicating if the black grid is active for grid2.
-        gridleft1 (float): The left position of grid1 on the screen.
-        gridtop1 (int): The top position of grid1 on the screen.
-        gridleft2 (float): The left position of grid2 on the screen.
-        gridtop2 (int): The top position of grid2 on the screen.
+        smaller_grid1 (Smallergrid): The first smaller grid instance.
+        smaller_grid2 (Smallergrid): The second smaller grid instance.
+        grid_left1 (float): The left position of grid1 on the screen.
+        grid_top1 (int): The top position of grid1 on the screen.
+        grid_left2 (float): The left position of grid2 on the screen.
+        grid_top2 (int): The top position of grid2 on the screen.
        """
+
     def __init__(self, grid1, grid2, block_size, smallergrid1, smallergrid2, SCREEN_X):
         """
         Create a new GridManager instance.
@@ -40,15 +39,13 @@ class GridManager:
         self.grid1 = grid1
         self.grid2 = grid2
         self.block_size = block_size
-        self.smallergrid1 = smallergrid1
-        self.smallergrid2 = smallergrid2
-        self.blackgrid = True
-        self.blackgrid2 = True
+        self.smaller_grid1 = smallergrid1
+        self.smaller_grid2 = smallergrid2
 
-        self.gridleft1 = SCREEN_X / 2 - 400
-        self.gridtop1 = 100
-        self.gridleft2 = SCREEN_X / 2 + 100
-        self.gridtop2 = 100
+        self.grid_left1 = SCREEN_X / 2 - 400
+        self.grid_top1 = 100
+        self.grid_left2 = SCREEN_X / 2 + 100
+        self.grid_top2 = 100
 
     def draw_smaller_grids(self, SCREEN_X, SCREEN_Y):
         """
@@ -60,13 +57,13 @@ class GridManager:
         :return: None
         :rtype: None
         """
-        gridleft1 = SCREEN_X / 20
-        gridtop1 = SCREEN_Y / 1.3
-        gridleft2 = SCREEN_X - SCREEN_X / 8
-        gridtop2 = SCREEN_Y / 1.3
+        grid_left1 = SCREEN_X / 20
+        grid_top1 = SCREEN_Y / 1.3
+        grid_left2 = SCREEN_X - SCREEN_X / 8
+        grid_top2 = SCREEN_Y / 1.3
 
-        self.smallergrid1.draw_grid(gridleft1, gridtop1)
-        self.smallergrid2.draw_grid(gridleft2, gridtop2)
+        self.smaller_grid1.draw_grid(grid_left1, grid_top1)
+        self.smaller_grid2.draw_grid(grid_left2, grid_top2)
 
     def draw_grids(self):
         """
@@ -75,11 +72,10 @@ class GridManager:
         :rtype: None
         """
 
+        self.grid1.draw_grid(self.grid_left1, self.grid_top1)
+        self.grid2.draw_grid(self.grid_left2, self.grid_top2)
 
-        self.grid1.draw_grid(self.gridleft1, self.gridtop1)
-        self.grid2.draw_grid(self.gridleft2, self.gridtop2)
-
-    def ship_into_state(self, grid, ship, smallergrid,side):
+    def ship_into_state(self, grid, ship, smallergrid, side):
         """
         Turns left ship into cell state 1 (occupied)
         :param grid: Grid instance.
@@ -96,11 +92,11 @@ class GridManager:
         ship_positions = []  # Array to store the grid positions of the ship
         # If side is 1, calculate for the left grid, else for the right grid
         if side == 1:
-            gridleft = self.gridleft1
-            gridtop = self.gridtop1
+            gridleft = self.grid_left1
+            gridtop = self.grid_top1
         else:
-            gridleft = self.gridleft2
-            gridtop = self.gridtop2
+            gridleft = self.grid_left2
+            gridtop = self.grid_top2
         # Calculate colum and row and update cell state
         for rect in overlapping_rects:
             row = (rect.left - gridleft) // self.block_size
@@ -114,9 +110,7 @@ class GridManager:
 
         return ship_positions
 
-
-
-    def click_on_grid(self, grid, SCREEN_X,side):
+    def click_on_grid(self, grid, SCREEN_X, side):
         """
         Convert left state 0 (empty) into state 4 (selected).
         :param grid: Grid instance
@@ -226,7 +220,6 @@ class GridManager:
         # Remove collected ships from the dictionary
         for ship_name in ships_to_remove:
             all_ships.pop(ship_name)
-            print(ship_name)
 
         return ships_with_no_grids_left
 
