@@ -8,8 +8,7 @@ class TextManager:
     Attributes:
         screen (Surface): The Pygame surface representing the game window where text is displayed.
         my_font (Font): The font object used to render text.
-        text_surface (Surface or None): The Pygame surface that holds the rendered text.
-    """
+   """
 
     def __init__(self, screen):
         """
@@ -22,7 +21,7 @@ class TextManager:
         # Loads the font
         self.my_font = pygame.font.SysFont('Arial', 25)
         self.screen = screen
-        self.text_surface = None
+
 
     def create_label(self, label, COLOR, x, y):
         """
@@ -38,5 +37,5 @@ class TextManager:
         :return: None
         :rtype: None
         """
-        self.text_surface = self.my_font.render(label, False, COLOR)
-        self.screen.blit(self.text_surface, (x, y))
+        text_surface = self.my_font.render(label, False, COLOR)
+        self.screen.blit(text_surface, (x, y))

@@ -226,6 +226,7 @@ class GridManager:
         # Remove collected ships from the dictionary
         for ship_name in ships_to_remove:
             all_ships.pop(ship_name)
+            print(ship_name)
 
         return ships_with_no_grids_left
 

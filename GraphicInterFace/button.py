@@ -1,4 +1,3 @@
-# Imports
 import pygame
 
 # Configuration
@@ -6,7 +5,7 @@ pygame.init()
 
 class Button:
     """
-    A class representing a clickable button in the Pygame window
+    A class representing a clickable button in the Pygame window.
 
     Attributes:
         screen (pygame.Surface): The screen surface where the button will be rendered.
@@ -19,7 +18,7 @@ class Button:
         fillColors (dict): Dictionary holding colors for normal, hover, and pressed states.
         buttonSurface (pygame.Surface): The surface representing the button's visual display.
         buttonRect (pygame.Rect): The rectangle representing the button's position and size.
-
+        is_pressed (bool): Tracks if the mouse button is currently pressed.
     """
 
     def __init__(self, screen, x, y, width, height, onclickFunction=None):
@@ -33,7 +32,6 @@ class Button:
             width (int): The width of the button.
             height (int): The height of the button.
             onclickFunction (function): The function to be called when the button is clicked.
-            onePress (bool): If True, the button can only be pressed once.
         """
         self.screen = screen
         self.x = x
@@ -42,6 +40,7 @@ class Button:
         self.height = height
         self.onclickFunction = onclickFunction
         self.ships_placed = False
+        self.is_pressed = False  # Track if the button was pressed
         self.fillColors = {
             'normal': '#00aaaa',
             'hover': '#00ffff',
@@ -50,27 +49,34 @@ class Button:
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-
     def process(self):
         """
-        Update the button state based on user input and call the associated function if the button is pressed.
+        Update the button state based on user input and call the associated function if the button is clicked.
 
         This method changes the button's visual state (normal, hover, pressed) based on mouse interactions,
-        and triggers the onclickFunction if the button is clicked.
+        and triggers the onclickFunction if the button is clicked and released.
 
         Returns:
             None
         """
         mousePos = pygame.mouse.get_pos()
 
+        # Default state
         self.buttonSurface.fill(self.fillColors['normal'])
+
         if self.buttonRect.collidepoint(mousePos):
             self.buttonSurface.fill(self.fillColors['hover'])
 
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
-                self.buttonSurface.fill(self.fillColors['pressed'])
-                self.onclickFunction()
+                # Mouse button is pressed down
+                if not self.is_pressed:
+                    self.is_pressed = True
+                    self.buttonSurface.fill(self.fillColors['pressed'])
 
+            elif self.is_pressed:
+                # Mouse button is released after being pressed
+                self.is_pressed = False
+                self.onclickFunction()
 
         # Render the button on the screen
         self.screen.blit(self.buttonSurface, self.buttonRect)

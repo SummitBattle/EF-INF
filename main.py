@@ -7,7 +7,6 @@ from GraphicInterFace.button import Button
 from Ships.ships import Destroyer, Carrier, PatrolBoat, Battleship
 from gameconfig import GameConfig
 
-
 # Initialize Pygame
 pygame.init()
 
@@ -39,9 +38,7 @@ class Main:
         """
         Initialize the Main instance.
         """
-        # Arrays to collect ships
-        self.all_ships1 = None
-        self.all_ships2 = None
+
         # Dicts to store ships and grid positions from smaller grid
         self.all_ships_smaller_grid1 = {}
         self.all_ships_smaller_grid2 = {}
@@ -52,14 +49,14 @@ class Main:
         self.ships_overlaps2 = False
         self.destroyed_ship = False
         self.destroyed_ship2 = False
-        self.won1 = False
-        self.won2 = False
+        self.won1 = None
+        self.won2 = None
         self.turn = 1
 
         # CONST Variables
         self.config = GameConfig()
 
-        # Class instances for later
+        # Class instances placeholders
 
         self.grid1 = None
         self.grid2 = None
@@ -69,6 +66,7 @@ class Main:
         self.customButton2 = None
         self.smaller_grid1 = None
         self.smaller_grid2 = None
+
         self.patrol_boat1 = None
         self.patrol_boat2 = None
         self.destroyer1 = None
@@ -77,11 +75,13 @@ class Main:
         self.carrier2 = None
         self.battleship1 = None
         self.battleship2 = None
+        # Arrays to collect ships
+        self.all_ships1 = None
+        self.all_ships2 = None
 
         # Screen instance
         self.screen = None
-
-        # This creates all instances
+        # Sets needed variables for game
         self.setup_game()
 
     def setup_game(self):
@@ -155,6 +155,7 @@ class Main:
 
             self.smaller_grid2.draw_grid(self.config.SCREEN_X, self.config.SCREEN_Y)
             destroyed_ships2 = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid2)
+            print(destroyed_ships2)
             # Checks if any ships are left
             if len(self.all_ships_smaller_grid2) == 0:
                 self.won1 = True
@@ -415,18 +416,16 @@ class Main:
         if self.turn == 1:
             self.customButton1.process()
             self.gui.create_label('CONFIRM', self.config.WHITE,
-                                           self.config.CUSTOM_BUTTON_X - 375 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
-                                           self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
+                                  self.config.CUSTOM_BUTTON_X - 375 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
+                                  self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
             self.gui.cover_right_side()
-
 
         if self.turn == 2:
             self.customButton2.process()
             self.gui.create_label('CONFIRM', self.config.WHITE,
-                                           self.config.CUSTOM_BUTTON_X + 125 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
-                                           self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
+                                  self.config.CUSTOM_BUTTON_X + 125 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
+                                  self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
             self.gui.cover_left_side()
-
 
         # When ship got destroyed
         if self.destroyed_ship2 and self.turn == 1:
@@ -435,12 +434,14 @@ class Main:
         if self.destroyed_ship and self.turn == 2:
             self.gui.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
 
+        # If ships are overlapping
         if self.ships_overlaps1:
             self.gui.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
 
         if self.ships_overlaps2:
             self.gui.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
 
+        # If someone won
         if self.won2 or self.won1:
             self.gui.create_label("PRESS R TO RESTART", self.config.GREEN, self.config.SCREEN_X / 2 - 120, 300)
 
@@ -490,6 +491,7 @@ class Main:
                 # Events that happen every frame
 
                 self.draw_elements()
+
 
                 # Check for restart condition
                 keys = pygame.key.get_pressed()

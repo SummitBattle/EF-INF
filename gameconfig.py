@@ -34,7 +34,7 @@ class GameConfig:
         self.SCREEN_Y = 700
         self.BLOCK_SIZE = 30
         self.SMALLER_BLOCK_SIZE = 10
-        self.CAPTION = "SHIP WRECK"
+        self.CAPTION = "Battleship"
         self.WHITE = (255, 255, 255)
         self.LINE_THICKNESS = 30
         self.GREEN = (0, 255, 0)

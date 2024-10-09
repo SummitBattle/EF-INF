@@ -126,7 +126,7 @@ class Ship:
             mousePos = pygame.mouse.get_pos()
             # If current ship is being dragged, center the ship around the mouse position
             self.overlapping = False
-            self.rect.topleft = (mousePos[0] - width // 2, mousePos[1] - height // 2)
+            self.rect.topleft = mousePos
 
         # Check if ship is overlapping with any grids
         overlapping_cells = self.check_overlap(grid)

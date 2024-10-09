@@ -40,6 +40,7 @@ class SmallerGrid:
             5: (0, 255, 255, 255)  # Hovering (light blue, fully visible)
         }
 
+
     def set_cell_state(self, row, col, state):
         """
         Set the state of a cell.
