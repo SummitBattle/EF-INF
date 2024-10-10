@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram name="Seite-1" id="Txuyjtg0kyF4jXf7s4eo">
-    <mxGraphModel dx="3335" dy="2065" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3292" dy="2056" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -240,26 +240,35 @@
             <mxPoint x="670" y="420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="kwNNu7d775iZCvvpEm9I-1" value="key variable to transition to game phase:&lt;div&gt;ships_placed: tracks if the ships were placed&lt;/div&gt;" style="shape=note;size=15;align=left;spacingLeft=10;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="kwNNu7d775iZCvvpEm9I-1" value="key variable to transition to game phase:&lt;div&gt;ships_placed: tracks if the ships were placed&lt;/div&gt;" style="shape=note;size=15;align=left;spacingLeft=10;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="70" y="810" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="kwNNu7d775iZCvvpEm9I-2" value="" style="edgeStyle=none;endArrow=none;exitX=0.4;exitY=0;dashed=1;html=1;rounded=0;entryX=0.46;entryY=0.97;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" source="kwNNu7d775iZCvvpEm9I-1" parent="1" target="gaxLcLSFY38JtSqAiTus-36">
+        <mxCell id="kwNNu7d775iZCvvpEm9I-2" value="" style="edgeStyle=none;endArrow=none;exitX=0.4;exitY=0;dashed=1;html=1;rounded=0;entryX=0.46;entryY=0.97;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="kwNNu7d775iZCvvpEm9I-1" target="gaxLcLSFY38JtSqAiTus-36" edge="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="10" y="840" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="kwNNu7d775iZCvvpEm9I-3" value="" style="edgeStyle=none;endArrow=none;exitX=0.8;exitY=0;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="kwNNu7d775iZCvvpEm9I-1" parent="1" target="gaxLcLSFY38JtSqAiTus-43">
+        <mxCell id="kwNNu7d775iZCvvpEm9I-3" value="" style="edgeStyle=none;endArrow=none;exitX=0.8;exitY=0;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="kwNNu7d775iZCvvpEm9I-1" target="gaxLcLSFY38JtSqAiTus-43" edge="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="170" y="840" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="kwNNu7d775iZCvvpEm9I-4" value="key variable to transition to game phase:&lt;div&gt;copied_grids: checks if all ship positions were copied to the smallergrid&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+        <mxCell id="kwNNu7d775iZCvvpEm9I-4" value="key variable to transition to game phase:&lt;div&gt;copied_grids: checks if all ship positions were copied to the smallergrid&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="850" y="310" width="260" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="kwNNu7d775iZCvvpEm9I-5" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gaxLcLSFY38JtSqAiTus-41" target="kwNNu7d775iZCvvpEm9I-4">
+        <mxCell id="kwNNu7d775iZCvvpEm9I-5" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="gaxLcLSFY38JtSqAiTus-41" target="kwNNu7d775iZCvvpEm9I-4" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="840" y="380" as="sourcePoint" />
             <mxPoint x="890" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MJ331BztfJFu_1JRxCfL-1" value="Only unique objects and values are shown to avoid cluttering" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="180" y="-320" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="MJ331BztfJFu_1JRxCfL-2" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="MJ331BztfJFu_1JRxCfL-1" target="gaxLcLSFY38JtSqAiTus-34">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="-160" as="sourcePoint" />
+            <mxPoint x="490" y="-210" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
