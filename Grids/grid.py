@@ -30,7 +30,6 @@ class Grid:
         Returns:
             None
         """
-        self.is_dragging = None
         self.rect = None
         self.block_size = block_size
         self.SCREEN = screen
@@ -152,16 +151,7 @@ class Grid:
         mouse_pos = pygame.mouse.get_pos()
         self.is_hovering = self.rect.collidepoint(mouse_pos)
 
-    def check_mouseclick(self):
-        """
-        Check if the mouse has clicked a grid cell.
 
-        Returns:
-            None
-        """
-        mouse_pressed = pygame.mouse.get_pressed()
-        if self.is_dragging and not mouse_pressed[0]:
-            self.is_dragging = False
 
     def return_black_grids(self):
         """

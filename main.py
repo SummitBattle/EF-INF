@@ -148,14 +148,13 @@ class Main:
         if black_grids:
             black_grid_exists = True
 
-        all_ships_placed = True  # Assume all ships are placed at first
+        all_ships_placed = True
         # Draws smaller grid and checks for selected grids
         if self.turn == 1 and self.customButton1.ships_placed:
             ship_hit = (self.grid_manager.check_blackgrid(self.grid1, self.smaller_grid2, self.all_ships_smaller_grid2))
 
             self.smaller_grid2.draw_grid(self.config.SCREEN_X, self.config.SCREEN_Y)
             destroyed_ships2 = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid2)
-            print(destroyed_ships2)
             # Checks if any ships are left
             if len(self.all_ships_smaller_grid2) == 0:
                 self.won1 = True
@@ -203,7 +202,7 @@ class Main:
         black_grid_exists = False
         if black_grids:
             black_grid_exists = True
-        all_ships_placed = True  # Assume all ships are placed at first
+        all_ships_placed = True
 
         # Draw smaller grid and check for black grids
         if self.turn == 2 and self.customButton2.ships_placed:
@@ -212,6 +211,7 @@ class Main:
             destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid1)
 
             # Check if somebody won
+            print(self.all_ships_smaller_grid1)
             if len(self.all_ships_smaller_grid1) == 0:
                 self.won1 = False
                 self.won2 = True
@@ -314,10 +314,10 @@ class Main:
                     ship2.check_mouseclick()
             # Allows to select grids for left and right side
             if self.turn == 1 and self.copied_grids:
-                self.grid_manager.click_on_grid(self.grid1, self.config.SCREEN_X, 1)
+                self.grid_manager.click_on_grid(1)
 
             if self.turn == 2 and self.copied_grids:
-                self.grid_manager.click_on_grid(self.grid2, self.config.SCREEN_X, 2)
+                self.grid_manager.click_on_grid(2)
         # 3 equals right click
 
         if event.button == 3:
@@ -384,15 +384,15 @@ class Main:
 
             for ship1 in self.all_ships1:
                 ship_name = ship1.name
-                ship_grids = self.grid_manager.ship_into_state(self.grid1, ship1, self.smaller_grid1, 1)
+                ship_grids = self.grid_manager.ship_into_state(self.grid1, ship1, 1)
                 self.all_ships_smaller_grid1[ship_name] = ship_grids  # Store the grid positions in the dictionary
 
             for ship2 in self.all_ships2:
                 ship_name2 = ship2.name
-                ship_grids2 = self.grid_manager.ship_into_state(self.grid2, ship2, self.smaller_grid2, 2)
+                ship_grids2 = self.grid_manager.ship_into_state(self.grid2, ship2, 2)
                 self.all_ships_smaller_grid2[ship_name2] = ship_grids2  # Store the grid positions in the dictionary
 
-            self.grid_manager.draw_smaller_grids(self.config.SCREEN_X, self.config.SCREEN_Y)
+            self.grid_manager.draw_smaller_grids(self.config.SCREEN_Y)
             self.copied_grids = True
 
     def draw_smaller_grids(self):
@@ -403,7 +403,7 @@ class Main:
         """
         self.grid_manager.draw_grids()
         if self.customButton1.ships_placed and self.customButton2.ships_placed:
-            self.grid_manager.draw_smaller_grids(self.config.SCREEN_X, self.config.SCREEN_Y)
+            self.grid_manager.draw_smaller_grids(self.config.SCREEN_Y)
 
     def draw_labels(self):
         """
@@ -418,16 +418,18 @@ class Main:
             self.gui.create_label('CONFIRM', self.config.WHITE,
                                   self.config.CUSTOM_BUTTON_X - 375 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
                                   self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
-            self.gui.cover_right_side()
+            if not self.won1 or not self.won2:
+                self.gui.cover_right_side()
 
         if self.turn == 2:
             self.customButton2.process()
             self.gui.create_label('CONFIRM', self.config.WHITE,
                                   self.config.CUSTOM_BUTTON_X + 125 + self.config.CUSTOM_BUTTON_WIDTH / 2 + 28,
                                   self.config.CUSTOM_BUTTON_Y + self.config.CUSTOM_BUTTON_WIDTH / 2 - 13)
-            self.gui.cover_left_side()
+            if not self.won1 or not self.won2:
+                self.gui.cover_left_side()
 
-        # When ship got destroyed
+        # If ship was destroyed
         if self.destroyed_ship2 and self.turn == 1:
             self.gui.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
 

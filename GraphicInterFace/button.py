@@ -40,7 +40,6 @@ class Button:
         self.height = height
         self.onclickFunction = onclickFunction
         self.ships_placed = False
-        self.is_pressed = False  # Track if the button was pressed
         self.fillColors = {
             'normal': '#00aaaa',
             'hover': '#00ffff',
@@ -48,7 +47,7 @@ class Button:
         }
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
-
+        self.is_pressed = False
     def process(self):
         """
         Update the button state based on user input and call the associated function if the button is clicked.

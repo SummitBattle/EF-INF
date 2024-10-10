@@ -46,8 +46,8 @@ class Ship:
         self.overlapping = False
         self.block_size = block_size
         self.screen = screen
-        self.num_rows = num_rows  # Number of rows the ship will occupy
-        self.num_cols = num_cols  # Number of columns the ship will occupy
+        self.num_rows = num_rows
+        self.num_cols = num_cols
         self.name = name
         self.is_hovering = False
         self.is_dragging = False
@@ -144,8 +144,7 @@ class Ship:
                 self.rect.bottom = self.collided_rect.bottom
 
             # Horizontal position (clipping left or right)
-            # Fix for the right boundary
-            screen_width = self.screen.get_width()  # Use screen width for left-right boundary check
+            screen_width = self.screen.get_width()
 
             if side == 1:
                 if self.rect.right >= screen_width * 0.4:  # Check right boundary with the correct screen width

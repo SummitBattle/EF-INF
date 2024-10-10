@@ -34,6 +34,8 @@ class GridManager:
         :type smallergrid1: Smallergrid
         :param smallergrid2: Second Smallergrid instance
         :type smallergrid2: Smallergrid
+        :param SCREEN_X: Width of screen
+        :type SCREEN_X: int
         """
 
         self.grid1 = grid1
@@ -46,8 +48,9 @@ class GridManager:
         self.grid_top1 = 100
         self.grid_left2 = SCREEN_X / 2 + 100
         self.grid_top2 = 100
+        self.SCREEN_X  = SCREEN_X
 
-    def draw_smaller_grids(self, SCREEN_X, SCREEN_Y):
+    def draw_smaller_grids(self, SCREEN_Y):
         """
         Draws the smallergrids on screen.
         :param SCREEN_X: Width of screen
@@ -57,9 +60,9 @@ class GridManager:
         :return: None
         :rtype: None
         """
-        grid_left1 = SCREEN_X / 20
+        grid_left1 = self.SCREEN_X / 20
         grid_top1 = SCREEN_Y / 1.3
-        grid_left2 = SCREEN_X - SCREEN_X / 8
+        grid_left2 = self.SCREEN_X - self.SCREEN_X / 8
         grid_top2 = SCREEN_Y / 1.3
 
         self.smaller_grid1.draw_grid(grid_left1, grid_top1)
@@ -75,7 +78,7 @@ class GridManager:
         self.grid1.draw_grid(self.grid_left1, self.grid_top1)
         self.grid2.draw_grid(self.grid_left2, self.grid_top2)
 
-    def ship_into_state(self, grid, ship, smallergrid, side):
+    def ship_into_state(self, grid, ship, side):
         """
         Turns left ship into cell state 1 (occupied)
         :param grid: Grid instance.
@@ -94,9 +97,11 @@ class GridManager:
         if side == 1:
             gridleft = self.grid_left1
             gridtop = self.grid_top1
+            smallergrid = self.smaller_grid1
         else:
             gridleft = self.grid_left2
             gridtop = self.grid_top2
+            smallergrid = self.smaller_grid2
         # Calculate colum and row and update cell state
         for rect in overlapping_rects:
             row = (rect.left - gridleft) // self.block_size
@@ -110,31 +115,31 @@ class GridManager:
 
         return ship_positions
 
-    def click_on_grid(self, grid, SCREEN_X, side):
+    def click_on_grid(self, side):
         """
         Convert left state 0 (empty) into state 4 (selected).
         :param grid: Grid instance
         :type grid: Grid
-        :param SCREEN_X: Width of screen
-        :type SCREEN_X: int
+
         :return: None
         :rtype: None
         """
         # Calculate for either left or right side
         if side == 1:
-
-            gridleft = SCREEN_X / 2 - 400
+            grid = self.grid1
+            gridleft = self.SCREEN_X / 2 - 400
             gridtop = 100
 
         else:
-            gridleft = SCREEN_X / 2 + 100
+            grid = self.grid2
+            gridleft = self.SCREEN_X / 2 + 100
             gridtop = 100
 
         # Get the mouse position
         mouse_pos = pygame.mouse.get_pos()
 
         # Get all rectangles for grid cells
-        overlapping_rects2 = grid.get_grids()  # Assuming this method returns a list of pygame.Rect objects
+        overlapping_rects2 = grid.get_grids()
 
         # Iterate through each rectangle to find which one was clicked
         for rect in overlapping_rects2:
@@ -151,7 +156,7 @@ class GridManager:
                 row = (rect.left - gridleft) // self.block_size
                 col = (rect.top - gridtop) // self.block_size
                 grid.black_grid = True
-                grid.set_cell_state(int(col), int(row), 4)  # Assuming the method expects (row, col, value)
+                grid.set_cell_state(int(col), int(row), 4)
                 grid.black_grid = False
 
                 break  # Exit the loop once the correct cell is found and processed
@@ -199,7 +204,7 @@ class GridManager:
                 smallergrid.set_cell_state(row, col, 2)
                 return hit_detected
 
-        # Reset self.blackgrid
+
 
     def find_ships_with_no_grids_left(self, all_ships):
         """
