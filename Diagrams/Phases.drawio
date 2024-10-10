@@ -1,9 +1,12 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram name="Seite-1" id="p63VLaspHqnrgBOGA-di">
-    <mxGraphModel dx="3255" dy="2026" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3941" dy="2393" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="w7tAdLLK2ZvJtZfWx73t-101" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2000" y="-13" width="770" height="1023" as="geometry" />
+        </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-31" value="w" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="940" width="830" height="1030" as="geometry" />
         </mxCell>
@@ -16,11 +19,11 @@
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="180" y="-13" width="640" height="863" as="geometry" />
         </mxCell>
-        <mxCell id="w7tAdLLK2ZvJtZfWx73t-2" value="Turn 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-90" y="267.5" width="240" height="160" as="geometry" />
+        <mxCell id="w7tAdLLK2ZvJtZfWx73t-2" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=5;" parent="1" vertex="1">
+          <mxGeometry x="-90" y="150" width="2860" height="291.25" as="geometry" />
         </mxCell>
-        <mxCell id="w7tAdLLK2ZvJtZfWx73t-3" value="Turn 2" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-90" y="538" width="240" height="182" as="geometry" />
+        <mxCell id="w7tAdLLK2ZvJtZfWx73t-3" value="Turn 2" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=5;" parent="1" vertex="1">
+          <mxGeometry x="-90" y="440" width="2860" height="380" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-6" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -31,7 +34,7 @@
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-7" value="Player1 places ships and presses button" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="390" y="325" width="150" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="w7tAdLLK2ZvJtZfWx73t-8" value="Check if all ships were placed&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="w7tAdLLK2ZvJtZfWx73t-8" value="Check if all ships were placed and check for overlap between ships" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="630" y="335" width="150" height="65" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-13" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
@@ -68,7 +71,7 @@
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-25" value="Player 2 places ships and presses button" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="380" y="566" width="150" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="w7tAdLLK2ZvJtZfWx73t-26" value="check if all ships were placed" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="w7tAdLLK2ZvJtZfWx73t-26" value="check if all ships were placed and check for overlaps between ships" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="575" y="566" width="160" height="80" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-27" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="w7tAdLLK2ZvJtZfWx73t-26" target="w7tAdLLK2ZvJtZfWx73t-25" edge="1">
@@ -97,7 +100,7 @@
           <mxGeometry x="840" y="448" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-34" value="Player1 selects grid to check and clicks on button&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="990" y="337.5" width="170" height="60" as="geometry" />
+          <mxGeometry x="990" y="292.5" width="170" height="60" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-35" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="w7tAdLLK2ZvJtZfWx73t-33" target="w7tAdLLK2ZvJtZfWx73t-34" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -112,7 +115,7 @@
           <mxGeometry x="1250" y="190" width="150" height="60" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-55" value="Player2 selects grid to check and clicks on button&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="980" y="508" width="180" height="84" as="geometry" />
+          <mxGeometry x="980" y="566" width="180" height="84" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-57" value="Object diagram1.png" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
           <mxGeometry x="260" y="704" width="120" height="60" as="geometry" />
@@ -126,9 +129,6 @@
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-85" value="Remove grid from smallergrid dictionary&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1250" y="660" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="w7tAdLLK2ZvJtZfWx73t-101" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="2000" y="-13" width="770" height="1023" as="geometry" />
-        </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-103" value="Check if smallergrid ship list has ships left" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1501.5" y="544.5" width="120" height="60" as="geometry" />
         </mxCell>
@@ -136,16 +136,19 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="2020" y="517" as="sourcePoint" />
             <mxPoint x="2070" y="508" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1830" y="540" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-112" value="if no ships left" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="1790" y="502" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-113" value="player1 or player 2 win" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="2100" y="448" width="230" height="103" as="geometry" />
+          <mxGeometry x="2100" y="393.5" width="230" height="103" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-114" value="&quot;all ships destroyed&quot; and &quot;press r to restart displayed&quot; displayed" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="2380" y="452.5" width="180" height="92" as="geometry" />
+          <mxGeometry x="2391" y="399" width="180" height="92" as="geometry" />
         </mxCell>
         <mxCell id="w7tAdLLK2ZvJtZfWx73t-115" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="w7tAdLLK2ZvJtZfWx73t-113" target="w7tAdLLK2ZvJtZfWx73t-114" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -268,7 +271,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="47wFf__YNuEGRafaKNUe-59" value="Object diagram2.png" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" parent="1" vertex="1">
-          <mxGeometry x="1010" y="860" width="120" height="60" as="geometry" />
+          <mxGeometry x="1000" y="720" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="47wFf__YNuEGRafaKNUe-60" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0;exitY=0;exitDx=47.50000000000001;exitDy=0;exitPerimeter=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="47wFf__YNuEGRafaKNUe-59" target="w7tAdLLK2ZvJtZfWx73t-55" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -287,6 +290,12 @@
         </mxCell>
         <mxCell id="EcRMkKmqfWhUBaUgR1io-3" value="if ships left" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="1430" y="230" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="EcRMkKmqfWhUBaUgR1io-4" value="&lt;font style=&quot;font-size: 40px;&quot;&gt;Turn 1&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="275" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="EcRMkKmqfWhUBaUgR1io-5" value="&lt;font style=&quot;font-size: 40px;&quot;&gt;Turn 2&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="600" width="140" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
