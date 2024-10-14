@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
   <diagram name="Seite-1" id="KfkzlzeGyipSNbMYe78v">
-    <mxGraphModel dx="1403" dy="1833" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1651" dy="1948" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -111,6 +111,15 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="410" y="300" as="sourcePoint" />
             <mxPoint x="460" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dyHDTayyQShotvZOJwQN-1" value="Reasoning:&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;This snapshot captures all relevant objects and variables very well,&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;You can clearly see how destroyed ships are managed and how green, red and black grids are displayed.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;You can also see what is needed to transition to the end phase.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="50" y="350" width="370" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="dyHDTayyQShotvZOJwQN-2" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="dyHDTayyQShotvZOJwQN-1" target="eZOon7eAASovPXOQ26h7-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="510" as="sourcePoint" />
+            <mxPoint x="480" y="430" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
