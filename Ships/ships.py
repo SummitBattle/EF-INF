@@ -98,42 +98,19 @@ class Ship:
             self.orientation = 'vertical' if self.orientation == 'horizontal' else 'horizontal'
             self.num_rows, self.num_cols = self.num_cols, self.num_rows
 
-    def draw_ship(self, ship_x, ship_y, grid, side):
+    def clip_ship(self, grid, side):
         """
-        Draws the ship.
-        :param ship_x: X position of the ship
-        :type ship_x: int
-        :param ship_y: Y position of the ship
-        :type ship_y: int
-        :param grid: Grid it belongs to (Ships1 belong to Grid1 and Ships2 to Grid2)
+        Clips ship to the grid
+        :param grid: Grid of player
         :type grid: Grid
+        :param side: Turn of players (1 or 2)
+        :type side: int
         :return: None
         :rtype: None
         """
-        self.is_hovering = False
-        width = self.num_cols * self.block_size
-        height = self.num_rows * self.block_size
-        # Clip the position of the ship to the overlapping grid
+        overlapping_cells = self.check_overlap_with_grid(grid)
+
         if self.overlapping:
-            ship_x = self.collided_rect.x
-            ship_y = self.collided_rect.y
-
-        # Create the rect for the ship
-        self.rect = pygame.Rect(ship_x, ship_y, width, height)
-
-        self.check_mouse_hover()
-        if self.is_dragging:
-            mousePos = pygame.mouse.get_pos()
-            # If current ship is being dragged, center the ship around the mouse position
-            self.overlapping = False
-            self.rect.topleft = mousePos
-
-        # Check if ship is overlapping with any grids
-        overlapping_cells = self.check_overlap(grid)
-
-        # If overlapping with any grids, clip ship to the position of the grid
-        if self.overlapping:
-
             # Get the first collided rectangle (cell) from overlapping_cells
             self.collided_rect = overlapping_cells[0]
 
@@ -158,6 +135,41 @@ class Ship:
                 else:
                     self.rect.left = self.collided_rect.left
 
+    def draw_ship(self, ship_x, ship_y, grid, side):
+        """
+        Draws the ship.
+        :param ship_x: X position of the ship
+        :type ship_x: int
+        :param ship_y: Y position of the ship
+        :type ship_y: int
+        :param grid: Grid it belongs to (Ships1 belong to Grid1 and Ships2 to Grid2)
+        :type grid: Grid
+        :return: None
+        :rtype: None
+        """
+        self.is_hovering = False
+        width = self.num_cols * self.block_size
+        height = self.num_rows * self.block_size
+
+        # This makes sure the ship stays at clipped grid
+        if self.overlapping:
+            ship_x = self.collided_rect.x
+            ship_y = self.collided_rect.y
+
+        # Create the rect for the ship
+        self.rect = pygame.Rect(ship_x, ship_y, width, height)
+
+        self.check_mouse_hover()
+        if self.is_dragging:
+            mousePos = pygame.mouse.get_pos()
+            # If current ship is being dragged, center the ship around the mouse position
+            self.overlapping = False
+            self.rect.topleft = mousePos
+
+
+        # Clip ship to the position of the grid
+        self.clip_ship(grid, side)
+
         # Create a surface for the ship
         ship_surface = pygame.Surface((width, height), pygame.SRCALPHA)
 
@@ -169,11 +181,10 @@ class Ship:
 
         # Blit the ship surface onto the main screen
         self.screen.blit(ship_surface, self.rect.topleft)
-
         # Draw the grid lines around the ship
         pygame.draw.rect(self.screen, (255, 255, 255), self.rect, 1)  # White color for grid lines
 
-    def check_overlap(self, grid):
+    def check_overlap_with_grid(self, grid):
         """
         Function to check for overlapping.
         :param grid: The corresponding Grid for the ship

@@ -22,8 +22,8 @@ class Main:
         all_ships_smaller_grid1 (dict): Dictionary of ships for Player 1 with their grid positions.
         all_ships_smaller_grid2 (dict): Dictionary of ships for Player 2 with their grid positions.
         copied_grids (bool): Indicates if the grid state has been copied.
-        ships_overlaps1 (bool): Indicates if ships for Player 1 overlap.
-        ships_overlaps2 (bool): Indicates if ships for Player 2 overlap.
+        ships_wrong_placement1 (bool): Indicates if ships for Player 1 overlap.
+        ships_wrong_placement2 (bool): Indicates if ships for Player 2 overlap.
         destroyed_ship (bool): Indicates if a ship has been destroyed for Player 1.
         destroyed_ship2 (bool): Indicates if a ship has been destroyed for Player 2.
         won1 (bool): Indicates if Player 1 has won.
@@ -45,8 +45,8 @@ class Main:
 
         # Needed for game process
         self.copied_grids = None
-        self.ships_overlaps1 = False
-        self.ships_overlaps2 = False
+        self.ships_wrong_placement1 = False
+        self.ships_wrong_placement2 = False
         self.destroyed_ship = False
         self.destroyed_ship2 = False
         self.won1 = None
@@ -132,109 +132,127 @@ class Main:
         self.grid_manager = GridManager(self.grid1, self.grid2, self.config.BLOCK_SIZE, self.smaller_grid1,
                                         self.smaller_grid2, self.config.SCREEN_X)
 
-    def button_click1(self):
+    def check_ships_proper_placements(self, side, ship):
         """
-        Events if left button gets pressed.
-        :return: None
-        :rtype: None
+        Checks if a ship is properly placed for a given side (player).
+        Ensures no grid or ship overlap occurs.
+        :param side: Player's turn (1 or 2)
+        :type side: int
+        :param ship: Ship instance
+        :type ship: Ship
+        :return: If all ships were placed properly
+        :rtype: bool
         """
+        all_ships = self.all_ships1 if side == 1 else self.all_ships2
+        grid = self.grid1 if side == 1 else self.grid2
 
-        # Boolean if ship was hit
+        if not ship.check_overlap_with_grid(grid):
+            return False # Ship wasn't placed
+
+        if self.grid_manager.check_ship_ship_overlap(ship, all_ships):
+            return False  # Overlaps with another ship
+
+        return True
+
+    def handle_ship_placement(self, side):
+        """
+        Checks if a ship is properly placed for a given side (player).
+
+        :param side: Player's turn (1 or 2)
+        :type side: int
+        :return: If all ships were placed properly
+        :rtype: bool
+        """
+        all_ships = self.all_ships1 if side == 1 else self.all_ships2
+        for ship in all_ships:
+            if not self.check_ships_proper_placements(side, ship):
+                if side == 1:
+                    self.ships_wrong_placement1 = True
+                else:
+                    self.ships_wrong_placement2 = True
+                return False
+        # If no issues
+        if side == 1:
+            self.ships_wrong_placement1 = False
+        else:
+            self.ships_wrong_placement2 = False
+        return True
+
+    def button_click1(self):
+        """Handles Player 1's actions when left button is pressed."""
         ship_hit = False
 
-        # Boolean if there is a black grid
+        # Check for black grid
         black_grids = self.grid1.return_black_grids()
-        black_grid_exists = False
-        if black_grids:
-            black_grid_exists = True
+        black_grid_exists = bool(black_grids)
 
-        all_ships_placed = True
-        # Draws smaller grid and checks for selected grids
+        # Checks selected grid
         if self.turn == 1 and self.customButton1.ships_placed:
-            ship_hit = (self.grid_manager.check_blackgrid(self.grid1, self.smaller_grid2, self.all_ships_smaller_grid2))
-
+            ship_hit = self.grid_manager.check_blackgrid(self.grid1, self.smaller_grid2, self.all_ships_smaller_grid2)
             self.smaller_grid2.draw_grid(self.config.SCREEN_X, self.config.SCREEN_Y)
+
+            # Check for destroyed ship
             destroyed_ships2 = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid2)
-            # Checks if any ships are left
+            self.destroyed_ship2 = len(destroyed_ships2) >= 1
+
+            # Check for win
             if len(self.all_ships_smaller_grid2) == 0:
                 self.won1 = True
                 self.won2 = False
 
-            if len(destroyed_ships2) >= 1:
-                self.destroyed_ship2 = True
-            else:
-                self.destroyed_ship2 = False
+        # Check for proper placements
         if not self.customButton1.ships_placed:
-            # Change turn and check if all ships were placed
+            if not self.handle_ship_placement(1):
+                return
 
-            for ship1 in self.all_ships1:
-                # Check if all ships were placed properly
-                ship_list = ship1.check_overlap(self.grid1)
 
-                # Check for overlaps between ships with 1 grid distance
-                self.ships_overlaps1 = self.grid_manager.check_ship_ship_overlap(ship1, self.all_ships1)
-
-                if not ship_list:  # If any ship is not placed correctly
-                    all_ships_placed = False  # Set flag to False
-                    break  # Exit the loop early if a ship isn't placed correctly
-
-        # After all ships were placed and no ships are overlapping
-        if all_ships_placed and not self.copied_grids and not self.ships_overlaps1:
+        # Change turn
+        if not self.copied_grids and not self.ships_wrong_placement1:
             self.customButton1.ships_placed = True
             self.turn = 2
 
-        # Repeat turn if a ship was hit
+        # Repeat turn if hit
         if ship_hit:
             self.turn = 1
-        # Change turn only if a black grid exists
-        elif black_grid_exists:
 
+        # Change turn
+        elif black_grid_exists:
             self.turn = 2
 
     def button_click2(self):
-        """
-        Events if right button is clicked.
-        :return: None
-        :rtype:  None
-        """
+        """Handles Player 2's actions when right button is pressed."""
         ship_hit = False
-        black_grids = self.grid2.return_black_grids()
-        black_grid_exists = False
-        if black_grids:
-            black_grid_exists = True
-        all_ships_placed = True
 
-        # Draw smaller grid and check for black grids
+        # Check for black grids
+        black_grids = self.grid2.return_black_grids()
+        black_grid_exists = bool(black_grids)
+
+        # Check selected grid
         if self.turn == 2 and self.customButton2.ships_placed:
             ship_hit = self.grid_manager.check_blackgrid(self.grid2, self.smaller_grid1, self.all_ships_smaller_grid1)
-            self.smaller_grid1.draw_grid(self.config.SCREEN_X, self.config.SCREEN_Y)
+            self.smaller_grid2.draw_grid(self.config.SCREEN_X, self.config.SCREEN_Y)
             destroyed_ships = self.grid_manager.find_ships_with_no_grids_left(self.all_ships_smaller_grid1)
 
-            # Check if somebody won
-            print(self.all_ships_smaller_grid1)
             if len(self.all_ships_smaller_grid1) == 0:
                 self.won1 = False
                 self.won2 = True
-            if len(destroyed_ships) >= 1:
-                self.destroyed_ship = True
-            else:
-                self.destroyed_ship = False
 
-        # Check if all ships were placed and change turn
+            self.destroyed_ship = len(destroyed_ships) >= 1
+
         if not self.customButton2.ships_placed:
-            for ship2 in self.all_ships2:
-                ship_list = ship2.check_overlap(self.grid2)
-                self.ships_overlaps2 = self.grid_manager.check_ship_ship_overlap(ship2, self.all_ships2)
-                if not ship_list:  # If any ship is not placed correctly
-                    all_ships_placed = False  # Set flag to False
-                    break  # Exit the loop early if a ship isn't placed correctly
+            if not self.handle_ship_placement(2):
+                return
 
-        # Only change turn if all ships are placed correctly
-        if all_ships_placed and not self.copied_grids and not self.ships_overlaps2:
+        # Change turn for first click
+        if not self.copied_grids and not self.ships_wrong_placement2:
             self.customButton2.ships_placed = True
             self.turn = 1
+
+        # Repeat turn if hit
         if ship_hit:
             self.turn = 2
+
+        # Change turn for game phase
         elif black_grid_exists:
             self.turn = 1
 
@@ -366,13 +384,12 @@ class Main:
         # If ships were not placed yet, draw ships
         if not self.customButton1.ships_placed:
             self.gui.create_label('BATTLESHIPS', self.config.WHITE, 100, 25)
-            self.destroyer1.draw_ship(50, 100, self.grid1,1)
-            self.carrier1.draw_ship(150, 100, self.grid1,1)
-            self.patrol_boat1.draw_ship(50, 300, self.grid1,1)
-            self.battleship1.draw_ship(150, 300, self.grid1,1)
+            self.destroyer1.draw_ship(50, 100, self.grid1, 1)
+            self.carrier1.draw_ship(150, 100, self.grid1, 1)
+            self.patrol_boat1.draw_ship(50, 300, self.grid1, 1)
+            self.battleship1.draw_ship(150, 300, self.grid1, 1)
 
         if not self.customButton2.ships_placed:
-            self.gui.create_label('BATTLESHIPS', self.config.WHITE, self.config.SCREEN_X - 240, 25)
             self.destroyer2.draw_ship(self.config.SCREEN_X - 70, 100, self.grid2, 2)
             self.carrier2.draw_ship(self.config.SCREEN_X - 150, 100, self.grid2, 2)
             self.patrol_boat2.draw_ship(self.config.SCREEN_X - 70, 300, self.grid2, 2)
@@ -384,12 +401,12 @@ class Main:
 
             for ship1 in self.all_ships1:
                 ship_name = ship1.name
-                ship_grids = self.grid_manager.ship_into_state(self.grid1, ship1, 1)
+                ship_grids = self.grid_manager.ship_into_state(ship1, 1)
                 self.all_ships_smaller_grid1[ship_name] = ship_grids  # Store the grid positions in the dictionary
 
             for ship2 in self.all_ships2:
                 ship_name2 = ship2.name
-                ship_grids2 = self.grid_manager.ship_into_state(self.grid2, ship2, 2)
+                ship_grids2 = self.grid_manager.ship_into_state(ship2, 2)
                 self.all_ships_smaller_grid2[ship_name2] = ship_grids2  # Store the grid positions in the dictionary
 
             self.grid_manager.draw_smaller_grids(self.config.SCREEN_Y)
@@ -411,6 +428,12 @@ class Main:
         :return: None
         :rtype: None
         """
+        # Battleships text
+        if not self.customButton1.ships_placed:
+            self.gui.create_label('BATTLESHIPS', self.config.WHITE, 100, 25)
+
+        if not self.customButton2.ships_placed:
+            self.gui.create_label('BATTLESHIPS', self.config.WHITE, self.config.SCREEN_X - 240, 25)
 
         # Text for Buttons
         if self.turn == 1:
@@ -437,11 +460,11 @@ class Main:
             self.gui.create_label("SHIP DESTROYED!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
 
         # If ships are overlapping
-        if self.ships_overlaps1:
-            self.gui.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 4, 50)
+        if self.ships_wrong_placement1:
+            self.gui.create_label("PLACE SHIPS PROPERLY!", self.config.GREEN, self.config.SCREEN_X / 4.1, 50)
 
-        if self.ships_overlaps2:
-            self.gui.create_label("NO TOUCHING SHIPS!", self.config.GREEN, self.config.SCREEN_X / 1.5, 50)
+        if self.ships_wrong_placement2:
+            self.gui.create_label("PLACE SHIPS PROPERLY!", self.config.GREEN, self.config.SCREEN_X / 1.7, 50)
 
         # If someone won
         if self.won2 or self.won1:
@@ -493,7 +516,6 @@ class Main:
                 # Events that happen every frame
 
                 self.draw_elements()
-
 
                 # Check for restart condition
                 keys = pygame.key.get_pressed()

@@ -78,30 +78,31 @@ class GridManager:
         self.grid1.draw_grid(self.grid_left1, self.grid_top1)
         self.grid2.draw_grid(self.grid_left2, self.grid_top2)
 
-    def ship_into_state(self, grid, ship, side):
+    def ship_into_state(self, ship, side):
         """
         Turns left ship into cell state 1 (occupied)
         :param grid: Grid instance.
         :type grid: Grid
         :param ship: Ship instance
         :type ship: Ship
-        :param smallergrid: Smallergrid instance
-        :type smallergrid: Smallergrid
         :return: List of grid positions of the ship
         :rtype: List
         """
-        overlapping_rects = ship.check_overlap(grid)
-
-        ship_positions = []  # Array to store the grid positions of the ship
         # If side is 1, calculate for the left grid, else for the right grid
         if side == 1:
+            grid = self.grid1
             gridleft = self.grid_left1
             gridtop = self.grid_top1
             smallergrid = self.smaller_grid1
         else:
+            grid = self.grid2
             gridleft = self.grid_left2
             gridtop = self.grid_top2
             smallergrid = self.smaller_grid2
+        overlapping_rects = ship.check_overlap_with_grid(grid)
+
+        ship_positions = []  # Array to store the grid positions of the ship
+
         # Calculate colum and row and update cell state
         for rect in overlapping_rects:
             row = (rect.left - gridleft) // self.block_size
@@ -233,8 +234,8 @@ class GridManager:
         Checks overlapping between ships
         :param ship: Ship to check overlapping
         :type ship: Ship
-        :param ships: All own ships
-        :type ships: Array
+        :param ships: All ally ships
+        :type ships: List
         :return: Returns if ships are overlapping with ship
         :rtype: Bool
         """
